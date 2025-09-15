@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		8804C10A2E78095400ABDA6B /* PieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8804C1082E78095400ABDA6B /* PieChart.swift */; };
 		8804C10D2E780B7300ABDA6B /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = 8804C10C2E780B7300ABDA6B /* DGCharts */; };
+		882231A22E783BEF00AFC855 /* OntarioHuntingSeasonsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882231A02E783BEF00AFC855 /* OntarioHuntingSeasonsVC.swift */; };
+		882231A32E783BEF00AFC855 /* OntarioHuntingSeasonsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 882231A12E783BEF00AFC855 /* OntarioHuntingSeasonsVC.xib */; };
+		882231A82E78429100AFC855 /* DropDownTblViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882231A62E78429100AFC855 /* DropDownTblViewCell.swift */; };
+		882231A92E78429100AFC855 /* DropDownTblViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 882231A72E78429100AFC855 /* DropDownTblViewCell.xib */; };
 		884AB2242E77C4CB006C0BB5 /* outfitter.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 884AB2212E77C4CB006C0BB5 /* outfitter.sqlite */; };
 		884AB2252E77C4CB006C0BB5 /* smartout.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 884AB2222E77C4CB006C0BB5 /* smartout.sqlite */; };
 		884AB22C2E77C949006C0BB5 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884AB22A2E77C949006C0BB5 /* HomeVC.swift */; };
@@ -58,6 +62,10 @@
 
 /* Begin PBXFileReference section */
 		8804C1082E78095400ABDA6B /* PieChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChart.swift; sourceTree = "<group>"; };
+		882231A02E783BEF00AFC855 /* OntarioHuntingSeasonsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OntarioHuntingSeasonsVC.swift; sourceTree = "<group>"; };
+		882231A12E783BEF00AFC855 /* OntarioHuntingSeasonsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OntarioHuntingSeasonsVC.xib; sourceTree = "<group>"; };
+		882231A62E78429100AFC855 /* DropDownTblViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownTblViewCell.swift; sourceTree = "<group>"; };
+		882231A72E78429100AFC855 /* DropDownTblViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DropDownTblViewCell.xib; sourceTree = "<group>"; };
 		884AB2212E77C4CB006C0BB5 /* outfitter.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = outfitter.sqlite; sourceTree = "<group>"; };
 		884AB2222E77C4CB006C0BB5 /* smartout.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = smartout.sqlite; sourceTree = "<group>"; };
 		884AB22A2E77C949006C0BB5 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
@@ -127,6 +135,41 @@
 			path = PieChart;
 			sourceTree = "<group>";
 		};
+		8822319E2E78383100AFC855 /* Ontario Hunting Seasons */ = {
+			isa = PBXGroup;
+			children = (
+				8822319F2E78387A00AFC855 /* View */,
+			);
+			path = "Ontario Hunting Seasons";
+			sourceTree = "<group>";
+		};
+		8822319F2E78387A00AFC855 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				882231A42E78425F00AFC855 /* Cell */,
+				882231A02E783BEF00AFC855 /* OntarioHuntingSeasonsVC.swift */,
+				882231A12E783BEF00AFC855 /* OntarioHuntingSeasonsVC.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		882231A42E78425F00AFC855 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				882231A52E78426E00AFC855 /* Dropdown Cell */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		882231A52E78426E00AFC855 /* Dropdown Cell */ = {
+			isa = PBXGroup;
+			children = (
+				882231A62E78429100AFC855 /* DropDownTblViewCell.swift */,
+				882231A72E78429100AFC855 /* DropDownTblViewCell.xib */,
+			);
+			path = "Dropdown Cell";
+			sourceTree = "<group>";
+		};
 		884AB2202E77C4C1006C0BB5 /* Resouces */ = {
 			isa = PBXGroup;
 			children = (
@@ -155,6 +198,7 @@
 		884AB2272E77C8FC006C0BB5 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				8822319E2E78383100AFC855 /* Ontario Hunting Seasons */,
 				8861F4A62E782E660063193E /* EmailPopup */,
 				8861F4A02E7827430063193E /* About */,
 				889CAA912E77ED490001BC57 /* Hunter Reporting Data */,
@@ -433,6 +477,7 @@
 			files = (
 				889D8EFD2E77F385009B9CE8 /* HunterReportingTblViewCell.xib in Resources */,
 				8861F4AB2E782EB20063193E /* EmailPopup.xib in Resources */,
+				882231A92E78429100AFC855 /* DropDownTblViewCell.xib in Resources */,
 				888503122E73CF1200C99B57 /* WWCalendarTimeSelector.storyboard in Resources */,
 				888502E12E73CE5100C99B57 /* Assets.xcassets in Resources */,
 				889CAA952E77ED860001BC57 /* HunterReportingData.xib in Resources */,
@@ -445,6 +490,7 @@
 				888502E32E73CE5100C99B57 /* LaunchScreen.storyboard in Resources */,
 				888502E42E73CE5100C99B57 /* Main.storyboard in Resources */,
 				884AB22D2E77C949006C0BB5 /* HomeVC.xib in Resources */,
+				882231A32E783BEF00AFC855 /* OntarioHuntingSeasonsVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -461,6 +507,7 @@
 				889CAA962E77ED860001BC57 /* HunterReportingData.swift in Sources */,
 				888502ED2E73CEFE00C99B57 /* UIFont+Extension.swift in Sources */,
 				888502EE2E73CEFE00C99B57 /* UIColor+Extention.swift in Sources */,
+				882231A22E783BEF00AFC855 /* OntarioHuntingSeasonsVC.swift in Sources */,
 				888503042E73CF1200C99B57 /* ImagePicker.swift in Sources */,
 				888503052E73CF1200C99B57 /* PickerViewViewController.swift in Sources */,
 				888503062E73CF1200C99B57 /* AppConstants.swift in Sources */,
@@ -481,6 +528,7 @@
 				888503112E73CF1200C99B57 /* NSDate+Timepiece.swift in Sources */,
 				888502EF2E73CEFE00C99B57 /* UIViewController+Extension.swift in Sources */,
 				888502F02E73CEFE00C99B57 /* UIView+Extension.swift in Sources */,
+				882231A82E78429100AFC855 /* DropDownTblViewCell.swift in Sources */,
 				888502F12E73CEFE00C99B57 /* UIImageView+Extension.swift in Sources */,
 				8861F4A42E78276A0063193E /* AboutVC.swift in Sources */,
 				888502DE2E73CE5100C99B57 /* AppDelegate.swift in Sources */,
@@ -526,6 +574,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -557,6 +606,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

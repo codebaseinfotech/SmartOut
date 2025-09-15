@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import LGSideMenuController
 
 class HunterReportingData: UIViewController {
 

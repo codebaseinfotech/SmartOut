@@ -12,11 +12,16 @@ class SideMenuVC: UIViewController {
 
     @IBOutlet weak var tblViewList: UITableView!
         
+    @IBOutlet weak var viewMainAbout: UIView!
+    @IBOutlet weak var imgAbout: UIImageView!
+    @IBOutlet weak var lblAbout: UILabel!
     
     var arrImg = ["home_icon","bar_chart_icon", "moose", "aggregate_trout_and_salmon"]
     var arrList = ["Home","Hunter Reporting Data", "Ontario Hunting Seasons", "Ontario Fishing Seasons"]
     
     var selectedIndex: IndexPath?
+    
+    var isAboutSelected: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +53,12 @@ class SideMenuVC: UIViewController {
         self.navigationController?.navigationBar.isHidden = true
         self.sideMenuController?.rootViewController = nav
         self.sideMenuController?.hideLeftView(animated: true, completion: nil)
+        
+        // Update selection state
+        isAboutSelected = true
+        selectedIndex = nil
+        updateAboutSelectionUI()
+        tblViewList.reloadData()
     }
     
     @IBAction func clickedEmail(_ sender: Any) {
@@ -57,6 +68,20 @@ class SideMenuVC: UIViewController {
         nav.modalTransitionStyle = .coverVertical
         self.present(nav, animated: true, completion: nil)
         
+    }
+    
+    func updateAboutSelectionUI() {
+        if isAboutSelected {
+            viewMainAbout.backgroundColor = UIColor.white
+            lblAbout.textColor = UIColor.primary
+            imgAbout.tintColor = UIColor.primary
+            imgAbout.image = UIImage(named: "info_icon_orange")?.withRenderingMode(.alwaysTemplate)
+        } else {
+            viewMainAbout.backgroundColor = UIColor.clear
+            lblAbout.textColor = UIColor.white
+            imgAbout.tintColor = UIColor.white
+            imgAbout.image = UIImage(named: "info_icon")?.withRenderingMode(.alwaysTemplate)
+        }
     }
     
     
@@ -98,7 +123,9 @@ extension SideMenuVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         selectedIndex = indexPath
+        isAboutSelected = false
         tblViewList.reloadData()
+        updateAboutSelectionUI()
         
         if indexPath.row == 0 {
             let homeVC = HomeVC(nibName: "HomeVC", bundle: nil)
@@ -109,6 +136,12 @@ extension SideMenuVC: UITableViewDelegate, UITableViewDataSource {
         } else if indexPath.row == 1 {
             let HunterReportingDataVC = HunterReportingData(nibName: "HunterReportingData", bundle: nil)
             let nav = UINavigationController(rootViewController: HunterReportingDataVC)
+            self.navigationController?.navigationBar.isHidden = true
+            self.sideMenuController?.rootViewController = nav
+            self.sideMenuController?.hideLeftView(animated: true, completion: nil)
+        }else if indexPath.row == 2 {
+            let OntarioHuntingSeasonsVC = OntarioHuntingSeasonsVC(nibName: "OntarioHuntingSeasonsVC", bundle: nil)
+            let nav = UINavigationController(rootViewController: OntarioHuntingSeasonsVC)
             self.navigationController?.navigationBar.isHidden = true
             self.sideMenuController?.rootViewController = nav
             self.sideMenuController?.hideLeftView(animated: true, completion: nil)
