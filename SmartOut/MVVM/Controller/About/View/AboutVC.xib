@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AboutVC" customModule="SmartOut" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Nw-O9-MFi">
+                    <rect key="frame" x="0.0" y="59" width="393" height="40"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OWe-dq-74b">
+                            <rect key="frame" x="20" y="5" width="30" height="30"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_sidemenu" translatesAutoresizingMaskIntoConstraints="NO" id="GV0-zR-AEc">
+                                    <rect key="frame" x="0.0" y="2" width="30" height="26"/>
+                                </imageView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r4F-de-rqQ">
+                                    <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <connections>
+                                        <action selector="clickedSideMenu:" destination="-1" eventType="touchUpInside" id="V4e-mK-4lC"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstItem="GV0-zR-AEc" firstAttribute="top" secondItem="OWe-dq-74b" secondAttribute="top" constant="2" id="LOR-vt-wnU"/>
+                                <constraint firstAttribute="width" constant="30" id="NOb-C0-mvk"/>
+                                <constraint firstAttribute="bottom" secondItem="GV0-zR-AEc" secondAttribute="bottom" constant="2" id="OCT-QS-e2p"/>
+                                <constraint firstAttribute="bottom" secondItem="r4F-de-rqQ" secondAttribute="bottom" id="Ovx-CM-BZ6"/>
+                                <constraint firstItem="r4F-de-rqQ" firstAttribute="top" secondItem="OWe-dq-74b" secondAttribute="top" id="fU9-Rx-AAb"/>
+                                <constraint firstAttribute="height" constant="30" id="gX3-wR-vnS"/>
+                                <constraint firstItem="r4F-de-rqQ" firstAttribute="leading" secondItem="OWe-dq-74b" secondAttribute="leading" id="oUf-hJ-mze"/>
+                                <constraint firstItem="GV0-zR-AEc" firstAttribute="leading" secondItem="OWe-dq-74b" secondAttribute="leading" id="vax-fz-UUK"/>
+                                <constraint firstAttribute="trailing" secondItem="r4F-de-rqQ" secondAttribute="trailing" id="w7N-Ty-8ef"/>
+                                <constraint firstAttribute="trailing" secondItem="GV0-zR-AEc" secondAttribute="trailing" id="zWG-j8-nDT"/>
+                            </constraints>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About SmartOut" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wVB-jh-h7I">
+                            <rect key="frame" x="75" y="5" width="176" height="30"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="VfB-Zf-FQo"/>
+                        <constraint firstItem="wVB-jh-h7I" firstAttribute="centerY" secondItem="0Nw-O9-MFi" secondAttribute="centerY" id="Vgn-y7-Vjo"/>
+                        <constraint firstItem="OWe-dq-74b" firstAttribute="leading" secondItem="0Nw-O9-MFi" secondAttribute="leading" constant="20" id="kvR-nY-D6i"/>
+                        <constraint firstItem="wVB-jh-h7I" firstAttribute="leading" secondItem="OWe-dq-74b" secondAttribute="trailing" constant="25" id="nE1-QE-BL3"/>
+                        <constraint firstItem="OWe-dq-74b" firstAttribute="centerY" secondItem="0Nw-O9-MFi" secondAttribute="centerY" id="wrU-gd-ccl"/>
+                    </constraints>
+                </view>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TNP-Lm-jtk">
+                    <rect key="frame" x="10" y="119" width="373" height="699"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <mutableString key="text">Copyright © 2025 SmartOut Media Inc.
+
+Contains information licenses under the Open Government License – Ontario. Boundaries and locations are for representation purposes only.
+
+Hunting and Fishing seasons information is based on regulations published by Government of Ontario, Ministry of Northern Development, Mines, Natural Resources and Forestry, © Queen’s Printer for Ontario.
+
+Migratory Birds Hunting seasons information is based on regulations posted by Environment and Climate Change Canada.
+
+This software has not been produced in affiliation with or with the endorsement of the Government of Ontario or the Government of Canada.</mutableString>
+                    <color key="textColor" systemColor="labelColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="0Nw-O9-MFi" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="3mW-Ge-AVp"/>
+                <constraint firstItem="0Nw-O9-MFi" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="902-54-GA0"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="TNP-Lm-jtk" secondAttribute="trailing" constant="10" id="MGH-A8-9yQ"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="TNP-Lm-jtk" secondAttribute="bottom" id="QF7-1o-rpt"/>
+                <constraint firstItem="TNP-Lm-jtk" firstAttribute="top" secondItem="0Nw-O9-MFi" secondAttribute="bottom" constant="20" id="Wcj-tE-D7c"/>
+                <constraint firstItem="0Nw-O9-MFi" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="tdU-s8-rX9"/>
+                <constraint firstItem="TNP-Lm-jtk" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="xOB-q4-iJc"/>
+            </constraints>
+            <point key="canvasLocation" x="-71" y="-32"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="ic_sidemenu" width="512" height="512"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
