@@ -17,11 +17,14 @@ class OntarioHuntingSeasonsVC: UIViewController {
     
     @IBOutlet weak var viewDropDownList: UIView!
     
+    @IBOutlet weak var tblViewList: UITableView!
     
     
     var arrDropDownList = ["All WMUs", "WMU 1A", "WMU 1B", "WMU 1C", "WMU 1D", "WMU 2", "WMU 3", "WMU 4", "WMU 5", "WMU 6"]
     
     var isDropDownVisible = false
+    
+    var expandedIndexSet: Set<Int> = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +33,13 @@ class OntarioHuntingSeasonsVC: UIViewController {
         tblViewDropDown.dataSource = self
         tblViewDropDown.delegate = self
         
+        tblViewList.register(UINib(nibName: "ListTblVIewCell", bundle: nil), forCellReuseIdentifier: "ListTblVIewCell")
+        tblViewList.dataSource = self
+        tblViewList.delegate = self
+        
         viewDropDownList.isHidden = true
+        
+        lblDropdownTitle.text = arrDropDownList.first
         // Do any additional setup after loading the view.
     }
     
@@ -43,14 +52,27 @@ class OntarioHuntingSeasonsVC: UIViewController {
     }
     
     @IBAction func clickedOpenDropDown(_ sender: Any) {
-        isDropDownVisible.toggle()  // Toggle state
+        isDropDownVisible.toggle()
         
         UIView.animate(withDuration: 0.3) {
             self.viewDropDownList.isHidden = !self.isDropDownVisible
             
-            // Optional: Rotate dropdown arrow image
             self.imgDropdown.transform = self.isDropDownVisible ? CGAffineTransform(rotationAngle: .pi) : .identity
         }
+    }
+    
+    @objc func didTapTopView(_ sender: UITapGestureRecognizer) {
+        guard let row = sender.view?.tag else { return }
+        
+        if expandedIndexSet.contains(row) {
+            expandedIndexSet.remove(row)
+        } else {
+            expandedIndexSet.insert(row)
+        }
+        
+        tblViewList.beginUpdates()
+        tblViewList.reloadRows(at: [IndexPath(row: row, section: 0)], with: .automatic)
+        tblViewList.endUpdates()
     }
     
     
@@ -60,30 +82,58 @@ class OntarioHuntingSeasonsVC: UIViewController {
 extension OntarioHuntingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrDropDownList.count
+        if tableView == tblViewDropDown {
+            return arrDropDownList.count
+        } else if tableView == tblViewList {
+            return 20
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tblViewDropDown.dequeueReusableCell(withIdentifier: "DropDownTblViewCell") as! DropDownTblViewCell
         
-        cell.lblDropDownName.text = arrDropDownList[indexPath.row]
-        
-        return cell
+        if tableView == tblViewDropDown {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "DropDownTblViewCell", for: indexPath) as! DropDownTblViewCell
+            cell.lblDropDownName.text = arrDropDownList[indexPath.row]
+            return cell
+        } else if tableView == tblViewList {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ListTblVIewCell", for: indexPath) as! ListTblVIewCell
+            
+            cell.lblTitle.text = "Item \(indexPath.row + 1)"
+            
+            cell.isExpanded = expandedIndexSet.contains(indexPath.row)
+            
+            cell.viewTop.tag = indexPath.row
+            cell.viewTop.gestureRecognizers?.forEach { cell.viewTop.removeGestureRecognizer($0) } // clear old gestures
+            let tap = UITapGestureRecognizer(target: self, action: #selector(didTapTopView(_:)))
+            cell.viewTop.addGestureRecognizer(tap)
+            
+            return cell
+        }
+        return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+        if tableView == tblViewDropDown {
+            return 60
+        } else if tableView == tblViewList {
+            return UITableView.automaticDimension
+        }
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // Set selected name to label
-        lblDropdownTitle.text = arrDropDownList[indexPath.row]
         
-        // Hide dropdown after selection
-        isDropDownVisible = false
-        UIView.animate(withDuration: 0.3) {
-            self.viewDropDownList.isHidden = true
-            self.imgDropdown.transform = .identity
+        if tableView == tblViewDropDown {
+            lblDropdownTitle.text = arrDropDownList[indexPath.row]
+            
+            isDropDownVisible = false
+            UIView.animate(withDuration: 0.3) {
+                self.viewDropDownList.isHidden = true
+                self.imgDropdown.transform = .identity
+            }
+        } else if tableView == tblViewList {
+            print("Selected main list row: \(indexPath.row)")
         }
     }
 }

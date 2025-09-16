@@ -139,9 +139,15 @@ extension SideMenuVC: UITableViewDelegate, UITableViewDataSource {
             self.navigationController?.navigationBar.isHidden = true
             self.sideMenuController?.rootViewController = nav
             self.sideMenuController?.hideLeftView(animated: true, completion: nil)
-        }else if indexPath.row == 2 {
+        } else if indexPath.row == 2 {
             let OntarioHuntingSeasonsVC = OntarioHuntingSeasonsVC(nibName: "OntarioHuntingSeasonsVC", bundle: nil)
             let nav = UINavigationController(rootViewController: OntarioHuntingSeasonsVC)
+            self.navigationController?.navigationBar.isHidden = true
+            self.sideMenuController?.rootViewController = nav
+            self.sideMenuController?.hideLeftView(animated: true, completion: nil)
+        } else if indexPath.row == 3 {
+            let FishingSeasonsVC = FishingSeasonsVC(nibName: "FishingSeasonsVC", bundle: nil)
+            let nav = UINavigationController(rootViewController: FishingSeasonsVC)
             self.navigationController?.navigationBar.isHidden = true
             self.sideMenuController?.rootViewController = nav
             self.sideMenuController?.hideLeftView(animated: true, completion: nil)

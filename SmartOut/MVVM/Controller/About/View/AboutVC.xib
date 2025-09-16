@@ -2,7 +2,9 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -35,7 +37,7 @@
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="GV0-zR-AEc" firstAttribute="top" secondItem="OWe-dq-74b" secondAttribute="top" constant="2" id="LOR-vt-wnU"/>
                                 <constraint firstAttribute="width" constant="30" id="NOb-C0-mvk"/>
@@ -56,7 +58,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="VfB-Zf-FQo"/>
                         <constraint firstItem="wVB-jh-h7I" firstAttribute="centerY" secondItem="0Nw-O9-MFi" secondAttribute="centerY" id="Vgn-y7-Vjo"/>
@@ -67,8 +69,8 @@
                 </view>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TNP-Lm-jtk">
                     <rect key="frame" x="10" y="119" width="373" height="699"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    <mutableString key="text">Copyright © 2025 SmartOut Media Inc.
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <string key="text">Copyright © 2025 SmartOut Media Inc.
 
 Contains information licenses under the Open Government License – Ontario. Boundaries and locations are for representation purposes only.
 
@@ -76,14 +78,14 @@ Hunting and Fishing seasons information is based on regulations published by Gov
 
 Migratory Birds Hunting seasons information is based on regulations posted by Environment and Climate Change Canada.
 
-This software has not been produced in affiliation with or with the endorsement of the Government of Ontario or the Government of Canada.</mutableString>
+This software has not been produced in affiliation with or with the endorsement of the Government of Ontario or the Government of Canada.</string>
                     <color key="textColor" systemColor="labelColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <color key="backgroundColor" name="bg_color"/>
             <constraints>
                 <constraint firstItem="0Nw-O9-MFi" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="3mW-Ge-AVp"/>
                 <constraint firstItem="0Nw-O9-MFi" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="902-54-GA0"/>
@@ -98,11 +100,11 @@ This software has not been produced in affiliation with or with the endorsement 
     </objects>
     <resources>
         <image name="ic_sidemenu" width="512" height="512"/>
+        <namedColor name="bg_color">
+            <color red="0.95294117647058818" green="0.97647058823529409" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
     </resources>
 </document>

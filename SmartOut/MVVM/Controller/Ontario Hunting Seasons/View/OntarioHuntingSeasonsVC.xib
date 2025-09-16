@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -14,6 +15,7 @@
                 <outlet property="imgDropdown" destination="fDK-7F-oTF" id="3eo-24-HRz"/>
                 <outlet property="lblDropdownTitle" destination="E1Y-uf-mOY" id="Q06-7o-nbP"/>
                 <outlet property="tblViewDropDown" destination="Wu7-Ho-H9O" id="OIl-e9-m7s"/>
+                <outlet property="tblViewList" destination="4TC-Qr-IZi" id="KuO-19-3S1"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="viewDropDownList" destination="x6i-9F-nXM" id="Gua-z0-vf2"/>
             </connections>
@@ -40,7 +42,7 @@
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="30" id="4pM-Hr-lvL"/>
                                 <constraint firstItem="8e4-IE-Vdf" firstAttribute="top" secondItem="dwA-QV-zmR" secondAttribute="top" id="6tR-ZO-1hk"/>
@@ -61,7 +63,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="Xcl-kJ-eHv" firstAttribute="centerY" secondItem="kTO-W6-ZAJ" secondAttribute="centerY" id="6wY-Qe-jnj"/>
                         <constraint firstAttribute="height" constant="40" id="Py3-ua-1t8"/>
@@ -79,8 +81,8 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6bE-n5-zno">
                                     <rect key="frame" x="0.0" y="0.0" width="393" height="60"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All WMUs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E1Y-uf-mOY">
-                                            <rect key="frame" x="149.66666666666666" y="17" width="93.666666666666657" height="26.333333333333329"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E1Y-uf-mOY">
+                                            <rect key="frame" x="174" y="17" width="45" height="26.333333333333329"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
@@ -141,13 +143,13 @@
                         <constraint firstAttribute="trailing" secondItem="SPL-D6-mpd" secondAttribute="trailing" id="oDC-qh-HEG"/>
                     </constraints>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="4TC-Qr-IZi">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="4TC-Qr-IZi">
                     <rect key="frame" x="0.0" y="399" width="393" height="453"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <color key="backgroundColor" name="bg_color"/>
             <constraints>
                 <constraint firstItem="Ut2-xd-5Uo" firstAttribute="top" secondItem="kTO-W6-ZAJ" secondAttribute="bottom" id="0Ne-zk-eoj"/>
                 <constraint firstAttribute="bottom" secondItem="4TC-Qr-IZi" secondAttribute="bottom" id="4CU-84-aJo"/>
@@ -166,6 +168,9 @@
     <resources>
         <image name="ic_down-arrow" width="512" height="512"/>
         <image name="ic_sidemenu" width="512" height="512"/>
+        <namedColor name="bg_color">
+            <color red="0.95294117647058818" green="0.97647058823529409" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="primary_color">
             <color red="0.92549019607843142" green="0.39215686274509803" blue="0.031372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
