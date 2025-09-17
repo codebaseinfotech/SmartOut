@@ -17,23 +17,12 @@ class HunterReportingTblViewCell: UITableViewCell {
     @IBOutlet weak var viewFallChart: UIView!
     @IBOutlet weak var view3ValueChart: UIView!
     
+    @IBOutlet weak var lblFChartName: UILabel!
+    @IBOutlet weak var lblSChartName: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        let entries1 = [PieChartDataEntry(value: 80.0, label: "Female"),
-                       PieChartDataEntry(value: 20.0, label: "Male")]
-        PieChart.shared.setupChart(view: viewSpringChart, entries: entries1, colors: [.systemBlue, .orange])
-        
-        
-        let entries2 = [PieChartDataEntry(value: 37.0, label: "Female"),
-                       PieChartDataEntry(value: 63.0, label: "Male")]
-        PieChart.shared.setupChart(view: viewFallChart, entries: entries2, colors: [.systemBlue, .orange])
-        
-        let entries3 = [PieChartDataEntry(value: 27.0, label: "BUll"),
-                        PieChartDataEntry(value: 14.3, label: "Cow"),
-                        PieChartDataEntry(value: 58.7, label: "Calf")]
-        PieChart.shared.setupChart(view: view3ValueChart, entries: entries3, colors: [.systemBlue, .orange, .yellow])
         // Initialization code
     }
 

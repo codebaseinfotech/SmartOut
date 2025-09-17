@@ -27,6 +27,8 @@
 		8861F4A52E78276A0063193E /* AboutVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8861F4A32E78276A0063193E /* AboutVC.xib */; };
 		8861F4AA2E782EB20063193E /* EmailPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8861F4A82E782EB20063193E /* EmailPopup.swift */; };
 		8861F4AB2E782EB20063193E /* EmailPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8861F4A92E782EB20063193E /* EmailPopup.xib */; };
+		8867DD2F2E7A755B00435CC3 /* AdditionalOppoTblViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8867DD2D2E7A755B00435CC3 /* AdditionalOppoTblViewCell.swift */; };
+		8867DD302E7A755B00435CC3 /* AdditionalOppoTblViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8867DD2E2E7A755B00435CC3 /* AdditionalOppoTblViewCell.xib */; };
 		88834EC92E7915F900E686FC /* ListTblVIewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88834EC72E7915F900E686FC /* ListTblVIewCell.swift */; };
 		88834ECA2E7915F900E686FC /* ListTblVIewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88834EC82E7915F900E686FC /* ListTblVIewCell.xib */; };
 		888502DE2E73CE5100C99B57 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888502D42E73CE5100C99B57 /* AppDelegate.swift */; };
@@ -56,6 +58,7 @@
 		888503112E73CF1200C99B57 /* NSDate+Timepiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888502F62E73CF1200C99B57 /* NSDate+Timepiece.swift */; };
 		888503122E73CF1200C99B57 /* WWCalendarTimeSelector.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 888502F92E73CF1200C99B57 /* WWCalendarTimeSelector.storyboard */; };
 		888503152E73D48200C99B57 /* LGSideMenuController in Frameworks */ = {isa = PBXBuildFile; productRef = 888503142E73D48200C99B57 /* LGSideMenuController */; };
+		88855DE12E7AD01000AE85C7 /* getAllData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88855DDF2E7AD01000AE85C7 /* getAllData.swift */; };
 		889CAA8F2E77E42B0001BC57 /* SideMenuListTblViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889CAA8D2E77E42B0001BC57 /* SideMenuListTblViewCell.swift */; };
 		889CAA902E77E42B0001BC57 /* SideMenuListTblViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 889CAA8E2E77E42B0001BC57 /* SideMenuListTblViewCell.xib */; };
 		889CAA952E77ED860001BC57 /* HunterReportingData.xib in Resources */ = {isa = PBXBuildFile; fileRef = 889CAA942E77ED860001BC57 /* HunterReportingData.xib */; };
@@ -66,6 +69,10 @@
 		889D8EFD2E77F385009B9CE8 /* HunterReportingTblViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 889D8EFB2E77F385009B9CE8 /* HunterReportingTblViewCell.xib */; };
 		88D1F28C2E7975140084DBD5 /* ListDetailsTblViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D1F28A2E7975140084DBD5 /* ListDetailsTblViewCell.swift */; };
 		88D1F28D2E7975140084DBD5 /* ListDetailsTblViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88D1F28B2E7975140084DBD5 /* ListDetailsTblViewCell.xib */; };
+		88DBBDFC2E7A895800491331 /* ExceptionsTblViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88DBBDFB2E7A895800491331 /* ExceptionsTblViewCell.xib */; };
+		88DBBDFD2E7A895800491331 /* ExceptionsTblViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DBBDFA2E7A895800491331 /* ExceptionsTblViewCell.swift */; };
+		88DBBE012E7A915F00491331 /* ExceptionsDetailsTblViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88DBBE002E7A915F00491331 /* ExceptionsDetailsTblViewCell.xib */; };
+		88DBBE022E7A915F00491331 /* ExceptionsDetailsTblViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DBBDFF2E7A915F00491331 /* ExceptionsDetailsTblViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -88,6 +95,8 @@
 		8861F4A32E78276A0063193E /* AboutVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutVC.xib; sourceTree = "<group>"; };
 		8861F4A82E782EB20063193E /* EmailPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailPopup.swift; sourceTree = "<group>"; };
 		8861F4A92E782EB20063193E /* EmailPopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmailPopup.xib; sourceTree = "<group>"; };
+		8867DD2D2E7A755B00435CC3 /* AdditionalOppoTblViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalOppoTblViewCell.swift; sourceTree = "<group>"; };
+		8867DD2E2E7A755B00435CC3 /* AdditionalOppoTblViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdditionalOppoTblViewCell.xib; sourceTree = "<group>"; };
 		88834EC72E7915F900E686FC /* ListTblVIewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTblVIewCell.swift; sourceTree = "<group>"; };
 		88834EC82E7915F900E686FC /* ListTblVIewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListTblVIewCell.xib; sourceTree = "<group>"; };
 		888502BC2E73CE4800C99B57 /* SmartOut.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartOut.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,6 +127,7 @@
 		888503002E73CF1200C99B57 /* AGDesignable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AGDesignable.swift; sourceTree = "<group>"; };
 		888503012E73CF1200C99B57 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		888503022E73CF1200C99B57 /* AppUtilites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUtilites.swift; sourceTree = "<group>"; };
+		88855DDF2E7AD01000AE85C7 /* getAllData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getAllData.swift; sourceTree = "<group>"; };
 		889CAA8D2E77E42B0001BC57 /* SideMenuListTblViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuListTblViewCell.swift; sourceTree = "<group>"; };
 		889CAA8E2E77E42B0001BC57 /* SideMenuListTblViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SideMenuListTblViewCell.xib; sourceTree = "<group>"; };
 		889CAA932E77ED860001BC57 /* HunterReportingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HunterReportingData.swift; sourceTree = "<group>"; };
@@ -128,6 +138,10 @@
 		889D8EFB2E77F385009B9CE8 /* HunterReportingTblViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HunterReportingTblViewCell.xib; sourceTree = "<group>"; };
 		88D1F28A2E7975140084DBD5 /* ListDetailsTblViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDetailsTblViewCell.swift; sourceTree = "<group>"; };
 		88D1F28B2E7975140084DBD5 /* ListDetailsTblViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListDetailsTblViewCell.xib; sourceTree = "<group>"; };
+		88DBBDFA2E7A895800491331 /* ExceptionsTblViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExceptionsTblViewCell.swift; sourceTree = "<group>"; };
+		88DBBDFB2E7A895800491331 /* ExceptionsTblViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExceptionsTblViewCell.xib; sourceTree = "<group>"; };
+		88DBBDFF2E7A915F00491331 /* ExceptionsDetailsTblViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExceptionsDetailsTblViewCell.swift; sourceTree = "<group>"; };
+		88DBBE002E7A915F00491331 /* ExceptionsDetailsTblViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExceptionsDetailsTblViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -324,6 +338,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		8867DD2C2E7A737E00435CC3 /* additionalOppoTVC */ = {
+			isa = PBXGroup;
+			children = (
+				8867DD2D2E7A755B00435CC3 /* AdditionalOppoTblViewCell.swift */,
+				8867DD2E2E7A755B00435CC3 /* AdditionalOppoTblViewCell.xib */,
+			);
+			path = additionalOppoTVC;
+			sourceTree = "<group>";
+		};
 		88834EC62E7915BE00E686FC /* TblViewListCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -355,6 +378,7 @@
 				884AB2262E77C8F2006C0BB5 /* MVVM */,
 				884AB2202E77C4C1006C0BB5 /* Resouces */,
 				888502D42E73CE5100C99B57 /* AppDelegate.swift */,
+				88855DE02E7AD01000AE85C7 /* ModelClass */,
 				888502D52E73CE5100C99B57 /* Assets.xcassets */,
 				888502D62E73CE5100C99B57 /* Info.plist */,
 				8804C1092E78095400ABDA6B /* PieChart */,
@@ -418,6 +442,14 @@
 			path = Helper;
 			sourceTree = "<group>";
 		};
+		88855DE02E7AD01000AE85C7 /* ModelClass */ = {
+			isa = PBXGroup;
+			children = (
+				88855DDF2E7AD01000AE85C7 /* getAllData.swift */,
+			);
+			path = ModelClass;
+			sourceTree = "<group>";
+		};
 		889CAA8C2E77E40B0001BC57 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -457,18 +489,21 @@
 		889D33DB2E7990E2007B1124 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				889D33DC2E799110007B1124 /* zone-wide TVC */,
+				88DBBDFE2E7A910800491331 /* ExceptionsDetailsTVC */,
+				88DBBDF92E7A891800491331 /* ExceptionsTVC */,
+				8867DD2C2E7A737E00435CC3 /* additionalOppoTVC */,
+				889D33DC2E799110007B1124 /* zone-wideTVC */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
 		};
-		889D33DC2E799110007B1124 /* zone-wide TVC */ = {
+		889D33DC2E799110007B1124 /* zone-wideTVC */ = {
 			isa = PBXGroup;
 			children = (
 				889D33DD2E79917E007B1124 /* ZoneWideTblViewCell.swift */,
 				889D33DE2E79917E007B1124 /* ZoneWideTblViewCell.xib */,
 			);
-			path = "zone-wide TVC";
+			path = "zone-wideTVC";
 			sourceTree = "<group>";
 		};
 		88D1F2892E7974720084DBD5 /* ListDetailsTblViewCell */ = {
@@ -478,6 +513,24 @@
 				88D1F28B2E7975140084DBD5 /* ListDetailsTblViewCell.xib */,
 			);
 			path = ListDetailsTblViewCell;
+			sourceTree = "<group>";
+		};
+		88DBBDF92E7A891800491331 /* ExceptionsTVC */ = {
+			isa = PBXGroup;
+			children = (
+				88DBBDFA2E7A895800491331 /* ExceptionsTblViewCell.swift */,
+				88DBBDFB2E7A895800491331 /* ExceptionsTblViewCell.xib */,
+			);
+			path = ExceptionsTVC;
+			sourceTree = "<group>";
+		};
+		88DBBDFE2E7A910800491331 /* ExceptionsDetailsTVC */ = {
+			isa = PBXGroup;
+			children = (
+				88DBBDFF2E7A915F00491331 /* ExceptionsDetailsTblViewCell.swift */,
+				88DBBE002E7A915F00491331 /* ExceptionsDetailsTblViewCell.xib */,
+			);
+			path = ExceptionsDetailsTVC;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -548,10 +601,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8867DD302E7A755B00435CC3 /* AdditionalOppoTblViewCell.xib in Resources */,
 				889D8EFD2E77F385009B9CE8 /* HunterReportingTblViewCell.xib in Resources */,
 				8861F4AB2E782EB20063193E /* EmailPopup.xib in Resources */,
 				88834ECA2E7915F900E686FC /* ListTblVIewCell.xib in Resources */,
 				882231A92E78429100AFC855 /* DropDownTblViewCell.xib in Resources */,
+				88DBBDFC2E7A895800491331 /* ExceptionsTblViewCell.xib in Resources */,
 				888503122E73CF1200C99B57 /* WWCalendarTimeSelector.storyboard in Resources */,
 				888502E12E73CE5100C99B57 /* Assets.xcassets in Resources */,
 				889CAA952E77ED860001BC57 /* HunterReportingData.xib in Resources */,
@@ -564,6 +619,7 @@
 				889D33DF2E79917E007B1124 /* ZoneWideTblViewCell.xib in Resources */,
 				884AB2252E77C4CB006C0BB5 /* smartout.sqlite in Resources */,
 				888502E32E73CE5100C99B57 /* LaunchScreen.storyboard in Resources */,
+				88DBBE012E7A915F00491331 /* ExceptionsDetailsTblViewCell.xib in Resources */,
 				888502E42E73CE5100C99B57 /* Main.storyboard in Resources */,
 				884AB22D2E77C949006C0BB5 /* HomeVC.xib in Resources */,
 				884147102E79818E0007672F /* FishingSeasonsVC.xib in Resources */,
@@ -615,6 +671,7 @@
 				888503062E73CF1200C99B57 /* AppConstants.swift in Sources */,
 				884AB2312E77CDA1006C0BB5 /* HomeListTblViewCell.swift in Sources */,
 				889CAA8F2E77E42B0001BC57 /* SideMenuListTblViewCell.swift in Sources */,
+				88855DE12E7AD01000AE85C7 /* getAllData.swift in Sources */,
 				888503072E73CF1200C99B57 /* NSCalendar+Timepiece.swift in Sources */,
 				88834EC92E7915F900E686FC /* ListTblVIewCell.swift in Sources */,
 				888503082E73CF1200C99B57 /* VideoPicker.swift in Sources */,
@@ -627,10 +684,12 @@
 				884AB22C2E77C949006C0BB5 /* HomeVC.swift in Sources */,
 				8885030E2E73CF1200C99B57 /* Duration.swift in Sources */,
 				8885030F2E73CF1200C99B57 /* Int+Timepiece.swift in Sources */,
+				88DBBE022E7A915F00491331 /* ExceptionsDetailsTblViewCell.swift in Sources */,
 				888503102E73CF1200C99B57 /* NSDateComponents+Timepiece.swift in Sources */,
 				888503112E73CF1200C99B57 /* NSDate+Timepiece.swift in Sources */,
 				888502EF2E73CEFE00C99B57 /* UIViewController+Extension.swift in Sources */,
 				888502F02E73CEFE00C99B57 /* UIView+Extension.swift in Sources */,
+				8867DD2F2E7A755B00435CC3 /* AdditionalOppoTblViewCell.swift in Sources */,
 				882231A82E78429100AFC855 /* DropDownTblViewCell.swift in Sources */,
 				888502F12E73CEFE00C99B57 /* UIImageView+Extension.swift in Sources */,
 				88D1F28C2E7975140084DBD5 /* ListDetailsTblViewCell.swift in Sources */,
@@ -638,6 +697,7 @@
 				888502DE2E73CE5100C99B57 /* AppDelegate.swift in Sources */,
 				888502E02E73CE5100C99B57 /* ViewController.swift in Sources */,
 				884AB2382E77D93E006C0BB5 /* SideMenuVC.swift in Sources */,
+				88DBBDFD2E7A895800491331 /* ExceptionsTblViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

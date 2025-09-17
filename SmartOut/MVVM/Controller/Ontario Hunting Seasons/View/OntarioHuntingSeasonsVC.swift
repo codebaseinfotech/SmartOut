@@ -26,6 +26,9 @@ class OntarioHuntingSeasonsVC: UIViewController {
     
     var expandedIndexSet: Set<Int> = []
     
+    var arrAllDataList = AppDelegate.appDelegate.dicAllData
+    var arrAllWmuData: [HuntingSeason] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -39,7 +42,18 @@ class OntarioHuntingSeasonsVC: UIViewController {
         
         viewDropDownList.isHidden = true
         
-        lblDropdownTitle.text = arrDropDownList.first
+//        lblDropdownTitle.text = arrDropDownList.first
+        
+        let name = arrAllDataList.wmu.first?.name == "1" ? "All WMUs" : "WMU" + " " + (arrAllDataList.wmu.first?.name ?? "")
+        
+        lblDropdownTitle.text = name
+        
+        let seasonIdToCheck = arrAllDataList.wmu.first?.id ?? 0
+        
+        let fishingSeasonsData = arrAllDataList.hunting_seasons.filter { $0.animalId == seasonIdToCheck }
+        print("Fishing Seasons:", fishingSeasonsData.count)
+        arrAllWmuData = fishingSeasonsData
+        tblViewDropDown.reloadData()
         // Do any additional setup after loading the view.
     }
     
@@ -83,7 +97,7 @@ extension OntarioHuntingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == tblViewDropDown {
-            return arrDropDownList.count
+            return arrAllDataList.wmu.count
         } else if tableView == tblViewList {
             return 20
         }
@@ -94,7 +108,12 @@ extension OntarioHuntingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
         
         if tableView == tblViewDropDown {
             let cell = tableView.dequeueReusableCell(withIdentifier: "DropDownTblViewCell", for: indexPath) as! DropDownTblViewCell
-            cell.lblDropDownName.text = arrDropDownList[indexPath.row]
+//            cell.lblDropDownName.text = arrDropDownList[indexPath.row]
+            
+            let name = arrAllDataList.wmu.first?.name == "1" ? "All WMUs" : "WMU" + " " + (arrAllDataList.wmu.first?.name ?? "")
+            
+            cell.lblDropDownName.text = name
+            
             return cell
         } else if tableView == tblViewList {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ListTblVIewCell", for: indexPath) as! ListTblVIewCell
