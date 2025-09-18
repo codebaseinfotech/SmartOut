@@ -31,16 +31,19 @@ class ListTblVIewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        tblViewListDetails.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
+        tblViewListDetails.isScrollEnabled = false
+        
         tblViewListDetails.register(UINib(nibName: "ListDetailsTblViewCell", bundle: nil), forCellReuseIdentifier: "ListDetailsTblViewCell")
         tblViewListDetails.dataSource = self
         tblViewListDetails.delegate = self
         
         viewBottomDetails.isHidden = true
         
-//         Add tap gesture to viewTop
-        let tap = UITapGestureRecognizer(target: self, action: #selector(didTapTopView))
-        viewTop.isUserInteractionEnabled = true
-        viewTop.addGestureRecognizer(tap)
+//        let tap = UITapGestureRecognizer(target: self, action: #selector(didTapTopView))
+//        viewTop.isUserInteractionEnabled = true
+//        viewTop.addGestureRecognizer(tap)
+        
         // Initialization code
     }
 
@@ -48,6 +51,23 @@ class ListTblVIewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == "contentSize" {
+            DispatchQueue.main.async { [self] in
+                bottomDetailsHeightConstraint.constant = tblViewListDetails.contentSize.height
+                if let tableView = self.superview as? UITableView {
+                    tableView.beginUpdates()
+                    tableView.endUpdates()
+                }
+            }
+            
+        }
+    }
+    
+    deinit {
+        tblViewListDetails.removeObserver(self, forKeyPath: "contentSize")
     }
     
     @objc private func didTapTopView() {
