@@ -86,9 +86,16 @@ struct FishingSeason: Codable {
 struct HuntingSeason: Codable {
     let id: Int?
     let animalId: Int?
-    let startDate: String?
-    let endDate: String?
-    let limit: String?
+    let seasonType: String?
+    let shortWmuList: String?
+    let riflesAllowed: Int?
+    let shotgunsAllowed: Int?
+    let muzzleloadersAllowed: Int?
+    let bowsAllowed: Int?
+    let seasonResident: String?
+    let seasonNonResident: String?
+    let conditionsText: String?
+    let specialText: String?
 }
 
 // MARK: - Moose Draw
