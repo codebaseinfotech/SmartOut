@@ -37,12 +37,13 @@
                                             </view>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="canada_goose" translatesAutoresizingMaskIntoConstraints="NO" id="FOj-36-7og">
                                                 <rect key="frame" x="10" y="10" width="40" height="40"/>
+                                                <color key="tintColor" name="primary_color"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="PSQ-gH-dNH"/>
                                                     <constraint firstAttribute="width" constant="40" id="x2K-1L-aWk"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yZz-4n-Ru0">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yZz-4n-Ru0">
                                                 <rect key="frame" x="65" y="10" width="205" height="40"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                 <nil key="textColor"/>

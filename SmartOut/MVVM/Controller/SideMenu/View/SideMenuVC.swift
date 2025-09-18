@@ -84,6 +84,12 @@ class SideMenuVC: UIViewController {
         }
     }
     
+    func updateSelectedMenu(index: Int) {
+        selectedIndex = IndexPath(row: index, section: 0)
+        isAboutSelected = false
+        tblViewList.reloadData()
+    }
+    
     
 }
 

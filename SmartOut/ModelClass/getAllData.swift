@@ -7,6 +7,11 @@
 
 import Foundation
 
+struct MetricGroup {
+    let title: String
+    let data: [(year: String, value: Double)]
+}
+
 struct AllData: Codable {
     var fish: [Fish] = []
     var fishing_exception_types: [FishingExceptionType] = []

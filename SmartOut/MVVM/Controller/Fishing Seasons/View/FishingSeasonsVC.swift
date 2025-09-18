@@ -95,6 +95,10 @@ class FishingSeasonsVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = true
+        
+        if let sideMenu = self.sideMenuController?.leftViewController as? SideMenuVC {
+            sideMenu.updateSelectedMenu(index: 3)
+        }
     }
     
     @objc func handleSwipeDown() {

@@ -72,6 +72,10 @@
                         <constraint firstItem="dwA-QV-zmR" firstAttribute="leading" secondItem="kTO-W6-ZAJ" secondAttribute="leading" constant="20" id="wdq-06-vfr"/>
                     </constraints>
                 </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="4TC-Qr-IZi">
+                    <rect key="frame" x="0.0" y="159" width="393" height="693"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ut2-xd-5Uo">
                     <rect key="frame" x="0.0" y="99" width="393" height="300"/>
                     <subviews>
@@ -143,10 +147,6 @@
                         <constraint firstAttribute="trailing" secondItem="SPL-D6-mpd" secondAttribute="trailing" id="oDC-qh-HEG"/>
                     </constraints>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="4TC-Qr-IZi">
-                    <rect key="frame" x="0.0" y="399" width="393" height="453"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                </tableView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" name="bg_color"/>
@@ -154,10 +154,10 @@
                 <constraint firstItem="Ut2-xd-5Uo" firstAttribute="top" secondItem="kTO-W6-ZAJ" secondAttribute="bottom" id="0Ne-zk-eoj"/>
                 <constraint firstAttribute="bottom" secondItem="4TC-Qr-IZi" secondAttribute="bottom" id="4CU-84-aJo"/>
                 <constraint firstItem="Ut2-xd-5Uo" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="5TG-MT-B4Q"/>
+                <constraint firstItem="4TC-Qr-IZi" firstAttribute="top" secondItem="kTO-W6-ZAJ" secondAttribute="bottom" constant="60" id="6d0-ct-OfI"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Ut2-xd-5Uo" secondAttribute="trailing" id="6mF-HS-KcV"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="kTO-W6-ZAJ" secondAttribute="trailing" id="7rL-Q8-mRs"/>
                 <constraint firstItem="4TC-Qr-IZi" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="FGg-47-X9x"/>
-                <constraint firstItem="4TC-Qr-IZi" firstAttribute="top" secondItem="Ut2-xd-5Uo" secondAttribute="bottom" id="OI6-1w-CIk"/>
                 <constraint firstItem="kTO-W6-ZAJ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="n7M-ar-U4P"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="4TC-Qr-IZi" secondAttribute="trailing" id="qQN-lP-vsL"/>
                 <constraint firstItem="kTO-W6-ZAJ" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="zcR-6E-W3g"/>

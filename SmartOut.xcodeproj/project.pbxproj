@@ -29,6 +29,8 @@
 		8861F4AB2E782EB20063193E /* EmailPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8861F4A92E782EB20063193E /* EmailPopup.xib */; };
 		8867DD2F2E7A755B00435CC3 /* AdditionalOppoTblViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8867DD2D2E7A755B00435CC3 /* AdditionalOppoTblViewCell.swift */; };
 		8867DD302E7A755B00435CC3 /* AdditionalOppoTblViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8867DD2E2E7A755B00435CC3 /* AdditionalOppoTblViewCell.xib */; };
+		887AF3C52E7BC2F600309ECA /* DataTableCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 887AF3C42E7BC2F600309ECA /* DataTableCollectionViewCell.xib */; };
+		887AF3C62E7BC2F600309ECA /* DataTableCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887AF3C32E7BC2F600309ECA /* DataTableCollectionViewCell.swift */; };
 		88834EC92E7915F900E686FC /* ListTblVIewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88834EC72E7915F900E686FC /* ListTblVIewCell.swift */; };
 		88834ECA2E7915F900E686FC /* ListTblVIewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88834EC82E7915F900E686FC /* ListTblVIewCell.xib */; };
 		888502DE2E73CE5100C99B57 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888502D42E73CE5100C99B57 /* AppDelegate.swift */; };
@@ -97,6 +99,8 @@
 		8861F4A92E782EB20063193E /* EmailPopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmailPopup.xib; sourceTree = "<group>"; };
 		8867DD2D2E7A755B00435CC3 /* AdditionalOppoTblViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalOppoTblViewCell.swift; sourceTree = "<group>"; };
 		8867DD2E2E7A755B00435CC3 /* AdditionalOppoTblViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdditionalOppoTblViewCell.xib; sourceTree = "<group>"; };
+		887AF3C32E7BC2F600309ECA /* DataTableCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTableCollectionViewCell.swift; sourceTree = "<group>"; };
+		887AF3C42E7BC2F600309ECA /* DataTableCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DataTableCollectionViewCell.xib; sourceTree = "<group>"; };
 		88834EC72E7915F900E686FC /* ListTblVIewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTblVIewCell.swift; sourceTree = "<group>"; };
 		88834EC82E7915F900E686FC /* ListTblVIewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListTblVIewCell.xib; sourceTree = "<group>"; };
 		888502BC2E73CE4800C99B57 /* SmartOut.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartOut.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -347,6 +351,15 @@
 			path = additionalOppoTVC;
 			sourceTree = "<group>";
 		};
+		887AF3C22E7BC2C500309ECA /* CollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				887AF3C32E7BC2F600309ECA /* DataTableCollectionViewCell.swift */,
+				887AF3C42E7BC2F600309ECA /* DataTableCollectionViewCell.xib */,
+			);
+			path = CollectionViewCell;
+			sourceTree = "<group>";
+		};
 		88834EC62E7915BE00E686FC /* TblViewListCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -480,6 +493,7 @@
 		889CAA972E77F0130001BC57 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				887AF3C22E7BC2C500309ECA /* CollectionViewCell */,
 				889D8EFA2E77F385009B9CE8 /* HunterReportingTblViewCell.swift */,
 				889D8EFB2E77F385009B9CE8 /* HunterReportingTblViewCell.xib */,
 			);
@@ -610,6 +624,7 @@
 				888503122E73CF1200C99B57 /* WWCalendarTimeSelector.storyboard in Resources */,
 				888502E12E73CE5100C99B57 /* Assets.xcassets in Resources */,
 				889CAA952E77ED860001BC57 /* HunterReportingData.xib in Resources */,
+				887AF3C52E7BC2F600309ECA /* DataTableCollectionViewCell.xib in Resources */,
 				884AB2322E77CDA1006C0BB5 /* HomeListTblViewCell.xib in Resources */,
 				889CAA902E77E42B0001BC57 /* SideMenuListTblViewCell.xib in Resources */,
 				884AB2372E77D93E006C0BB5 /* SideMenuVC.xib in Resources */,
@@ -660,6 +675,7 @@
 				888502EC2E73CEFE00C99B57 /* String+Extension.swift in Sources */,
 				8804C10A2E78095400ABDA6B /* PieChart.swift in Sources */,
 				889D33E02E79917E007B1124 /* ZoneWideTblViewCell.swift in Sources */,
+				887AF3C62E7BC2F600309ECA /* DataTableCollectionViewCell.swift in Sources */,
 				8861F4AA2E782EB20063193E /* EmailPopup.swift in Sources */,
 				889CAA962E77ED860001BC57 /* HunterReportingData.swift in Sources */,
 				888502ED2E73CEFE00C99B57 /* UIFont+Extension.swift in Sources */,

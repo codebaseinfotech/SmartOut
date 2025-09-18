@@ -23,11 +23,17 @@ class OntarioHuntingSeasonsVC: UIViewController {
     var arrDropDownList = ["All WMUs", "WMU 1A", "WMU 1B", "WMU 1C", "WMU 1D", "WMU 2", "WMU 3", "WMU 4", "WMU 5", "WMU 6"]
     
     var isDropDownVisible = false
+    var selectDropName = "1"
+    
     
     var expandedIndexSet: Set<Int> = []
     
     var arrAllDataList = AppDelegate.appDelegate.dicAllData
     var arrAllWmuData: [HuntingSeason] = []
+    var arrAnimal: [Animal] = []
+    
+    
+    var arrHuntingSeasons: [HuntingSeason] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +50,8 @@ class OntarioHuntingSeasonsVC: UIViewController {
         
 //        lblDropdownTitle.text = arrDropDownList.first
         
+        arrAnimal = arrAllDataList.animals
+        
         let name = arrAllDataList.wmu.first?.name == "1" ? "All WMUs" : "WMU" + " " + (arrAllDataList.wmu.first?.name ?? "")
         
         lblDropdownTitle.text = name
@@ -59,6 +67,10 @@ class OntarioHuntingSeasonsVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = true
+        
+        if let sideMenu = self.sideMenuController?.leftViewController as? SideMenuVC {
+            sideMenu.updateSelectedMenu(index: 2)
+        }
     }
 
     @IBAction func clickedSideMenu(_ sender: Any) {
@@ -68,7 +80,7 @@ class OntarioHuntingSeasonsVC: UIViewController {
     @IBAction func clickedOpenDropDown(_ sender: Any) {
         isDropDownVisible.toggle()
         
-        UIView.animate(withDuration: 0.3) {
+        UIView.animate(withDuration: 0.0) {
             self.viewDropDownList.isHidden = !self.isDropDownVisible
             
             self.imgDropdown.transform = self.isDropDownVisible ? CGAffineTransform(rotationAngle: .pi) : .identity
@@ -99,7 +111,7 @@ extension OntarioHuntingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
         if tableView == tblViewDropDown {
             return arrAllDataList.wmu.count
         } else if tableView == tblViewList {
-            return 20
+            return arrAnimal.count
         }
         return 0
     }
@@ -110,17 +122,25 @@ extension OntarioHuntingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "DropDownTblViewCell", for: indexPath) as! DropDownTblViewCell
 //            cell.lblDropDownName.text = arrDropDownList[indexPath.row]
             
-            let name = arrAllDataList.wmu.first?.name == "1" ? "All WMUs" : "WMU" + " " + (arrAllDataList.wmu.first?.name ?? "")
+//            let name = arrAllDataList.wmu.first?.name == "1" ? "All WMUs" : "WMU" + " " + (arrAllDataList.wmu[indexPath.item].name ?? "")
             
-            cell.lblDropDownName.text = name
+            if arrAllDataList.wmu[indexPath.item].name == "1" {
+                cell.lblDropDownName.text = "All WMUs"
+            } else {
+                cell.lblDropDownName.text = "WMU" + " " + (arrAllDataList.wmu[indexPath.item].name ?? "")
+            }
             
             return cell
         } else if tableView == tblViewList {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ListTblVIewCell", for: indexPath) as! ListTblVIewCell
             
-            cell.lblTitle.text = "Item \(indexPath.row + 1)"
             
             cell.isExpanded = expandedIndexSet.contains(indexPath.row)
+            
+            let dicData = arrAnimal[indexPath.row]
+            
+            cell.lblTitle.text = dicData.name ?? ""
+            cell.imgMain.image = UIImage(named: "\(dicData.image_path?.replacingOccurrences(of: ".png", with: "") ?? "")")
             
             cell.viewTop.tag = indexPath.row
             cell.viewTop.gestureRecognizers?.forEach { cell.viewTop.removeGestureRecognizer($0) } // clear old gestures
@@ -147,7 +167,7 @@ extension OntarioHuntingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
             lblDropdownTitle.text = arrDropDownList[indexPath.row]
             
             isDropDownVisible = false
-            UIView.animate(withDuration: 0.3) {
+            UIView.animate(withDuration: 0.0) {
                 self.viewDropDownList.isHidden = true
                 self.imgDropdown.transform = .identity
             }
