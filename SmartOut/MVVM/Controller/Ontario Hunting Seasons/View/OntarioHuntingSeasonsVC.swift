@@ -20,7 +20,7 @@ class OntarioHuntingSeasonsVC: UIViewController {
     @IBOutlet weak var tblViewList: UITableView!
     
     
-    var arrDropDownList = ["All WMUs", "WMU 1A", "WMU 1B", "WMU 1C", "WMU 1D", "WMU 2", "WMU 3", "WMU 4", "WMU 5", "WMU 6"]
+    var arrSeasonId = NSMutableArray()
     
     var isDropDownVisible = false
     var selectDropName = "1"
@@ -35,6 +35,8 @@ class OntarioHuntingSeasonsVC: UIViewController {
     
     var arrHuntingSeasons: [HuntingSeason] = []
     
+    var arrHuntingSeasonWmus: [HuntingSeasonWMU] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -48,8 +50,6 @@ class OntarioHuntingSeasonsVC: UIViewController {
         
         viewDropDownList.isHidden = true
         
-//        lblDropdownTitle.text = arrDropDownList.first
-        
         arrAnimal = arrAllDataList.animals
         
         let name = arrAllDataList.wmu.first?.name == "1" ? "All WMUs" : "WMU" + " " + (arrAllDataList.wmu.first?.name ?? "")
@@ -58,7 +58,7 @@ class OntarioHuntingSeasonsVC: UIViewController {
         
         let seasonIdToCheck = arrAllDataList.wmu.first?.id ?? 0
         
-        let fishingSeasonsData = arrAllDataList.hunting_seasons.filter { $0.animalId == seasonIdToCheck }
+        let fishingSeasonsData = arrAllDataList.hunting_seasons.filter { $0.animal_id == seasonIdToCheck }
         print("Fishing Seasons:", fishingSeasonsData.count)
         arrAllWmuData = fishingSeasonsData
         tblViewDropDown.reloadData()
@@ -111,18 +111,15 @@ extension OntarioHuntingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
         if tableView == tblViewDropDown {
             return arrAllDataList.wmu.count
         } else if tableView == tblViewList {
-            return arrAnimal.count
+            return arrHuntingSeasons.count
         }
-        return 0
+        return 5
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if tableView == tblViewDropDown {
             let cell = tableView.dequeueReusableCell(withIdentifier: "DropDownTblViewCell", for: indexPath) as! DropDownTblViewCell
-//            cell.lblDropDownName.text = arrDropDownList[indexPath.row]
-            
-//            let name = arrAllDataList.wmu.first?.name == "1" ? "All WMUs" : "WMU" + " " + (arrAllDataList.wmu[indexPath.item].name ?? "")
             
             if arrAllDataList.wmu[indexPath.item].name == "1" {
                 cell.lblDropDownName.text = "All WMUs"
@@ -137,10 +134,21 @@ extension OntarioHuntingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
             
             cell.isExpanded = expandedIndexSet.contains(indexPath.row)
             
-            let dicData = arrAnimal[indexPath.row]
+            let dicData = arrHuntingSeasons[indexPath.row]
+            let animalID = dicData.animal_id ?? 0
+
+            // Find first matching animal
+            if let objAnimal = arrAllDataList.animals.first(where: { $0.id == animalID }) {
+                cell.lblTitle.text = objAnimal.name ?? ""
+
+                if let imagePath = objAnimal.image_path {
+                    let imageName = imagePath.replacingOccurrences(of: ".png", with: "")
+                    cell.imgMain.image = UIImage(named: imageName)
+                } else {
+                    cell.imgMain.image = nil // fallback if no image
+                }
+            }
             
-            cell.lblTitle.text = dicData.name ?? ""
-            cell.imgMain.image = UIImage(named: "\(dicData.image_path?.replacingOccurrences(of: ".png", with: "") ?? "")")
             
             cell.viewTop.tag = indexPath.row
             cell.viewTop.gestureRecognizers?.forEach { cell.viewTop.removeGestureRecognizer($0) } // clear old gestures
@@ -164,7 +172,51 @@ extension OntarioHuntingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if tableView == tblViewDropDown {
-            lblDropdownTitle.text = arrDropDownList[indexPath.row]
+            
+            if arrAllDataList.wmu[indexPath.item].name == "1" {
+                lblDropdownTitle.text = "All WMUs"
+            } else {
+                lblDropdownTitle.text = "WMU" + " " + (arrAllDataList.wmu[indexPath.item].name ?? "")
+            }
+            
+            self.arrHuntingSeasons.removeAll()
+            self.arrSeasonId.removeAllObjects()
+            
+            let id = arrAllDataList.wmu[indexPath.row].id ?? 0
+            
+            for objwmu in arrAllDataList.hunting_season_wmus {
+                if id == objwmu.wmu_id {
+                    let seasonId = objwmu.season_id ?? 0
+                    if !arrSeasonId.contains(seasonId) { // prevents duplicates
+                        arrSeasonId.add(seasonId)
+                    }
+                }
+            }
+
+            for objSeason in arrAllDataList.hunting_seasons {
+                if arrSeasonId.contains(objSeason.id ?? 0) {
+                    let seasonId = objSeason.id ?? 0
+                    let animalId = objSeason.animal_id ?? 0
+                    
+                    // Check duplicates by both id and animal_id
+                    let alreadyExists = arrHuntingSeasons.contains {
+                        $0.id == seasonId || $0.animal_id == animalId
+                    }
+                    
+                    if !alreadyExists {
+                        arrHuntingSeasons.append(objSeason)
+                    }
+                }
+            }
+            
+            
+            
+            print("arrSeasonId \(arrSeasonId)")
+            
+            print("arrHuntingSeasons \(arrHuntingSeasons)")
+
+            
+            self.tblViewList.reloadData()
             
             isDropDownVisible = false
             UIView.animate(withDuration: 0.0) {

@@ -85,17 +85,17 @@ struct FishingSeason: Codable {
 // MARK: - Hunting Seasons
 struct HuntingSeason: Codable {
     let id: Int?
-    let animalId: Int?
-    let seasonType: String?
-    let shortWmuList: String?
-    let riflesAllowed: Int?
-    let shotgunsAllowed: Int?
-    let muzzleloadersAllowed: Int?
-    let bowsAllowed: Int?
-    let seasonResident: String?
-    let seasonNonResident: String?
-    let conditionsText: String?
-    let specialText: String?
+    let animal_id: Int?
+    let season_type: String?
+    let short_wmu_list: String?
+    let rifles_allowed: Int?
+    let shotguns_allowed: Int?
+    let muzzleloaders_allowed: Int?
+    let bows_allowed: Int?
+    let season_resident: String?
+    let season_non_resident: String?
+    let conditions_text: String?
+    let special_text: String?
 }
 
 // MARK: - Moose Draw
@@ -165,8 +165,8 @@ struct FishingGeneralInfo: Codable {
 // MARK: - Hunting Season WMU
 struct HuntingSeasonWMU: Codable {
     let id: Int?
-    let name: String?
-    let wmuId: Int?
+    let wmu_id: Int?
+    let season_id: Int?
 }
 
 // MARK: - Deer Controlled
