@@ -37,6 +37,8 @@ class OntarioHuntingSeasonsVC: UIViewController {
     
     var arrHuntingSeasonWmus: [HuntingSeasonWMU] = []
     
+    var selectedwmuID = "1"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -113,7 +115,7 @@ extension OntarioHuntingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
         } else if tableView == tblViewList {
             return arrHuntingSeasons.count
         }
-        return 5
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -124,40 +126,84 @@ extension OntarioHuntingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
             if arrAllDataList.wmu[indexPath.item].name == "1" {
                 cell.lblDropDownName.text = "All WMUs"
             } else {
-                cell.lblDropDownName.text = "WMU" + " " + (arrAllDataList.wmu[indexPath.item].name ?? "")
+                cell.lblDropDownName.text = "WMU " + (arrAllDataList.wmu[indexPath.item].name ?? "")
             }
             
             return cell
+            
         } else if tableView == tblViewList {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ListTblVIewCell", for: indexPath) as! ListTblVIewCell
             
-            
+            // expanded or not
             cell.isExpanded = expandedIndexSet.contains(indexPath.row)
             
             let dicData = arrHuntingSeasons[indexPath.row]
             let animalID = dicData.animal_id ?? 0
-
-            // Find first matching animal
+            
+            // Reset before filling
+            cell.arrHuntingSeasons = []
+            
+            // Find animal info
             if let objAnimal = arrAllDataList.animals.first(where: { $0.id == animalID }) {
                 cell.lblTitle.text = objAnimal.name ?? ""
-
+                
                 if let imagePath = objAnimal.image_path {
                     let imageName = imagePath.replacingOccurrences(of: ".png", with: "")
                     cell.imgMain.image = UIImage(named: imageName)
                 } else {
-                    cell.imgMain.image = nil // fallback if no image
+                    cell.imgMain.image = nil
                 }
             }
             
+            // Filter hunting seasons for this animal + selected WMU
+            for objSet in arrHuntingSeasons {
+                if animalID == objSet.animal_id {
+                    let expandedWMUs = expandWMUList(objSet.short_wmu_list ?? "")
+                    if expandedWMUs.contains(selectedwmuID) {
+                        cell.arrHuntingSeasons.append(objSet)
+                    }
+                }
+            }
             
+            // Reload nested table
+            cell.tblViewListDetails.reloadData()
+            
+            // Tap gesture setup
             cell.viewTop.tag = indexPath.row
-            cell.viewTop.gestureRecognizers?.forEach { cell.viewTop.removeGestureRecognizer($0) } // clear old gestures
+            cell.viewTop.gestureRecognizers?.forEach { cell.viewTop.removeGestureRecognizer($0) }
             let tap = UITapGestureRecognizer(target: self, action: #selector(didTapTopView(_:)))
             cell.viewTop.addGestureRecognizer(tap)
             
             return cell
         }
+        
         return UITableViewCell()
+    }
+    
+    func expandWMUList(_ list: String) -> [String] {
+        let parts = list.split(separator: ",").map { $0.trimmingCharacters(in: .whitespaces) }
+        var expanded: [String] = []
+
+        for part in parts {
+            if part.contains("–") { // Handle range with en dash
+                let rangeParts = part.split(separator: "–").map {
+                    $0.trimmingCharacters(in: .whitespaces)
+                        .replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression) // remove letters
+                }
+                if let start = Int(rangeParts.first ?? ""), let end = Int(rangeParts.last ?? "") {
+                    for i in start...end {
+                        expanded.append("\(i)")
+                    }
+                }
+            } else {
+                // Remove A, B, C... keep only numbers
+                let numeric = part.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
+                if !numeric.isEmpty {
+                    expanded.append(numeric)
+                }
+            }
+        }
+        return expanded
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -178,6 +224,9 @@ extension OntarioHuntingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
             } else {
                 lblDropdownTitle.text = "WMU" + " " + (arrAllDataList.wmu[indexPath.item].name ?? "")
             }
+            let wmuName = arrAllDataList.wmu[indexPath.item].name
+            let numericOnly = wmuName?.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
+            self.selectedwmuID = numericOnly ?? ""
             
             self.arrHuntingSeasons.removeAll()
             self.arrSeasonId.removeAllObjects()

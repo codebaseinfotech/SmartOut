@@ -9,6 +9,10 @@ import UIKit
 
 class ListDetailsTblViewCell: UITableViewCell {
 
+    
+    
+    @IBOutlet weak var lblwmu: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

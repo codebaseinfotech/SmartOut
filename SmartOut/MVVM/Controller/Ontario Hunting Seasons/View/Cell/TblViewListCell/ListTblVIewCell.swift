@@ -20,6 +20,8 @@ class ListTblVIewCell: UITableViewCell {
     
     @IBOutlet weak var bottomDetailsHeightConstraint: NSLayoutConstraint!
     
+    var arrHuntingSeasons: [HuntingSeason] = []
+
     var isExpanded: Bool = false {
         didSet {
             toggleView(animated: true)
@@ -71,11 +73,13 @@ class ListTblVIewCell: UITableViewCell {
 extension ListTblVIewCell: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return arrHuntingSeasons.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tblViewListDetails.dequeueReusableCell(withIdentifier: "ListDetailsTblViewCell") as! ListDetailsTblViewCell
+        
+        cell.lblwmu.text = arrHuntingSeasons[indexPath.row].short_wmu_list ?? ""
         
         return cell
     }
