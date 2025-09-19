@@ -55,16 +55,37 @@ class OntarioHuntingSeasonsVC: UIViewController {
         
         arrAnimal = arrAllDataList.animals
         
-        let name = arrAllDataList.wmu.first?.name == "1" ? "All WMUs" : "WMU" + " " + (arrAllDataList.wmu.first?.name ?? "")
-        
-        lblDropdownTitle.text = name
-        
-        let seasonIdToCheck = arrAllDataList.wmu.first?.id ?? 0
-        
-        let fishingSeasonsData = arrAllDataList.hunting_seasons.filter { $0.animal_id == seasonIdToCheck }
-        print("Fishing Seasons:", fishingSeasonsData.count)
-        arrAllWmuData = fishingSeasonsData
-        tblViewDropDown.reloadData()
+        // Default = show "All WMUs"
+        lblDropdownTitle.text = "All WMUs"
+        selectedwmuID = "" // empty means include all
+
+        arrHuntingSeasons.removeAll()
+        arrSeasonId.removeAllObjects()
+
+        // Collect all season IDs
+        for obj in arrAllDataList.hunting_season_wmus {
+            let seasonId = obj.season_id ?? 0
+            if !arrSeasonId.contains(seasonId) {
+                arrSeasonId.add(seasonId)
+            }
+        }
+
+        // Add all hunting seasons
+        for objSeason in arrAllDataList.hunting_seasons {
+            if arrSeasonId.contains(objSeason.id ?? 0) {
+                let seasonId = objSeason.id ?? 0
+                let animalId = objSeason.animal_id ?? 0
+
+                let alreadyExists = arrHuntingSeasons.contains {
+                    $0.id == seasonId || $0.animal_id == animalId
+                }
+                if !alreadyExists {
+                    arrHuntingSeasons.append(objSeason)
+                }
+            }
+        }
+
+        tblViewList.reloadData()
         // Do any additional setup after loading the view.
     }
     
@@ -174,7 +195,7 @@ extension OntarioHuntingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
             UIView.animate(withDuration: 0) {
                 cell.imgDropDown.transform = isExpanded ? CGAffineTransform(rotationAngle: .pi) : .identity
             }
-//            
+//
             return cell
         }
         
@@ -220,55 +241,60 @@ extension OntarioHuntingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if tableView == tblViewDropDown {
-            
-            if arrAllDataList.wmu[indexPath.item].name == "1" {
+            let selectedWMU = arrAllDataList.wmu[indexPath.item]
+            if selectedWMU.name == "1" {
                 lblDropdownTitle.text = "All WMUs"
-            } else {
-                lblDropdownTitle.text = "WMU" + " " + (arrAllDataList.wmu[indexPath.item].name ?? "")
-            }
-            let wmuName = arrAllDataList.wmu[indexPath.item].name
-            let numericOnly = wmuName?.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
-            self.selectedwmuID = numericOnly ?? ""
-            
-            self.arrHuntingSeasons.removeAll()
-            self.arrSeasonId.removeAllObjects()
-            
-            let id = arrAllDataList.wmu[indexPath.row].id ?? 0
-            
-            for objwmu in arrAllDataList.hunting_season_wmus {
-                if id == objwmu.wmu_id {
-                    let seasonId = objwmu.season_id ?? 0
-                    if !arrSeasonId.contains(seasonId) { // prevents duplicates
+                selectedwmuID = "" // show all
+                arrHuntingSeasons.removeAll()
+                arrSeasonId.removeAllObjects()
+                for obj in arrAllDataList.hunting_season_wmus {
+                    let seasonId = obj.season_id ?? 0
+                    if !arrSeasonId.contains(seasonId) {
                         arrSeasonId.add(seasonId)
                     }
                 }
-            }
-
-            for objSeason in arrAllDataList.hunting_seasons {
-                if arrSeasonId.contains(objSeason.id ?? 0) {
-                    let seasonId = objSeason.id ?? 0
-                    let animalId = objSeason.animal_id ?? 0
-                    
-                    // Check duplicates by both id and animal_id
-                    let alreadyExists = arrHuntingSeasons.contains {
-                        $0.id == seasonId || $0.animal_id == animalId
+                for objSeason in arrAllDataList.hunting_seasons {
+                    if arrSeasonId.contains(objSeason.id ?? 0) {
+                        let seasonId = objSeason.id ?? 0
+                        let animalId = objSeason.animal_id ?? 0
+                        let alreadyExists = arrHuntingSeasons.contains {
+                            $0.id == seasonId || $0.animal_id == animalId
+                        }
+                        if !alreadyExists {
+                            arrHuntingSeasons.append(objSeason)
+                        }
                     }
-                    
-                    if !alreadyExists {
-                        arrHuntingSeasons.append(objSeason)
+                }
+            } else {
+                lblDropdownTitle.text = "WMU " + (selectedWMU.name ?? "")
+                let wmuName = selectedWMU.name
+                let numericOnly = wmuName?.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
+                selectedwmuID = numericOnly ?? ""
+                arrHuntingSeasons.removeAll()
+                arrSeasonId.removeAllObjects()
+                let id = selectedWMU.id ?? 0
+                for objwmu in arrAllDataList.hunting_season_wmus {
+                    if id == objwmu.wmu_id {
+                        let seasonId = objwmu.season_id ?? 0
+                        if !arrSeasonId.contains(seasonId) {
+                            arrSeasonId.add(seasonId)
+                        }
+                    }
+                }
+                for objSeason in arrAllDataList.hunting_seasons {
+                    if arrSeasonId.contains(objSeason.id ?? 0) {
+                        let seasonId = objSeason.id ?? 0
+                        let animalId = objSeason.animal_id ?? 0
+                        let alreadyExists = arrHuntingSeasons.contains {
+                            $0.id == seasonId || $0.animal_id == animalId
+                        }
+                        if !alreadyExists {
+                            arrHuntingSeasons.append(objSeason)
+                        }
                     }
                 }
             }
-            
-            
-            
-            print("arrSeasonId \(arrSeasonId)")
-            
-            print("arrHuntingSeasons \(arrHuntingSeasons)")
-
-            
-            self.tblViewList.reloadData()
-            
+            tblViewList.reloadData()
             isDropDownVisible = false
             UIView.animate(withDuration: 0.0) {
                 self.viewDropDownList.isHidden = true
