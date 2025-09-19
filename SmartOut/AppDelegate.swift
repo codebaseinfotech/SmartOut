@@ -185,7 +185,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             //                print("❌ Failed to encode AllData to JSON: \(error)")
             //            }
             
-            print("jsonString:- \(allData.hunter_report_statistic)")
+            print("jsonString:- \(allData.exceptions.count)")
             self.dicAllData = allData
             sqlite3_close(db)
         } else {

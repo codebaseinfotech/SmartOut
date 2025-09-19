@@ -40,7 +40,7 @@ struct AllData: Codable {
 struct Fish: Codable {
     let id: Int?
     let name: String?
-    let imagePath: String?
+    let image_path: String?
     let text: String?
     let pinImage: String?
     let bubbleImage: String?
@@ -137,8 +137,9 @@ struct HunterReport: Codable {
 // MARK: - Fishing Exception Type
 struct FishingExceptionType: Codable {
     let id: Int?
-    let name: String?
-    let description: String?
+    let text: String?
+    let pin_image: String?
+    let bubble_image: String?
 }
 
 // MARK: - WMU Geometry
@@ -200,8 +201,16 @@ struct MunicipalityGeometry: Codable {
 // MARK: - Exception Model
 struct ExceptionModel: Codable {
     let id: Int?
-    let name: String?
+    let fmz_id: Int?
+    let exception_type_id: Int?
+    let fish_id: Int?
+    let is_additional_opportunity: Double?
+    let season: String?
+    let limits: String?
+    let title: String?
     let description: String?
+    let province: String?
+     
 }
 
 // MARK: - Hunter Report Statistic

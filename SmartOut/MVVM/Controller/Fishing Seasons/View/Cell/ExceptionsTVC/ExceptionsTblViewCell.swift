@@ -22,6 +22,10 @@ class ExceptionsTblViewCell: UITableViewCell {
     var isExpanded: Bool = false
     var toggleAction: (() -> Void)?
     
+    var arrFish: [Fish] = []
+    var arrStringNo: [ExceptionModel] = []
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -93,12 +97,23 @@ class ExceptionsTblViewCell: UITableViewCell {
 extension ExceptionsTblViewCell: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return arrStringNo.count > 0 ? arrStringNo.count : arrFish.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = self.tblViewExceptionsDetails.dequeueReusableCell(withIdentifier: "ExceptionsDetailsTblViewCell") as! ExceptionsDetailsTblViewCell
+        
+        if arrStringNo.count > 0 {
+            let dicData = arrStringNo[indexPath.row]
+            cell.lblExceptionDetailsTitle.text = dicData.title ?? ""
+
+        } else {
+            let dicData = arrFish[indexPath.row]
+            cell.lblExceptionDetailsTitle.text = dicData.name ?? ""
+
+        }
+        
         
         cell.onToggle = { [weak self] in
             // Refresh height after expand/collapse

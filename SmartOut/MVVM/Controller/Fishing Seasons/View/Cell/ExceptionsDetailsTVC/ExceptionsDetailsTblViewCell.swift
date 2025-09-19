@@ -18,7 +18,12 @@ class ExceptionsDetailsTblViewCell: UITableViewCell {
     @IBOutlet weak var lblLimits: UILabel!
     @IBOutlet weak var lblDis: UILabel!
     
+    @IBOutlet weak var viewSeason: UIView!
+    @IBOutlet weak var viewLimit: UIView!
+    @IBOutlet weak var viewDes: UIView!
     
+    @IBOutlet weak var viewAddi: UIView!
+    @IBOutlet weak var imgLoca: UIImageView!
     
     var isExpanded = false
     var onToggle: (() -> Void)?

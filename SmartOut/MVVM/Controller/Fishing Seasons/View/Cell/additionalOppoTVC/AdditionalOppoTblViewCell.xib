@@ -86,7 +86,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bte-D3-9tH">
                                         <rect key="frame" x="0.0" y="55" width="320" height="135"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="mHu-wB-cEN">
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="mHu-wB-cEN">
                                                 <rect key="frame" x="10" y="5" width="300" height="130"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fnW-ew-nrv">
@@ -116,7 +116,7 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C7l-Lz-k4o">
-                                                        <rect key="frame" x="0.0" y="25" width="300" height="25"/>
+                                                        <rect key="frame" x="0.0" y="28" width="300" height="25"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Season:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dks-zI-coh">
                                                                 <rect key="frame" x="0.0" y="4" width="51.666666666666664" height="17"/>
@@ -141,7 +141,7 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lh0-KP-CKc">
-                                                        <rect key="frame" x="0.0" y="55" width="300" height="20"/>
+                                                        <rect key="frame" x="0.0" y="61" width="300" height="11"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Limits:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mlq-Ar-IMF">
                                                                 <rect key="frame" x="0.0" y="4" width="42.666666666666664" height="17"/>
@@ -221,6 +221,9 @@
                 <outlet property="lblSeason" destination="cDD-R7-TRe" id="7wR-u8-Wgx"/>
                 <outlet property="lblTitle" destination="RN8-Er-C1U" id="ryI-T3-a8g"/>
                 <outlet property="viewBottomDetails" destination="Bte-D3-9tH" id="f5M-0I-vWq"/>
+                <outlet property="viewDescription" destination="la3-uR-7D9" id="70G-bL-qyf"/>
+                <outlet property="viewLimitMain" destination="Lh0-KP-CKc" id="ENd-q4-hzV"/>
+                <outlet property="viewSeasonMain" destination="C7l-Lz-k4o" id="rd3-o1-t1X"/>
                 <outlet property="viewTop" destination="orj-eY-3UD" id="W0n-dc-XG5"/>
             </connections>
             <point key="canvasLocation" x="36.641221374045799" y="-32.394366197183103"/>

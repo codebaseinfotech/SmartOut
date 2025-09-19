@@ -224,12 +224,17 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="imgDropDown" destination="Q4x-nj-MMw" id="E9N-h7-2Eh"/>
+                <outlet property="imgLoca" destination="sUm-vs-IHz" id="43D-Ub-Wef"/>
                 <outlet property="imgTOp" destination="dc5-lz-EAW" id="6qC-E1-lpV"/>
                 <outlet property="lblDis" destination="iob-Sa-zNt" id="Zrg-mL-5Ht"/>
                 <outlet property="lblExceptionDetailsTitle" destination="gFW-fY-twF" id="iaU-nW-2Gs"/>
                 <outlet property="lblLimits" destination="0yK-Le-t8b" id="Xb0-XF-Sgm"/>
                 <outlet property="lblSeason" destination="mhF-hL-LPG" id="8Xl-n7-Qvy"/>
+                <outlet property="viewAddi" destination="2j4-qe-EvU" id="lRq-DP-jKl"/>
                 <outlet property="viewBottomException" destination="pki-q8-Cnq" id="Dt7-wI-1dQ"/>
+                <outlet property="viewDes" destination="EBo-uy-z5X" id="7Ih-kS-ipm"/>
+                <outlet property="viewLimit" destination="BHk-bs-Q78" id="3gE-vK-5se"/>
+                <outlet property="viewSeason" destination="i6J-Nt-gUr" id="QzJ-sy-lMF"/>
                 <outlet property="viewTopExceptionDetails" destination="a14-Hn-bF8" id="tSr-BU-jGH"/>
             </connections>
             <point key="canvasLocation" x="30.534351145038165" y="-32.394366197183103"/>
