@@ -1,0 +1,488 @@
+{
+  "data": [
+    {
+      "animal_name": "Black Bear",
+      "animal_image": "bear.png",
+      "chatr_data": [
+        {
+          "title": "Spring Harvest",
+          "value": [
+            {
+              "label": "Female",
+              "value_in_percent": 20
+            },
+            {
+              "label": "Male",
+              "value_in_percent": 80
+            }
+          ]
+        },
+        {
+          "title": "Fall Harvest",
+          "value": [
+            {
+              "label": "Female",
+              "value_in_percent": 37
+            },
+            {
+              "label": "Male",
+              "value_in_percent": 63
+            }
+          ]
+        }
+      ],
+      "static_data": [
+        {
+          "metric_name": "Reporting Rate",
+          "value": [
+            {
+              "year": "2021",
+              "metric_in_percent": "82%"
+            },
+            {
+              "year": "2022",
+              "metric_in_percent": "86%"
+            },
+            {
+              "year": "2023",
+              "metric_in_percent": "88%"
+            },
+            {
+              "year": "2024",
+              "metric_in_percent": "86%"
+            }
+          ]
+        },
+        {
+          "metric_name": "Spring Harvest",
+          "value": [
+            {
+              "year": "2021",
+              "metric_in_percent": "1650"
+            },
+            {
+              "year": "2022",
+              "metric_in_percent": "1759"
+            },
+            {
+              "year": "2023",
+              "metric_in_percent": "2190"
+            },
+            {
+              "year": "2024",
+              "metric_in_percent": "2538"
+            }
+          ]
+        },
+        {
+          "metric_name": "Fall Harvest",
+          "value": [
+            {
+              "year": "2021",
+              "metric_in_percent": "2139"
+            },
+            {
+              "year": "2022",
+              "metric_in_percent": "2602"
+            },
+            {
+              "year": "2023",
+              "metric_in_percent": "2657"
+            },
+            {
+              "year": "2024",
+              "metric_in_percent": "3672"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "animal_name": "Moose",
+      "animal_image": "moose.png",
+      "chatr_data": [
+        {
+          "title": "Bull",
+          "value_in_percent": 58.7
+        },
+        {
+          "title": "Cow",
+          "value_in_percent": 27
+        },
+        {
+          "title": "Calf",
+          "value_in_percent": 14.3
+        }
+      ],
+      "static_data": [
+        {
+          "metric_name": "Reporting Rate",
+          "value": [
+            {
+              "year": "2021",
+              "metric_in_percent": "89%"
+            },
+            {
+              "year": "2022",
+              "metric_in_percent": "92%"
+            },
+            {
+              "year": "2023",
+              "metric_in_percent": "94%"
+            },
+            {
+              "year": "2024",
+              "metric_in_percent": "92%"
+            }
+          ]
+        },
+        {
+          "metric_name": "Total Harvest",
+          "value": [
+            {
+              "year": "2021",
+              "metric_in_percent": "3745"
+            },
+            {
+              "year": "2022",
+              "metric_in_percent": "3353"
+            },
+            {
+              "year": "2023",
+              "metric_in_percent": "3383"
+            },
+            {
+              "year": "2024",
+              "metric_in_percent": "3134"
+            }
+          ]
+        }
+      ],
+      "static_sub_data": [
+        {
+          "metric_name": "Bull",
+          "value": "1839"
+        },
+        {
+          "metric_name": "Cow",
+          "value": "846"
+        },
+        {
+          "metric_name": "Calf",
+          "value": "449"
+        }
+      ]
+    },
+    {
+      "animal_name": "White-tailed Deer",
+      "animal_image": "deer.png",
+      "chatr_data": [
+        {
+          "title": "Buck",
+          "value_in_percent": 65.9
+        },
+        {
+          "title": "Doe",
+          "value_in_percent": 26.4
+        },
+        {
+          "title": "Fawn",
+          "value_in_percent": 7.6
+        }
+      ],
+      "static_data": [
+        {
+          "metric_name": "Reporting Rate",
+          "value": [
+            {
+              "year": "2021",
+              "metric_in_percent": "87%"
+            },
+            {
+              "year": "2022",
+              "metric_in_percent": "88%"
+            },
+            {
+              "year": "2023",
+              "metric_in_percent": "92%"
+            },
+            {
+              "year": "2024",
+              "metric_in_percent": "92%"
+            }
+          ]
+        },
+        {
+          "metric_name": "Total Harvest",
+          "value": [
+            {
+              "year": "2021",
+              "metric_in_percent": "52352"
+            },
+            {
+              "year": "2022",
+              "metric_in_percent": "55950"
+            },
+            {
+              "year": "2023",
+              "metric_in_percent": "52342"
+            },
+            {
+              "year": "2024",
+              "metric_in_percent": "54389"
+            }
+          ]
+        }
+      ],
+      "static_sub_data": [
+        {
+          "metric_name": "Buck",
+          "value": "35,864"
+        },
+        {
+          "metric_name": "Doe",
+          "value": "14,380"
+        },
+        {
+          "metric_name": "Calf",
+          "value": "4,144"
+        }
+      ]
+    },
+    {
+      "animal_name": "Wild Turkey",
+      "animal_image": "turkey.png",
+      "chatr_data": [
+        {
+          "title": "Spring",
+          "value": [
+            {
+              "label": "Female",
+              "value_in_percent": 82
+            },
+            {
+              "label": "Male",
+              "value_in_percent": 18
+            }
+          ]
+        },
+        {
+          "title": "Fall",
+          "value": [
+            {
+              "label": "Female",
+              "value_in_percent": 42
+            },
+            {
+              "label": "Male",
+              "value_in_percent": 58
+            }
+          ]
+        }
+      ],
+      "static_data": [
+        {
+          "metric_name": "Spring Reporting Rate",
+          "value": [
+            {
+              "year": "2021",
+              "metric_in_percent": "84%"
+            },
+            {
+              "year": "2022",
+              "metric_in_percent": "86%"
+            },
+            {
+              "year": "2023",
+              "metric_in_percent": "90%"
+            },
+            {
+              "year": "2024",
+              "metric_in_percent": "90%"
+            }
+          ]
+        },
+        {
+          "metric_name": "Spring Harvest",
+          "value": [
+            {
+              "year": "2021",
+              "metric_in_percent": "18,638"
+            },
+            {
+              "year": "2022",
+              "metric_in_percent": "17,212"
+            },
+            {
+              "year": "2023",
+              "metric_in_percent": "17,778"
+            },
+            {
+              "year": "2024",
+              "metric_in_percent": "17,768"
+            }
+          ]
+        },
+        {
+          "metric_name": "Fall Reporting Harvest",
+          "value": [
+            {
+              "year": "2021",
+              "metric_in_percent": "81%"
+            },
+            {
+              "year": "2022",
+              "metric_in_percent": "86%"
+            },
+            {
+              "year": "2023",
+              "metric_in_percent": "89%"
+            },
+            {
+              "year": "2024",
+              "metric_in_percent": "87%"
+            }
+          ]
+        },
+        {
+          "metric_name": "Fall Harvest",
+          "value": [
+            {
+              "year": "2021",
+              "metric_in_percent": "701"
+            },
+            {
+              "year": "2022",
+              "metric_in_percent": "827"
+            },
+            {
+              "year": "2023",
+              "metric_in_percent": "702"
+            },
+            {
+              "year": "2024",
+              "metric_in_percent": "783"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "animal_name": "Wolf and Coyote",
+      "animal_image": "wolf.png",
+      "chatr_data": [],
+      "static_data": [
+        {
+          "metric_name": "Reporting Rate",
+          "value": [
+            {
+              "year": "2021",
+              "metric_in_percent": "87%"
+            },
+            {
+              "year": "2022",
+              "metric_in_percent": "88%"
+            },
+            {
+              "year": "2023",
+              "metric_in_percent": "91%"
+            },
+            {
+              "year": "2024",
+              "metric_in_percent": "91%"
+            }
+          ]
+        },
+        {
+          "metric_name": "Total Harvest",
+          "value": [
+            {
+              "year": "2021",
+              "metric_in_percent": "206"
+            },
+            {
+              "year": "2022",
+              "metric_in_percent": "213"
+            },
+            {
+              "year": "2023",
+              "metric_in_percent": "300"
+            },
+            {
+              "year": "2024",
+              "metric_in_percent": "279"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "animal_name": "Elk",
+      "animal_image": "elk.png",
+      "chatr_data": [
+        {
+          "title": "Bull",
+          "value_in_percent": 80
+        },
+        {
+          "title": "Cow",
+          "value_in_percent": 20
+        }
+      ],
+      "static_data": [
+        {
+          "metric_name": "Reporting Rate",
+          "value": [
+            {
+              "year": "2021",
+              "metric_in_percent": "89%"
+            },
+            {
+              "year": "2022",
+              "metric_in_percent": "94%"
+            },
+            {
+              "year": "2023",
+              "metric_in_percent": "100%"
+            },
+            {
+              "year": "2024",
+              "metric_in_percent": "91%"
+            }
+          ]
+        },
+        {
+          "metric_name": "Total Harvest",
+          "value": [
+            {
+              "year": "2021",
+              "metric_in_percent": "4"
+            },
+            {
+              "year": "2022",
+              "metric_in_percent": "6"
+            },
+            {
+              "year": "2023",
+              "metric_in_percent": "4"
+            },
+            {
+              "year": "2024",
+              "metric_in_percent": "5"
+            }
+          ]
+        }
+      ],
+      "static_sub_data": [
+        {
+          "metric_name": "Bull",
+          "value": "4"
+        },
+        {
+          "metric_name": "Cow",
+          "value": "1"
+        }
+      ]
+    }
+  ]
+}

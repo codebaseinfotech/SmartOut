@@ -12,12 +12,10 @@ import DGCharts
 class HunterReportingData: UIViewController {
 
     @IBOutlet weak var tblViewHunterReportingData: UITableView!
-    
-    var arrList = ["Black Bear", "Moose", "White-tailed Deer", "Wild Turkey", "Wolf and Coyote", "Elk"]
-    var arrImg = ["bear_orange", "moose-orange", "deer_Orange", "turkey_orange", "wolf_orange", "elk_orange"]
-    
-    var arrAllDataList = AppDelegate.appDelegate.dicAllData
-    var arrAnimalData: [Animal] = []
+
+    var arrAllData = AppDelegate.appDelegate.arrAllData
+    var didReloadOnce = false
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,18 +23,8 @@ class HunterReportingData: UIViewController {
         tblViewHunterReportingData.register(UINib(nibName: "HunterReportingTblViewCell", bundle: nil), forCellReuseIdentifier: "HunterReportingTblViewCell")
         tblViewHunterReportingData.dataSource = self
         tblViewHunterReportingData.delegate = self
-        
-        
-        var seen = Set<Int>()
-        let uniqueOrdered = arrAllDataList.hunter_report_statistic.filter { seen.insert($0.animal_id ?? 0).inserted }
-        let animalIds = uniqueOrdered.map { $0.animal_id }
 
-        let selectedAnimals = arrAllDataList.animals.filter { animalIds.contains($0.id) }
-        arrAnimalData = selectedAnimals
-        tblViewHunterReportingData.reloadData()
-
-        print("Animal Data \(selectedAnimals.count)")
-        
+        print("Animal Data \(arrAllData.count)")
         
         // Do any additional setup after loading the view.
     }
@@ -58,109 +46,148 @@ class HunterReportingData: UIViewController {
 
 }
 
-extension HunterReportingData: UITableViewDelegate, UITableViewDataSource {
+extension HunterReportingData: UITableViewDelegate, UITableViewDataSource, reloadCell {
+
+    func reloadData() {
+        if !didReloadOnce {
+            tblViewHunterReportingData.reloadData()
+            didReloadOnce = true
+        }
+        
+    }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrAnimalData.count
+        return arrAllData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tblViewHunterReportingData.dequeueReusableCell(withIdentifier: "HunterReportingTblViewCell") as! HunterReportingTblViewCell
         
-        let dicData = arrAnimalData[indexPath.row]
-        cell.lblTitle.text = dicData.name
-        cell.imgAnimal.tintColor = .primary
-        cell.imgAnimal.image = UIImage(named: dicData.image_path ?? "")
+        let dicData = arrAllData[indexPath.row]
+         
+        let animal_name = dicData["animal_name"] as? String ?? ""
         
-        let animalHarvests = arrAllDataList.hunter_report_harvest.filter { $0.animal_id == dicData.id }
+        cell.delegateReload = self
+        
+        cell.lblTitle.text = animal_name
+        cell.imgAnimal.image = UIImage(named: dicData["animal_image"] as? String ?? "")
 
-        // group by title
-        let groupedByTitle = Dictionary(grouping: animalHarvests, by: { $0.title ?? "" })
-
-        let uniqueTitles = Array(groupedByTitle.keys).filter { !$0.isEmpty }
-
-        if uniqueTitles.count > 1 {
-            // First chart
-            if let springItems = groupedByTitle[uniqueTitles[0]] {
-                cell.lblFChartName.text = uniqueTitles[0]
-                let entries = springItems.map {
-                    PieChartDataEntry(value: Double($0.value_in_percent ?? 0),
-                                      label: $0.label ?? "")
+        if let staticSubData = dicData["static_sub_data"] as? [[String: Any]], !staticSubData.isEmpty {
+            for sub in staticSubData {
+                let label = sub["metric_name"] as? String ?? ""
+                let valueString = sub["value"] as? String ?? "0"
+                
+                if label.lowercased() == "bull" || label.lowercased() == "buck" {
+                    cell.lblBullValue.text = valueString
                 }
-                PieChart.shared.setupChart(view: cell.viewSpringChart,
-                                           entries: entries,
-                                           colors: [.systemBlue, .orange, .yellow])
-            }
-
-            // Second chart
-            if let fallItems = groupedByTitle[uniqueTitles[1]] {
-                cell.lblSChartName.text = uniqueTitles[1]
-                let entries = fallItems.map {
-                    PieChartDataEntry(value: Double($0.value_in_percent ?? 0),
-                                      label: $0.label ?? "")
+                if label.lowercased() == "cow" || label.lowercased() == "doe" {
+                    cell.lblCowValue.text = valueString
                 }
-                PieChart.shared.setupChart(view: cell.viewFallChart,
-                                           entries: entries,
-                                           colors: [.systemBlue, .orange, .yellow])
+                if label.lowercased() == "calf" || label.lowercased() == "fawn" {
+                    cell.lblCalfValue.text = valueString
+                }
+                
+                if animal_name == "White-tailed Deer" {
+                    cell.lblBull.text = "Buck"
+                    cell.lblFColor.text = "Buck"
+                    
+                    cell.lblCow.text = "Doe"
+                    cell.lblSColor.text = "Doe"
+                    
+                    cell.lblCalf.text = "Fawn"
+                    cell.lblTColor.text = "Fawn"
+                    
+                }
+                
+                if animal_name == "Moose" {
+                    cell.lblBull.text = "Buck"
+                    cell.lblFColor.text = "Buck"
+                    
+                    cell.lblCow.text = "Doe"
+                    cell.lblSColor.text = "Doe"
+                    
+                    cell.lblCalf.text = "Calf"
+                    cell.lblTColor.text = "Calf"
+                    
+                }
+                
+                if animal_name == "Elk" {
+                    cell.lblBull.text = "Bull"
+                    cell.lblFColor.text = "Bull"
+                    
+                    cell.lblCow.text = "Cow"
+                    cell.lblSColor.text = "Cow"
+                    
+                    cell.viewClaf.isHidden = true
+                    cell.viewCalfMain.isHidden = true
+                    cell.viewCalfColor.isHidden = true
+                }
             }
-        } else {
-            cell.lblFChartName.isHidden = true
-            cell.lblSChartName.isHidden = true
+            cell.collectionViewDataTable.reloadData()
         }
         
-        let filteredStats = arrAllDataList.hunter_report_statistic.filter { $0.animal_id == dicData.id }
-
-        // Step 2: group by metric_name
-
-        // Step 2: Extract unique metric names
-        let uniqueMetricNames = Array(Set(arrAllDataList.hunter_report_statistic.compactMap { $0.metric_name }))
- 
-        var arrListNamesd: [HunterReportStatistic] = []
-        
-        var hunter_report_statistic: [HunterReportStatistic] = []
-        
-        for obj in arrAllDataList.hunter_report_statistic {
-            if obj.animal_id == 2 {
-                hunter_report_statistic.append(obj)
-            }
-        }
-        
-        print("dfdfd\(arrListNamesd.count)")
-        let dsfdsf = arrAllDataList.hunter_report_statistic.filter {
-            $0.metric_name.map(uniqueMetricNames.contains) ?? false
-        }
-
-        
-        let groupedDict = Dictionary(grouping: dsfdsf) { $0.metric_name ?? "" }
-
-        print("Add String: \(uniqueMetricNames)")
-
-        // ✅ Step 3: convert to array of MetricGroup
-        let metricGroups: [MetricGroup] = groupedDict.map { (key, stats) in
-            let data = stats.compactMap { stat -> (String, Double)? in
-                if let year = stat.year {
-                    if let number = stat.metric_in_number {
-                        return (year, number) as? (String, Double)
-                    } else if let percent = stat.metric_in_percent {
-                        return (year, percent)
+        if let chatr_data = dicData["chatr_data"] as? [[String: Any]], !chatr_data.isEmpty {
+            
+            cell.viewMainChart.isHidden = false
+            cell.viewMainCharS.isHidden = true
+            
+            var directEntries: [PieChartDataEntry] = []
+            
+            for (i, chart) in chatr_data.enumerated() {
+                let title = chart["title"] as? String ?? ""
+                
+                // Case 1: value array (e.g. Black Bear, Turkey)
+                if let values = chart["value"] as? [[String: Any]] {
+                    var entries: [PieChartDataEntry] = []
+                    for v in values {
+                        let label = v["label"] as? String ?? ""
+                        let percent = v["value_in_percent"] as? Double ?? 0.0
+                        entries.append(PieChartDataEntry(value: percent, label: label))
+                    }
+                    
+                    if i == 0 {
+                        cell.lblFChartName.text = title
+                        PieChart.shared.setupChart(
+                            view: cell.viewSpringChart,
+                            entries: entries,
+                            colors: [UIColor.primary, UIColor.systemBlue]
+                        )
+                    } else if i == 1 {
+                        cell.lblSChartName.text = title
+                        PieChart.shared.setupChart(
+                            view: cell.viewFallChart,
+                            entries: entries,
+                            colors: [UIColor.primary, UIColor.systemBlue]
+                        )
                     }
                 }
-                return nil
+                
+                // Case 2: direct value_in_percent (e.g. Moose, Deer, Elk)
+                else if let percent = chart["value_in_percent"] as? Double {
+                    directEntries.append(PieChartDataEntry(value: percent, label: title))
+                }
             }
-            // Sort years ascending (optional)
-            let sortedData = data.sorted { $0.0 < $1.0 }
-            return MetricGroup(title: key, data: sortedData)
+            
+            if !directEntries.isEmpty {
+                cell.viewMainCharS.isHidden = false
+                cell.viewMainChart.isHidden = true
+                PieChart.shared.setupChart(
+                    view: cell.view3ValueChart,
+                    entries: directEntries,
+                    colors: [UIColor.primary, UIColor.systemBlue, UIColor.systemYellow]
+                )
+            }
+            cell.collectionViewDataTable.reloadData()
+        } else {
+            // Case 3: no chart data (Wolf & Coyote)
+            cell.viewMainChart.isHidden = true
+            cell.viewMainCharS.isHidden = true
         }
         
-        cell.arrListName = metricGroups
-        cell.collectionViewDataTable.reloadData()
-        
-        let entries3 = [PieChartDataEntry(value: 27.0, label: "BUll"),
-                        PieChartDataEntry(value: 14.3, label: "Cow"),
-                        PieChartDataEntry(value: 58.7, label: "Calf")]
-        PieChart.shared.setupChart(view: cell.view3ValueChart, entries: entries3, colors: [.systemBlue, .orange, .yellow])
-
-        
+        if let static_data = dicData["static_data"] as? [[String: Any]] {
+            cell.arrAllRpe = static_data
+        }
         
         return cell
     }

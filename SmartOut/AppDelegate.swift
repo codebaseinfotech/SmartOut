@@ -22,12 +22,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
+    var arrAllData: [[String: Any]] = [[:]]
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
         if let path = Bundle.main.path(forResource: "smartout", ofType: "sqlite") {
             fetchAllData(from: path)
         }
+        
+        let animals = loadHunterReportingData()
+        arrAllData = animals
+
         
         let homeVC = HomeVC(nibName: "HomeVC", bundle: nil)
         let homeNavigation = UINavigationController(rootViewController: homeVC)
@@ -49,6 +55,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         
         return true
+    }
+    
+    func loadHunterReportingData() -> [[String: Any]] {
+        guard let url = Bundle.main.url(forResource: "HunterReportingData", withExtension: "json") else {
+            print("❌ JSON file not found")
+            return []
+        }
+        
+        do {
+            let data = try Data(contentsOf: url)
+            if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+               let dataArray = json["data"] as? [[String: Any]] {
+                return dataArray
+            }
+        } catch {
+            print("❌ Error parsing JSON:", error)
+        }
+        return []
     }
     
     func fetchAllData(from dbPath: String) {

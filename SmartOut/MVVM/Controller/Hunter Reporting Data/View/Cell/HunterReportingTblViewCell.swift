@@ -10,11 +10,17 @@ import Charts
 import DGCharts
 
 
-
+protocol reloadCell: AnyObject {
+    func reloadData()
+}
 
 class HunterReportingTblViewCell: UITableViewCell {
 
-    @IBOutlet weak var imgAnimal: UIImageView!
+    @IBOutlet weak var imgAnimal: UIImageView! {
+        didSet {
+            imgAnimal.tintColor = .primary
+        }
+    }
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var viewSpringChart: UIView!
     @IBOutlet weak var viewFallChart: UIView!
@@ -24,6 +30,29 @@ class HunterReportingTblViewCell: UITableViewCell {
     @IBOutlet weak var lblSChartName: UILabel!
     
     @IBOutlet weak var collectionViewDataTable: UICollectionView!
+    
+    @IBOutlet weak var viewMainChart: UIView!
+    @IBOutlet weak var viewMainCharS: UIView!
+    
+    
+    @IBOutlet weak var lblBull: UILabel!
+    @IBOutlet weak var lblCow: UILabel!
+    @IBOutlet weak var lblCalf: UILabel!
+    
+    @IBOutlet weak var lblBullValue: UILabel!
+    @IBOutlet weak var lblCowValue: UILabel!
+    @IBOutlet weak var lblCalfValue: UILabel!
+    
+    @IBOutlet weak var viewClaf: UIView!
+    @IBOutlet weak var viewCalfMain: UIView!
+    
+    @IBOutlet weak var viewCalfColor: UIView!
+    
+    @IBOutlet weak var lblFColor: UILabel!
+    @IBOutlet weak var lblSColor: UILabel!
+    @IBOutlet weak var lblTColor: UILabel!
+    
+    @IBOutlet weak var heightCV: NSLayoutConstraint!
     
     let SlidarsectionInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
     let SlidaritemsPerRow : CGFloat = 1
@@ -47,7 +76,25 @@ class HunterReportingTblViewCell: UITableViewCell {
         return _SlidarflowLayout
     }
     
-    var arrListName: [MetricGroup] = []
+    var delegateReload: reloadCell?
+    
+    var arrAllRpe: [[String: Any]] = [] {
+        didSet {
+            DispatchQueue.main.async {
+                self.collectionViewDataTable.reloadData()
+                self.collectionViewDataTable.layoutIfNeeded()
+                
+                let newHeight = self.collectionViewDataTable.collectionViewLayout.collectionViewContentSize.height
+                self.heightCV.constant = newHeight
+                
+                self.setNeedsLayout()
+                self.layoutIfNeeded()
+                
+                self.delegateReload?.reloadData()
+                
+            }
+        }
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -55,12 +102,17 @@ class HunterReportingTblViewCell: UITableViewCell {
         collectionViewDataTable.delegate = self
         collectionViewDataTable.dataSource = self
         collectionViewDataTable.collectionViewLayout =  SlidarflowLayout
-      
-        
         
         // Initialization code
     }
-
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        DispatchQueue.main.async {
+            self.heightCV.constant = self.collectionViewDataTable.collectionViewLayout.collectionViewContentSize.height
+        }
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
@@ -71,21 +123,42 @@ class HunterReportingTblViewCell: UITableViewCell {
 extension HunterReportingTblViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return arrListName.count+1
+        return arrAllRpe.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = self.collectionViewDataTable.dequeueReusableCell(withReuseIdentifier: "DataTableCollectionViewCell", for: indexPath) as! DataTableCollectionViewCell
         
-        if indexPath.row == 0 {
-            cell.lblTitle.isHidden = true
-            cell.lblValue1.text = "2021"
-            cell.lblValue2.text = "2022"
-            cell.lblValue3.text = "2023"
-            cell.lblValue4.text = "2024"
+        let dicData = arrAllRpe[indexPath.item]
+        
+        let metric_name = dicData["metric_name"] as? String ?? ""
+        cell.lblTitle.text = metric_name
+        
+        
+        if let value = dicData["value"] as? [[String: Any]] {
+            for val in value {
+                let year = val["year"] as? String ?? ""
+                let percent = val["metric_in_percent"] as? String ?? ""
+                print("   Year:", year, "Value:", percent)
+                
+                if year == "2021" {
+                    cell.lblValue1.text = percent
+                }
+                
+                if year == "2022" {
+                    cell.lblValue2.text = percent
+                }
+                
+                if year == "2023" {
+                    cell.lblValue3.text = percent
+                }
+                
+                if year == "2024" {
+                    cell.lblValue4.text = percent
+                }
+            }
         }
         
-//        let dicData = statsDict[0][indexPath.item]
         
         if indexPath.item == collectionView.numberOfItems(inSection: indexPath.section) - 1 {
             cell.viewBottomLine.isHidden = true
