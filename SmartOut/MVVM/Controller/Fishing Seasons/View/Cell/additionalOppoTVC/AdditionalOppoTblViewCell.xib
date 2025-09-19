@@ -217,6 +217,7 @@
                 <outlet property="imgDropDown" destination="mkf-aj-M7e" id="eay-as-rTe"/>
                 <outlet property="imgIcon" destination="Luu-8p-rCK" id="Hge-hM-lgr"/>
                 <outlet property="lblDis" destination="j09-Lq-TCg" id="8qr-8C-dsl"/>
+                <outlet property="lblLimits" destination="MUz-AM-ojZ" id="a2C-Pz-6uV"/>
                 <outlet property="lblSeason" destination="cDD-R7-TRe" id="7wR-u8-Wgx"/>
                 <outlet property="lblTitle" destination="RN8-Er-C1U" id="ryI-T3-a8g"/>
                 <outlet property="viewBottomDetails" destination="Bte-D3-9tH" id="f5M-0I-vWq"/>

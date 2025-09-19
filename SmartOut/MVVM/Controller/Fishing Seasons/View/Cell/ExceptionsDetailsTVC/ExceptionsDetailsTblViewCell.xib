@@ -225,7 +225,10 @@
             <connections>
                 <outlet property="imgDropDown" destination="Q4x-nj-MMw" id="E9N-h7-2Eh"/>
                 <outlet property="imgTOp" destination="dc5-lz-EAW" id="6qC-E1-lpV"/>
+                <outlet property="lblDis" destination="iob-Sa-zNt" id="Zrg-mL-5Ht"/>
                 <outlet property="lblExceptionDetailsTitle" destination="gFW-fY-twF" id="iaU-nW-2Gs"/>
+                <outlet property="lblLimits" destination="0yK-Le-t8b" id="Xb0-XF-Sgm"/>
+                <outlet property="lblSeason" destination="mhF-hL-LPG" id="8Xl-n7-Qvy"/>
                 <outlet property="viewBottomException" destination="pki-q8-Cnq" id="Dt7-wI-1dQ"/>
                 <outlet property="viewTopExceptionDetails" destination="a14-Hn-bF8" id="tSr-BU-jGH"/>
             </connections>

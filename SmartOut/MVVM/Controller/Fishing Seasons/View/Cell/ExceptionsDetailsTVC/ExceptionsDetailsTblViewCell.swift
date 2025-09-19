@@ -14,6 +14,11 @@ class ExceptionsDetailsTblViewCell: UITableViewCell {
     @IBOutlet weak var lblExceptionDetailsTitle: UILabel!
     @IBOutlet weak var imgDropDown: UIImageView!
     @IBOutlet weak var viewBottomException: UIView!
+    @IBOutlet weak var lblSeason: UILabel!
+    @IBOutlet weak var lblLimits: UILabel!
+    @IBOutlet weak var lblDis: UILabel!
+    
+    
     
     var isExpanded = false
     var onToggle: (() -> Void)?

@@ -14,6 +14,7 @@ class AdditionalOppoTblViewCell: UITableViewCell {
     @IBOutlet weak var imgDropDown: UIImageView!
     @IBOutlet weak var lblSeason: UILabel!
     @IBOutlet weak var lblDis: UILabel!
+    @IBOutlet weak var lblLimits: UILabel!
     
     @IBOutlet weak var viewTop: UIView!
     @IBOutlet weak var viewBottomDetails: UIView!
