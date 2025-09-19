@@ -250,13 +250,13 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ps7-Oc-amv">
-                                        <rect key="frame" x="0.0" y="129.66666666666666" width="320" height="89.333333333333343"/>
+                                        <rect key="frame" x="0.0" y="129.66666666666663" width="320" height="210.33333333333337"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="sOR-G6-8pp">
-                                                <rect key="frame" x="5" y="0.0" width="310" height="89.333333333333329"/>
+                                                <rect key="frame" x="5" y="0.0" width="310" height="210.33333333333334"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SW4-qv-i4a">
-                                                        <rect key="frame" x="0.0" y="0.0" width="75" height="89.333333333333329"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="75" height="210.33333333333334"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Season:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="htV-XS-se5">
                                                                 <rect key="frame" x="0.0" y="0.99999999999999911" width="75" height="15.666666666666664"/>
@@ -274,7 +274,7 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Eh-lE-6VT">
-                                                        <rect key="frame" x="80" y="0.0" width="230" height="89.333333333333329"/>
+                                                        <rect key="frame" x="80" y="0.0" width="230" height="210.33333333333334"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rifle" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DDs-dj-VkU">
                                                                 <rect key="frame" x="0.0" y="0.99999999999999911" width="230" height="15.666666666666664"/>
@@ -303,7 +303,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xdi-a5-DER">
-                                        <rect key="frame" x="0.0" y="229" width="320" height="50"/>
+                                        <rect key="frame" x="0.0" y="350" width="320" height="50"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="U26-ZR-dDd">
                                                 <rect key="frame" x="5" y="0.0" width="310" height="50"/>
@@ -341,7 +341,7 @@
                                                             <constraint firstItem="tdI-cu-AMb" firstAttribute="top" secondItem="ety-lk-aOo" secondAttribute="top" constant="1" id="IFx-1n-KaE"/>
                                                             <constraint firstItem="tdI-cu-AMb" firstAttribute="leading" secondItem="ety-lk-aOo" secondAttribute="leading" id="h83-LJ-7LU"/>
                                                             <constraint firstAttribute="trailing" secondItem="tdI-cu-AMb" secondAttribute="trailing" id="qKv-R6-zku"/>
-                                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="tdI-cu-AMb" secondAttribute="bottom" constant="1" id="sf9-XP-3su"/>
+                                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="tdI-cu-AMb" secondAttribute="bottom" constant="5" id="sf9-XP-3su"/>
                                                         </constraints>
                                                     </view>
                                                 </subviews>
@@ -355,8 +355,8 @@
                                             <constraint firstAttribute="bottom" secondItem="U26-ZR-dDd" secondAttribute="bottom" id="mU4-Bl-sdD"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sXK-24-fQ1">
-                                        <rect key="frame" x="0.0" y="289" width="320" height="111"/>
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sXK-24-fQ1">
+                                        <rect key="frame" x="0.0" y="400" width="320" height="111"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="kWJ-gj-Lvz">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="111"/>
