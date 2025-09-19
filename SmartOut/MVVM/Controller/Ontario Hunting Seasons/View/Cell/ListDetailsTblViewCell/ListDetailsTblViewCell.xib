@@ -619,6 +619,8 @@
                 <outlet property="lblSeason" destination="DDs-dj-VkU" id="kxu-MK-t8R"/>
                 <outlet property="lblwmu" destination="74F-dM-zi1" id="gIM-EW-GJe"/>
                 <outlet property="viewBow" destination="qvE-Zn-5S6" id="LQy-Mx-QEd"/>
+                <outlet property="viewCondtionMain" destination="xdi-a5-DER" id="YCx-UY-Ba5"/>
+                <outlet property="viewMainSeason" destination="ps7-Oc-amv" id="StM-sW-KWa"/>
                 <outlet property="viewMuzzleLoader" destination="tBu-PF-Hj8" id="qkJ-e5-utr"/>
                 <outlet property="viewRifle" destination="Ynj-Kf-S7h" id="JO2-LD-mZN"/>
                 <outlet property="viewShortgun" destination="0IE-3F-sku" id="e5X-tE-45e"/>

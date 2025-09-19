@@ -89,6 +89,10 @@ extension ListTblVIewCell: UITableViewDelegate, UITableViewDataSource {
         cell.lblSeason.text = season
         cell.lblConditionS.text = dicData.conditions_text
         
+        cell.viewCondtionMain.isHidden = dicData.conditions_text != "" ? false : true
+        
+        cell.viewMainSeason.isHidden = dicData.season_resident != "" && dicData.season_non_resident != "" ? false : true
+        
         return cell
     }
     

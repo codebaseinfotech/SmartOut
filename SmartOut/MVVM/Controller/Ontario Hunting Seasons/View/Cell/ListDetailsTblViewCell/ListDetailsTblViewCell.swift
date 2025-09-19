@@ -19,6 +19,8 @@ class ListDetailsTblViewCell: UITableViewCell {
     @IBOutlet weak var lblSeason: UILabel!
     @IBOutlet weak var lblConditionS: UILabel!
     
+    @IBOutlet weak var viewCondtionMain: UIView!
+    @IBOutlet weak var viewMainSeason: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
