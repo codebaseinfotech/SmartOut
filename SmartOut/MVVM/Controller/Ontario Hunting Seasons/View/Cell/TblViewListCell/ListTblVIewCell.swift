@@ -22,11 +22,6 @@ class ListTblVIewCell: UITableViewCell {
     
     var arrHuntingSeasons: [HuntingSeason] = []
 
-    var isExpanded: Bool = false {
-        didSet {
-            toggleView(animated: true)
-        }
-    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -39,10 +34,6 @@ class ListTblVIewCell: UITableViewCell {
         tblViewListDetails.delegate = self
         
         viewBottomDetails.isHidden = true
-        
-//        let tap = UITapGestureRecognizer(target: self, action: #selector(didTapTopView))
-//        viewTop.isUserInteractionEnabled = true
-//        viewTop.addGestureRecognizer(tap)
         
         // Initialization code
     }
@@ -69,25 +60,7 @@ class ListTblVIewCell: UITableViewCell {
     deinit {
         tblViewListDetails.removeObserver(self, forKeyPath: "contentSize")
     }
-    
-    @objc private func didTapTopView() {
-        isExpanded.toggle()
-    }
-    
-    private func toggleView(animated: Bool) {
-        let changes = {
-            self.viewBottomDetails.isHidden = !self.isExpanded
-            self.imgDropDown.transform = self.isExpanded ? CGAffineTransform(rotationAngle: .pi) : .identity
-            self.layoutIfNeeded()
-        }
-        
-        if animated {
-            UIView.animate(withDuration: 0.3, animations: changes)
-        } else {
-            changes()
-        }
-    }
-    
+
 }
 
 extension ListTblVIewCell: UITableViewDelegate, UITableViewDataSource {
@@ -99,7 +72,22 @@ extension ListTblVIewCell: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tblViewListDetails.dequeueReusableCell(withIdentifier: "ListDetailsTblViewCell") as! ListDetailsTblViewCell
         
-        cell.lblwmu.text = arrHuntingSeasons[indexPath.row].short_wmu_list ?? ""
+        let dicData = arrHuntingSeasons[indexPath.row]
+        
+        cell.lblwmu.text = dicData.short_wmu_list ?? ""
+        
+        cell.viewRifle.isHidden = dicData.rifles_allowed == 1 ? false : true
+        cell.viewShortgun.isHidden = dicData.shotguns_allowed == 1 ? false : true
+        cell.viewMuzzleLoader.isHidden = dicData.muzzleloaders_allowed == 1 ? false : true
+        cell.viewBow.isHidden = dicData.bows_allowed == 1 ? false : true
+        
+        let season_resident = (dicData.season_resident ?? "") + " " + "(Resident)"
+        let season_non_resident = (dicData.season_resident ?? "") + " " + "(Non-resident)"
+        
+        let season = season_resident != "" ? season_resident + "\n" + season_non_resident : season_non_resident
+        
+        cell.lblSeason.text = season
+        cell.lblConditionS.text = dicData.conditions_text
         
         return cell
     }

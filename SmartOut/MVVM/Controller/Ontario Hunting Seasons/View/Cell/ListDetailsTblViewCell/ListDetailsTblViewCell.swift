@@ -8,10 +8,17 @@
 import UIKit
 
 class ListDetailsTblViewCell: UITableViewCell {
-
-    
     
     @IBOutlet weak var lblwmu: UILabel!
+    
+    @IBOutlet weak var viewRifle: UIView!
+    @IBOutlet weak var viewShortgun: UIView!
+    @IBOutlet weak var viewMuzzleLoader: UIView!
+    @IBOutlet weak var viewBow: UIView!
+    
+    @IBOutlet weak var lblSeason: UILabel!
+    @IBOutlet weak var lblConditionS: UILabel!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()

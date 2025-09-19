@@ -38,6 +38,7 @@ class OntarioHuntingSeasonsVC: UIViewController {
     var arrHuntingSeasonWmus: [HuntingSeasonWMU] = []
     
     var selectedwmuID = "1"
+    var expandedIndexDocument: IndexPath?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -135,8 +136,6 @@ extension OntarioHuntingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ListTblVIewCell", for: indexPath) as! ListTblVIewCell
             
             // expanded or not
-            cell.isExpanded = expandedIndexSet.contains(indexPath.row)
-            
             let dicData = arrHuntingSeasons[indexPath.row]
             let animalID = dicData.animal_id ?? 0
             
@@ -168,17 +167,20 @@ extension OntarioHuntingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
             // Reload nested table
             cell.tblViewListDetails.reloadData()
             
-            // Tap gesture setup
-            cell.viewTop.tag = indexPath.row
-            cell.viewTop.gestureRecognizers?.forEach { cell.viewTop.removeGestureRecognizer($0) }
-            let tap = UITapGestureRecognizer(target: self, action: #selector(didTapTopView(_:)))
-            cell.viewTop.addGestureRecognizer(tap)
-            
+            let isExpanded = expandedIndexDocument == indexPath
+
+            cell.viewBottomDetails.isHidden = !isExpanded
+//            // Rotate the arrow
+            UIView.animate(withDuration: 0) {
+                cell.imgDropDown.transform = isExpanded ? CGAffineTransform(rotationAngle: .pi) : .identity
+            }
+//            
             return cell
         }
         
         return UITableViewCell()
     }
+ 
     
     func expandWMUList(_ list: String) -> [String] {
         let parts = list.split(separator: ",").map { $0.trimmingCharacters(in: .whitespaces) }
@@ -274,6 +276,16 @@ extension OntarioHuntingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
             }
         } else if tableView == tblViewList {
             print("Selected main list row: \(indexPath.row)")
+            
+            if expandedIndexDocument == indexPath {
+                expandedIndexDocument = nil
+            } else {
+                // Otherwise, expand the new cell and collapse any previously expanded cell
+                expandedIndexDocument = indexPath
+            }
+            // Reload the table view to update the views
+            tableView.reloadRows(at: [indexPath], with: .none)
+
         }
     }
 }
