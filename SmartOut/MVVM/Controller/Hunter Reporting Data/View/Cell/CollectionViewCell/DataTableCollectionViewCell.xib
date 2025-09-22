@@ -60,7 +60,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                         </subviews>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <color key="backgroundColor" red="0.99215686274509807" green="0.89411764705882346" blue="0.83921568627450982" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="trailing" secondItem="vb4-Y2-ejF" secondAttribute="trailing" id="1VB-ZT-oDu"/>
                                                             <constraint firstItem="vb4-Y2-ejF" firstAttribute="leading" secondItem="hr6-pV-5zB" secondAttribute="leading" id="L44-ca-uXy"/>
@@ -94,7 +94,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                         </subviews>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <color key="backgroundColor" red="0.99215686270000003" green="0.89411764709999997" blue="0.83921568629999999" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstItem="OVw-hS-bKi" firstAttribute="centerY" secondItem="Ded-4i-Mgv" secondAttribute="centerY" id="HoU-1k-WF4"/>
                                                             <constraint firstAttribute="trailing" secondItem="OVw-hS-bKi" secondAttribute="trailing" id="lmg-dr-3s6"/>

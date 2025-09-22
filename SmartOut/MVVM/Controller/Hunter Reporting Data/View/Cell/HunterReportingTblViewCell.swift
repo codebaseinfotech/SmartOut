@@ -123,42 +123,54 @@ class HunterReportingTblViewCell: UITableViewCell {
 extension HunterReportingTblViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return arrAllRpe.count
+        return arrAllRpe.count+1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = self.collectionViewDataTable.dequeueReusableCell(withReuseIdentifier: "DataTableCollectionViewCell", for: indexPath) as! DataTableCollectionViewCell
         
-        let dicData = arrAllRpe[indexPath.item]
-        
-        let metric_name = dicData["metric_name"] as? String ?? ""
-        cell.lblTitle.text = metric_name
-        
-        
-        if let value = dicData["value"] as? [[String: Any]] {
-            for val in value {
-                let year = val["year"] as? String ?? ""
-                let percent = val["metric_in_percent"] as? String ?? ""
-                print("   Year:", year, "Value:", percent)
+        if indexPath.item == 0 {
+            cell.lblTitle.text = ""
+
+            cell.lblValue1.text = "2021"
+            cell.lblValue2.text = "2022"
+            cell.lblValue3.text = "2023"
+            cell.lblValue4.text = "2024"
                 
-                if year == "2021" {
-                    cell.lblValue1.text = percent
-                }
-                
-                if year == "2022" {
-                    cell.lblValue2.text = percent
-                }
-                
-                if year == "2023" {
-                    cell.lblValue3.text = percent
-                }
-                
-                if year == "2024" {
-                    cell.lblValue4.text = percent
+        } else {
+            let dicData = arrAllRpe[indexPath.item-1]
+            
+            let metric_name = dicData["metric_name"] as? String ?? ""
+            cell.lblTitle.text = metric_name
+            
+            
+            if let value = dicData["value"] as? [[String: Any]] {
+                for val in value {
+                    let year = val["year"] as? String ?? ""
+                    let percent = val["metric_in_percent"] as? String ?? ""
+                    print("   Year:", year, "Value:", percent)
+                    
+                    if year == "2021" {
+                        cell.lblValue1.text = percent
+                    }
+                    
+                    if year == "2022" {
+                        cell.lblValue2.text = percent
+                    }
+                    
+                    if year == "2023" {
+                        cell.lblValue3.text = percent
+                    }
+                    
+                    if year == "2024" {
+                        cell.lblValue4.text = percent
+                    }
                 }
             }
+            
         }
         
+       
         
         if indexPath.item == collectionView.numberOfItems(inSection: indexPath.section) - 1 {
             cell.viewBottomLine.isHidden = true
