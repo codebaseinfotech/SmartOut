@@ -9,7 +9,11 @@ import UIKit
 
 class AdditionalOppoTblViewCell: UITableViewCell {
 
-    @IBOutlet weak var imgIcon: UIImageView!
+    @IBOutlet weak var imgIcon: UIImageView! {
+        didSet {
+            imgIcon.tintColor = .primary
+        }
+    }
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var imgDropDown: UIImageView!
     @IBOutlet weak var lblSeason: UILabel!

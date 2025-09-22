@@ -56,8 +56,9 @@ class FishingSeasonsVC: UIViewController {
     var exceptionsNew: [ExceptionModel] = []
     
     var expandedSections: Set<Int> = []
-    
-    var expandedIndexPath: Set<IndexPath> = []
+    var expandedCells: [IndexPath: Bool] = [:]
+
+    var expandedIndexPath: IndexPath?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -77,6 +78,8 @@ class FishingSeasonsVC: UIViewController {
         tblViewExceptions.register(UINib(nibName: "ExceptionsDetailsTblViewCell", bundle: nil), forCellReuseIdentifier: "ExceptionsDetailsTblViewCell")
         tblViewExceptions.dataSource = self
         tblViewExceptions.delegate = self
+        tblViewExceptions.estimatedRowHeight = UITableView.automaticDimension
+        tblViewExceptions.rowHeight = UITableView.automaticDimension
         
         viewMainList.isHidden = true
         
@@ -88,7 +91,7 @@ class FishingSeasonsVC: UIViewController {
         print("Fishing Seasons:", fishingSeasonsData.count)
         arrAllFmzData = fishingSeasonsData
         
-        let additional = arrAllDataList.exceptions.filter { $0.fmz_id == seasonIdToCheck && $0.fish_id != nil }
+        let additional = arrAllDataList.exceptions.filter { $0.fmz_id == seasonIdToCheck && $0.fish_id != nil && $0.is_additional_opportunity == 1 }
         exceptions = additional
 
         // 2. Get all fish_ids from additional
@@ -301,7 +304,8 @@ extension FishingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
             let dicDataEX = exceptions[indexPath.row]
             
             cell.lblTitle.text = dicData.name ?? ""
-            
+            cell.imgIcon.image = UIImage(named: dicData.image_path ?? "")
+
             cell.lblSeason.text = dicDataEX.season ?? ""
             cell.lblLimits.text = dicDataEX.limits ?? ""
             cell.lblDis.text = dicDataEX.description ?? ""
@@ -336,7 +340,7 @@ extension FishingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
                 let dicData = additional[indexPath.row]
                 
                 cell.lblExceptionDetailsTitle.text = dicData.title ?? ""
-                
+
                 cell.viewSeason.isHidden = true
                 cell.viewLimit.isHidden = true
                 cell.viewDes.isHidden = false
@@ -369,17 +373,11 @@ extension FishingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
 
             }
             
-            let isExpanded = expandedIndexPaths.contains(indexPath)
-            cell.configure(isExpanded: isExpanded)
-            
-            cell.toggleAction = { [weak self] in
-                guard let self = self else { return }
-                if isExpanded {
-                    self.expandedIndexPaths.remove(indexPath)
-                } else {
-                    self.expandedIndexPaths.insert(indexPath)
-                }
-                self.tblViewAdditionalOppo.reloadRows(at: [indexPath], with: .automatic)
+            // Cell expand/collapse
+            let isExpanded = expandedCells[indexPath] ?? false
+            cell.viewBottomException.isHidden = !isExpanded
+            UIView.animate(withDuration: 0.25) {
+                cell.imgDropDown.transform = isExpanded ? CGAffineTransform(rotationAngle: .pi) : .identity
             }
             
             return cell
@@ -398,7 +396,7 @@ extension FishingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
         } else if tableView == tblViewExceptions {
             return UITableView.automaticDimension
         }
-        return 0
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -411,7 +409,7 @@ extension FishingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
             print("Fishing Seasons:", fishingSeasonsData.count)
             arrAllFmzData = fishingSeasonsData
             
-            let additional = arrAllDataList.exceptions.filter { $0.fmz_id == seasonIdToCheck && $0.fish_id != nil }
+            let additional = arrAllDataList.exceptions.filter { $0.fmz_id == seasonIdToCheck && $0.fish_id != nil && $0.is_additional_opportunity == 1 }
             exceptions = additional
 
             // 2. Get all fish_ids from additional
@@ -436,9 +434,11 @@ extension FishingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
             print("Unique Exception Types:", fishing_exception_types)
             
             lblNoDataExceptions.isHidden = fishing_exception_types.count > 0 ? true : false
-
+            lblNoDataExceptions.text = "no exceptions for " + "FMZ " + (arrAllDataList.fmz[indexPath.row].name ?? "")
+            
+            
             lblNoDataAddOppo.isHidden = arrFish.count > 0 ? true : false
-            lblNoDataAddOppo.text = "no exceptions for" + "FMZ" + (arrAllDataList.fmz[indexPath.row].name ?? "")
+            lblNoDataAddOppo.text = "no additional opportunities for " + "FMZ " + (arrAllDataList.fmz[indexPath.row].name ?? "")
             
             DispatchQueue.main.async { [self] in
                 tblViewZoneWide.reloadData()
@@ -452,16 +452,14 @@ extension FishingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
                 self.imgDropDown.transform = .identity
             }
         } else if tableView == tblViewExceptions {
-            print("Selected main list row: \(indexPath.row)")
+            print("Selected exceptions row: \(indexPath.row)")
             
-//            tableView.beginUpdates()
-//            if expandedIndexPath == indexPath {
-//                expandedIndexPath = nil
-//            } else {
-//                expandedIndexPath = indexPath
-//            }
-//            tableView.reloadRows(at: [indexPath], with: .automatic)
-//            tableView.endUpdates()
+            let isExpanded = expandedCells[indexPath] ?? false
+            expandedCells[indexPath] = !isExpanded
+            
+            tableView.beginUpdates()
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+            tableView.endUpdates()
         }
     }
     
@@ -490,6 +488,9 @@ extension FishingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
             // Configure header title
             let headerData = fishing_exception_types[section]
             headerView.lblName.text = headerData.text ?? "Exception Type"
+            
+            headerView.imgPic.isHidden = true/*.image = UIImage(named: headerData.bubble_image ?? "")*/
+
             
             // Arrow rotation based on expansion
             if expandedSections.contains(section) {

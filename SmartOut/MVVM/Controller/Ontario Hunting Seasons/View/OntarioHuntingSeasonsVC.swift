@@ -178,12 +178,15 @@ extension OntarioHuntingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
             // Filter hunting seasons for this animal + selected WMU
             for objSet in arrHuntingSeasons {
                 if animalID == objSet.animal_id {
-                    let expandedWMUs = expandWMUList(objSet.short_wmu_list ?? "")
-                    if expandedWMUs.contains(selectedwmuID) {
+//                    let expandedWMUs = expandWMUList(objSet.short_wmu_list ?? "")
+//                    if expandedWMUs.contains(selectedwmuID) {
+                    if objSet.short_wmu_list != "" {
                         cell.arrHuntingSeasons.append(objSet)
                     }
+//                    }
                 }
             }
+            
             
             // Reload nested table
             cell.tblViewListDetails.reloadData()

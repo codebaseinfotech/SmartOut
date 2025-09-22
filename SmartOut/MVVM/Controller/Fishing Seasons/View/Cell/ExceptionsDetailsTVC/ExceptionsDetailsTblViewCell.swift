@@ -34,9 +34,9 @@ class ExceptionsDetailsTblViewCell: UITableViewCell {
         viewBottomException.isHidden = true  // start collapsed
         imgDropDown.transform = .identity
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(toggleExpansion))
-        viewTopExceptionDetails.isUserInteractionEnabled = true
-        viewTopExceptionDetails.addGestureRecognizer(tap)
+//        let tap = UITapGestureRecognizer(target: self, action: #selector(toggleExpansion))
+//        viewTopExceptionDetails.isUserInteractionEnabled = true
+//        viewTopExceptionDetails.addGestureRecognizer(tap)
         // Initialization code
     }
 

@@ -13,4 +13,5 @@ class FishindHeaderView: UIView {
     @IBOutlet weak var imgDrop: UIImageView!
     @IBOutlet weak var lblName: UILabel!
 
+    @IBOutlet weak var viewBottom: UIView!
 }
