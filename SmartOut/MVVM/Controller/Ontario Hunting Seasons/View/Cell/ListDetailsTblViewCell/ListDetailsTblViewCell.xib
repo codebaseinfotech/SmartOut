@@ -596,11 +596,21 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cF6-us-WdT">
+                                <rect key="frame" x="10" y="399" width="300" height="1"/>
+                                <color key="backgroundColor" name="primary_color"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="IHU-hu-tJl"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.92549019610000005" green="0.3921568627" blue="0.031372549020000001" alpha="0.080000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="jY8-l7-PuW" secondAttribute="trailing" id="1Q8-eC-ivg"/>
+                            <constraint firstAttribute="bottom" secondItem="cF6-us-WdT" secondAttribute="bottom" id="Eeu-Sv-N7g"/>
                             <constraint firstAttribute="bottom" secondItem="jY8-l7-PuW" secondAttribute="bottom" id="UU9-3p-ngS"/>
+                            <constraint firstAttribute="trailing" secondItem="cF6-us-WdT" secondAttribute="trailing" constant="10" id="jQa-8k-EKi"/>
+                            <constraint firstItem="cF6-us-WdT" firstAttribute="leading" secondItem="Vzr-Zc-kIw" secondAttribute="leading" constant="10" id="n12-Rm-4l9"/>
                             <constraint firstItem="jY8-l7-PuW" firstAttribute="leading" secondItem="Vzr-Zc-kIw" secondAttribute="leading" id="tOv-7T-Sg7"/>
                             <constraint firstItem="jY8-l7-PuW" firstAttribute="top" secondItem="Vzr-Zc-kIw" secondAttribute="top" id="vCs-ij-7Jw"/>
                         </constraints>
