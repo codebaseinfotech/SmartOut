@@ -115,11 +115,11 @@ extension ExceptionsTblViewCell: UITableViewDelegate, UITableViewDataSource {
         }
         
         
-        cell.onToggle = { [weak self] in
-            // Refresh height after expand/collapse
-            self?.tblViewExceptionsDetails.beginUpdates()
-            self?.tblViewExceptionsDetails.endUpdates()
-        }
+//        cell.onToggle = { [weak self] in
+//            // Refresh height after expand/collapse
+//            self?.tblViewExceptionsDetails.beginUpdates()
+//            self?.tblViewExceptionsDetails.endUpdates()
+//        }
         
         return cell
     }

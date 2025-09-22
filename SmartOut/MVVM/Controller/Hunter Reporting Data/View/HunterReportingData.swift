@@ -101,11 +101,11 @@ extension HunterReportingData: UITableViewDelegate, UITableViewDataSource, reloa
                 }
                 
                 if animal_name == "Moose" {
-                    cell.lblBull.text = "Buck"
-                    cell.lblFColor.text = "Buck"
+                    cell.lblBull.text = "Bull"
+                    cell.lblFColor.text = "Bull"
                     
-                    cell.lblCow.text = "Doe"
-                    cell.lblSColor.text = "Doe"
+                    cell.lblCow.text = "Cow"
+                    cell.lblSColor.text = "Cow"
                     
                     cell.lblCalf.text = "Calf"
                     cell.lblTColor.text = "Calf"
@@ -137,6 +137,7 @@ extension HunterReportingData: UITableViewDelegate, UITableViewDataSource, reloa
             for (i, chart) in chatr_data.enumerated() {
                 let title = chart["title"] as? String ?? ""
                 
+                
                 // Case 1: value array (e.g. Black Bear, Turkey)
                 if let values = chart["value"] as? [[String: Any]] {
                     var entries: [PieChartDataEntry] = []
@@ -151,14 +152,14 @@ extension HunterReportingData: UITableViewDelegate, UITableViewDataSource, reloa
                         PieChart.shared.setupChart(
                             view: cell.viewSpringChart,
                             entries: entries,
-                            colors: [UIColor.primary, UIColor.systemBlue]
+                            colors: [UIColor.systemBlue, UIColor.primary]
                         )
                     } else if i == 1 {
                         cell.lblSChartName.text = title
                         PieChart.shared.setupChart(
                             view: cell.viewFallChart,
                             entries: entries,
-                            colors: [UIColor.primary, UIColor.systemBlue]
+                            colors: [UIColor.systemBlue, UIColor.primary]
                         )
                     }
                 }

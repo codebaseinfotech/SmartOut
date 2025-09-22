@@ -56,8 +56,8 @@ class FishingSeasonsVC: UIViewController {
     var exceptionsNew: [ExceptionModel] = []
     
     var expandedSections: Set<Int> = []
-    var expandedIndexDocument: IndexPath?
     
+    var expandedIndexPath: Set<IndexPath> = []
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -369,12 +369,17 @@ extension FishingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
 
             }
             
-            // expanded
-            let isExpanded = expandedIndexDocument == indexPath
-            cell.viewBottomException.isHidden = !isExpanded
-//            // Rotate the arrow
-            UIView.animate(withDuration: 0) {
-                cell.imgDropDown.transform = isExpanded ? CGAffineTransform(rotationAngle: .pi) : .identity
+            let isExpanded = expandedIndexPaths.contains(indexPath)
+            cell.configure(isExpanded: isExpanded)
+            
+            cell.toggleAction = { [weak self] in
+                guard let self = self else { return }
+                if isExpanded {
+                    self.expandedIndexPaths.remove(indexPath)
+                } else {
+                    self.expandedIndexPaths.insert(indexPath)
+                }
+                self.tblViewAdditionalOppo.reloadRows(at: [indexPath], with: .automatic)
             }
             
             return cell
@@ -449,20 +454,14 @@ extension FishingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
         } else if tableView == tblViewExceptions {
             print("Selected main list row: \(indexPath.row)")
             
-            if let previous = expandedIndexDocument, previous != indexPath {
-                expandedIndexDocument = indexPath
-            } else if expandedIndexDocument == indexPath {
-                expandedIndexDocument = nil
-            }
-            
-            // Animate height change
-            UIView.animate(withDuration: 0.3) {
-                tableView.beginUpdates()
-                tableView.endUpdates()
-            }
-            
-            // Optional: scroll to make row fully visible
-            tableView.scrollToRow(at: indexPath, at: .none, animated: true)
+//            tableView.beginUpdates()
+//            if expandedIndexPath == indexPath {
+//                expandedIndexPath = nil
+//            } else {
+//                expandedIndexPath = indexPath
+//            }
+//            tableView.reloadRows(at: [indexPath], with: .automatic)
+//            tableView.endUpdates()
         }
     }
     

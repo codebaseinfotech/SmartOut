@@ -26,7 +26,7 @@ class ExceptionsDetailsTblViewCell: UITableViewCell {
     @IBOutlet weak var imgLoca: UIImageView!
     
     var isExpanded = false
-    var onToggle: (() -> Void)?
+    var toggleAction: (() -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -46,6 +46,15 @@ class ExceptionsDetailsTblViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func configure(isExpanded: Bool) {
+        viewBottomException.isHidden = !isExpanded
+        imgDropDown.transform = isExpanded ? CGAffineTransform(rotationAngle: .pi) : .identity
+    }
+    
+    @objc private func didTapTop() {
+        toggleAction?()
+    }
+    
     @objc private func toggleExpansion() {
         isExpanded.toggle()
         
@@ -56,7 +65,7 @@ class ExceptionsDetailsTblViewCell: UITableViewCell {
             : .identity
         }
         
-        onToggle?()  // notify parent to refresh layout
+       // onToggle?()  // notify parent to refresh layout
     }
     
 }
