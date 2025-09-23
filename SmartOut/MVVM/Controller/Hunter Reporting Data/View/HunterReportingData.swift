@@ -124,7 +124,6 @@ extension HunterReportingData: UITableViewDelegate, UITableViewDataSource, reloa
                     cell.viewCalfColor.isHidden = true
                 }
             }
-            cell.collectionViewDataTable.reloadData()
         }
         
         if let chatr_data = dicData["chatr_data"] as? [[String: Any]], !chatr_data.isEmpty {
@@ -179,7 +178,6 @@ extension HunterReportingData: UITableViewDelegate, UITableViewDataSource, reloa
                     colors: [UIColor.primary, UIColor.systemBlue, UIColor.systemYellow]
                 )
             }
-            cell.collectionViewDataTable.reloadData()
         } else {
             // Case 3: no chart data (Wolf & Coyote)
             cell.viewMainChart.isHidden = true

@@ -39,9 +39,10 @@ class PieChart {
         
         // Format values as percentages with % sign
         let formatter = NumberFormatter()
-        formatter.numberStyle = .percent
+        formatter.numberStyle = .decimal // ✅ Change from .percent to .decimal
+        formatter.positiveSuffix = " %"
         formatter.maximumFractionDigits = 1
-        formatter.multiplier = 1
+
         let data = PieChartData(dataSet: dataSet)
         data.setValueFormatter(DefaultValueFormatter(formatter: formatter))
         pieChart.data = data

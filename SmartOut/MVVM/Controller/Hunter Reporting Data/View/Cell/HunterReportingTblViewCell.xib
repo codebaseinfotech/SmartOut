@@ -179,19 +179,13 @@
                                                     <constraint firstAttribute="height" constant="30" id="HNd-D6-A4b"/>
                                                 </constraints>
                                             </stackView>
-                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="bZ9-3m-Go8">
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Qz6-hc-Yj6">
                                                 <rect key="frame" x="0.0" y="0.0" width="262" height="150"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="150" id="2hJ-L7-puO"/>
+                                                    <constraint firstAttribute="height" constant="150" id="TRX-cr-8qj"/>
                                                 </constraints>
-                                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="9Ri-gh-2Y7">
-                                                    <size key="itemSize" width="128" height="128"/>
-                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                </collectionViewFlowLayout>
-                                            </collectionView>
+                                            </tableView>
                                         </subviews>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fWi-G4-dd3">
@@ -882,8 +876,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="collectionViewDataTable" destination="bZ9-3m-Go8" id="mqS-JV-7lC"/>
-                <outlet property="heightCV" destination="2hJ-L7-puO" id="6Kg-nV-Sup"/>
+                <outlet property="heightTV" destination="TRX-cr-8qj" id="a3e-nT-xa7"/>
                 <outlet property="imgAnimal" destination="Jns-bB-Jqo" id="GTJ-bX-IrD"/>
                 <outlet property="lblBull" destination="4bd-jg-qrQ" id="Tkq-3x-F7q"/>
                 <outlet property="lblBullValue" destination="2to-DZ-pku" id="s1O-UQ-mj2"/>
@@ -897,6 +890,7 @@
                 <outlet property="lblSColor" destination="oUQ-Ym-ily" id="J2y-fd-3KA"/>
                 <outlet property="lblTColor" destination="ASe-mp-jc8" id="ZGU-ER-caI"/>
                 <outlet property="lblTitle" destination="g2W-hG-iWu" id="S9u-2z-StM"/>
+                <outlet property="tblView" destination="Qz6-hc-Yj6" id="wK3-ww-4bE"/>
                 <outlet property="view3ValueChart" destination="qLL-U1-qVO" id="mfM-1I-NR7"/>
                 <outlet property="viewCalfColor" destination="hD8-v5-LEt" id="yej-x3-wGR"/>
                 <outlet property="viewCalfMain" destination="DiT-Lt-CyU" id="BtZ-ba-1Bn"/>
