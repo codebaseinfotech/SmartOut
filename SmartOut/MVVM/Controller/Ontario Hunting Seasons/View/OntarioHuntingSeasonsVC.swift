@@ -105,6 +105,8 @@ class OntarioHuntingSeasonsVC: UIViewController {
             }
         }
         
+        loadAllSeasons()
+        
         tblViewList.reloadData()
         // Do any additional setup after loading the view.
     }
@@ -277,7 +279,7 @@ extension OntarioHuntingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == tblViewDropDown {
             let selectedWMU = filteredWMUs[indexPath.row]
-            if selectedWMU.id == -1 {
+            if selectedWMU.id == 1 {
                 lblDropdownTitle.text = "All WMUs"
                 selectedwmuID = ""
                 loadAllSeasons()
