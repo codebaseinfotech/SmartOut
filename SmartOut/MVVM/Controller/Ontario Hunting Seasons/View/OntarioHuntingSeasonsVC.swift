@@ -145,6 +145,66 @@ class OntarioHuntingSeasonsVC: UIViewController {
         tblViewList.endUpdates()
     }
     
+    // MARK: - Season Loading
+    
+    private func loadAllSeasons() {
+        arrHuntingSeasons.removeAll()
+        arrSeasonId.removeAllObjects()
+        
+        // Collect all valid season IDs
+        for obj in arrAllDataList.hunting_season_wmus {
+            let seasonId = obj.season_id ?? 0
+            if !arrSeasonId.contains(seasonId) {
+                arrSeasonId.add(seasonId)
+            }
+        }
+        
+        // Add matching hunting seasons
+        for objSeason in arrAllDataList.hunting_seasons {
+            if arrSeasonId.contains(objSeason.id ?? 0) {
+                let seasonId = objSeason.id ?? 0
+                if !arrHuntingSeasons.contains(where: { $0.id == seasonId }) {
+                    arrHuntingSeasons.append(objSeason)
+                }
+            }
+        }
+        
+        // Filter animals that actually have seasons
+        arrAnimal = arrAllDataList.animals.filter { animal in
+            arrHuntingSeasons.contains { $0.animal_id == animal.id }
+        }
+    }
+    
+    private func loadSeasons(forWMU wmuId: Int) {
+        arrHuntingSeasons.removeAll()
+        arrSeasonId.removeAllObjects()
+        
+        // Collect season IDs for this WMU
+        for objwmu in arrAllDataList.hunting_season_wmus {
+            if wmuId == objwmu.wmu_id {
+                let seasonId = objwmu.season_id ?? 0
+                if !arrSeasonId.contains(seasonId) {
+                    arrSeasonId.add(seasonId)
+                }
+            }
+        }
+        
+        // Add matching hunting seasons
+        for objSeason in arrAllDataList.hunting_seasons {
+            if arrSeasonId.contains(objSeason.id ?? 0) {
+                let seasonId = objSeason.id ?? 0
+                if !arrHuntingSeasons.contains(where: { $0.id == seasonId }) {
+                    arrHuntingSeasons.append(objSeason)
+                }
+            }
+        }
+        
+        // Filter animals that actually have seasons
+        arrAnimal = arrAllDataList.animals.filter { animal in
+            arrHuntingSeasons.contains { $0.animal_id == animal.id }
+        }
+    }
+    
     
     
 }
@@ -153,7 +213,7 @@ extension OntarioHuntingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         if tableView == tblViewList {
-            return arrHuntingSeasons.count
+            return arrAnimal.count
         }
         return 1
     }
@@ -163,7 +223,7 @@ extension OntarioHuntingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
             return filteredWMUs.count
         } else if tableView == tblViewList {
             if expandedSections.contains(section) {
-                let animalId = arrAllDataList.animals[section].id ?? 0
+                let animalId = arrAnimal[section].id ?? 0
                 return arrHuntingSeasons.filter { $0.animal_id == animalId }.count
             } else {
                 return 0
@@ -188,98 +248,60 @@ extension OntarioHuntingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
             
         } else if tableView == tblViewList {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ListDetailsTblViewCell", for: indexPath) as! ListDetailsTblViewCell
-            
-            let animalId = arrAllDataList.animals[indexPath.section].id ?? 0
+            let animalId = arrAnimal[indexPath.section].id ?? 0
             let filteredSeasons = arrHuntingSeasons.filter { $0.animal_id == animalId }
             let dicData = filteredSeasons[indexPath.row]
             
             cell.configure(with: dicData)
             cell.lblwmu.text = dicData.short_wmu_list ?? ""
             
-            cell.viewRifle.isHidden = dicData.rifles_allowed == 1 ? false : true
-            cell.viewShortgun.isHidden = dicData.shotguns_allowed == 1 ? false : true
-            cell.viewMuzzleLoader.isHidden = dicData.muzzleloaders_allowed == 1 ? false : true
-            cell.viewBow.isHidden = dicData.bows_allowed == 1 ? false : true
+            cell.viewRifle.isHidden = dicData.rifles_allowed != 1
+            cell.viewShortgun.isHidden = dicData.shotguns_allowed != 1
+            cell.viewMuzzleLoader.isHidden = dicData.muzzleloaders_allowed != 1
+            cell.viewBow.isHidden = dicData.bows_allowed != 1
             
             let season_resident = (dicData.season_resident ?? "") + " " + "(Resident)"
             let season_non_resident = (dicData.season_non_resident ?? "") + " " + "(Non-resident)"
             let season = season_resident != "" ? season_resident + "\n" + season_non_resident : season_non_resident
-            
             cell.lblSeason.text = season
-            cell.lblConditionS.text = dicData.conditions_text
-            cell.viewCondtionMain.isHidden = dicData.conditions_text != "" ? false : true
-            cell.viewMainSeason.isHidden = dicData.season_resident != "" && dicData.season_non_resident != "" ? false : true
             
-            // Reset before filling
-            //            cell.arrHuntingSeasons = []
-            //
-            //            // Find animal info
-            //            if let objAnimal = arrAllDataList.animals.first(where: { $0.id == animalID }) {
-            //                cell.lblTitle.text = objAnimal.name ?? ""
-            //
-            //                if let imagePath = objAnimal.image_path {
-            //                    let imageName = imagePath.replacingOccurrences(of: ".png", with: "")
-            //                    cell.imgMain.image = UIImage(named: imageName)
-            //                } else {
-            //                    cell.imgMain.image = nil
-            //                }
-            //            }
-            //
-            //            // Filter hunting seasons for this animal + selected WMU
-            //            for objSet in arrHuntingSeasons {
-            //                if animalID == objSet.animal_id {
-            ////                    let expandedWMUs = expandWMUList(objSet.short_wmu_list ?? "")
-            ////                    if expandedWMUs.contains(selectedwmuID) {
-            //                    if objSet.short_wmu_list != "" {
-            //                        cell.arrHuntingSeasons.append(objSet)
-            //                    }
-            ////                    }
-            //                }
-            //            }
-            //
-            //
-            //            // Reload nested table
-            //            cell.tblViewListDetails.reloadData()
-            //
-            //            let isExpanded = expandedIndexDocument == indexPath
-            //
-            //            cell.viewBottomDetails.isHidden = !isExpanded
-            ////            // Rotate the arrow
-            //            UIView.animate(withDuration: 0) {
-            //                cell.imgDropDown.transform = isExpanded ? CGAffineTransform(rotationAngle: .pi) : .identity
-            //            }
-            //
+            cell.lblConditionS.text = dicData.conditions_text
+            cell.viewCondtionMain.isHidden = (dicData.conditions_text ?? "").isEmpty
+            cell.viewMainSeason.isHidden = (dicData.season_resident ?? "").isEmpty && (dicData.season_non_resident ?? "").isEmpty
+            
             return cell
         }
-        
         return UITableViewCell()
     }
     
-    
-    func expandWMUList(_ list: String) -> [String] {
-        let parts = list.split(separator: ",").map { $0.trimmingCharacters(in: .whitespaces) }
-        var expanded: [String] = []
-        
-        for part in parts {
-            if part.contains("–") { // Handle range with en dash
-                let rangeParts = part.split(separator: "–").map {
-                    $0.trimmingCharacters(in: .whitespaces)
-                        .replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression) // remove letters
-                }
-                if let start = Int(rangeParts.first ?? ""), let end = Int(rangeParts.last ?? "") {
-                    for i in start...end {
-                        expanded.append("\(i)")
-                    }
-                }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if tableView == tblViewDropDown {
+            let selectedWMU = filteredWMUs[indexPath.row]
+            if selectedWMU.id == -1 {
+                lblDropdownTitle.text = "All WMUs"
+                selectedwmuID = ""
+                loadAllSeasons()
             } else {
-                // Remove A, B, C... keep only numbers
-                let numeric = part.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
-                if !numeric.isEmpty {
-                    expanded.append(numeric)
-                }
+                lblDropdownTitle.text = "WMU " + (selectedWMU.name ?? "")
+                selectedwmuID = selectedWMU.name ?? ""
+                loadSeasons(forWMU: selectedWMU.id ?? 0)
             }
+            
+            tblViewList.reloadData()
+            isDropDownVisible = false
+            UIView.animate(withDuration: 0.2) {
+                self.viewDropDownList.isHidden = true
+                self.imgDropdown.transform = .identity
+            }
+            
+        } else if tableView == tblViewList {
+            if expandedIndexDocument == indexPath {
+                expandedIndexDocument = nil
+            } else {
+                expandedIndexDocument = indexPath
+            }
+            tableView.reloadRows(at: [indexPath], with: .none)
         }
-        return expanded
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -289,83 +311,6 @@ extension OntarioHuntingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
             return UITableView.automaticDimension
         }
         return UITableView.automaticDimension
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        if tableView == tblViewDropDown {
-            let selectedWMU = arrAllDataList.wmu[indexPath.item]
-            if selectedWMU.name == "1" {
-                lblDropdownTitle.text = "All WMUs"
-                selectedwmuID = "" // show all
-                arrHuntingSeasons.removeAll()
-                arrSeasonId.removeAllObjects()
-                for obj in arrAllDataList.hunting_season_wmus {
-                    let seasonId = obj.season_id ?? 0
-                    if !arrSeasonId.contains(seasonId) {
-                        arrSeasonId.add(seasonId)
-                    }
-                }
-                for objSeason in arrAllDataList.hunting_seasons {
-                    if arrSeasonId.contains(objSeason.id ?? 0) {
-                        let seasonId = objSeason.id ?? 0
-                        let animalId = objSeason.animal_id ?? 0
-                        let alreadyExists = arrHuntingSeasons.contains {
-                            $0.id == seasonId || $0.animal_id == animalId
-                        }
-                        if !alreadyExists {
-                            arrHuntingSeasons.append(objSeason)
-                        }
-                    }
-                }
-            } else {
-                lblDropdownTitle.text = "WMU " + (selectedWMU.name ?? "")
-                let wmuName = selectedWMU.name
-                let numericOnly = wmuName?.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
-                selectedwmuID = numericOnly ?? ""
-                arrHuntingSeasons.removeAll()
-                arrSeasonId.removeAllObjects()
-                let id = selectedWMU.id ?? 0
-                for objwmu in arrAllDataList.hunting_season_wmus {
-                    if id == objwmu.wmu_id {
-                        let seasonId = objwmu.season_id ?? 0
-                        if !arrSeasonId.contains(seasonId) {
-                            arrSeasonId.add(seasonId)
-                        }
-                    }
-                }
-                for objSeason in arrAllDataList.hunting_seasons {
-                    if arrSeasonId.contains(objSeason.id ?? 0) {
-                        let seasonId = objSeason.id ?? 0
-                        let animalId = objSeason.animal_id ?? 0
-                        let alreadyExists = arrHuntingSeasons.contains {
-                            $0.id == seasonId || $0.animal_id == animalId
-                        }
-                        if !alreadyExists {
-                            arrHuntingSeasons.append(objSeason)
-                        }
-                    }
-                }
-            }
-            tblViewList.reloadData()
-            isDropDownVisible = false
-            UIView.animate(withDuration: 0.0) {
-                self.viewDropDownList.isHidden = true
-                self.imgDropdown.transform = .identity
-            }
-        } else if tableView == tblViewList {
-            print("Selected main list row: \(indexPath.row)")
-            
-            if expandedIndexDocument == indexPath {
-                expandedIndexDocument = nil
-            } else {
-                // Otherwise, expand the new cell and collapse any previously expanded cell
-                expandedIndexDocument = indexPath
-            }
-            // Reload the table view to update the views
-            tableView.reloadRows(at: [indexPath], with: .none)
-            
-        }
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -383,27 +328,20 @@ extension OntarioHuntingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
         if tableView == tblViewList {
             let headerView = Bundle.main.loadNibNamed("FishindHeaderView", owner: self, options: nil)?.first as! FishindHeaderView
             headerView.backgroundColor = .green
-            
             headerView.tag = section
             
-            // Add tap gesture
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleHeaderTap(_:)))
             headerView.addGestureRecognizer(tapGesture)
             
-            //            // Configure header title
-            let headerData = arrAllDataList.animals[section]
+            let headerData = arrAnimal[section]
             headerView.lblName.text = headerData.name ?? "Exception Type"
-            
             headerView.imgPic.image = UIImage(named: headerData.image_path ?? "")
             
-            
-            // Arrow rotation based on expansion
             if expandedSections.contains(section) {
                 headerView.imgDrop.transform = CGAffineTransform(rotationAngle: .pi)
             } else {
                 headerView.imgDrop.transform = .identity
             }
-            
             return headerView
         }
         return UIView()
@@ -412,13 +350,11 @@ extension OntarioHuntingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
     @objc func handleHeaderTap(_ gesture: UITapGestureRecognizer) {
         guard let headerView = gesture.view else { return }
         let section = headerView.tag
-        
         if expandedSections.contains(section) {
             expandedSections.remove(section)
         } else {
             expandedSections.insert(section)
         }
-        
         tblViewList.reloadSections(IndexSet(integer: section), with: .automatic)
     }
 }
