@@ -37,6 +37,8 @@ class OntarioHuntingSeasonsVC: UIViewController {
     
     var arrHuntingSeasonWmus: [HuntingSeasonWMU] = []
     
+    var filteredWMUs: [WMU] = []
+    
     var expandedSections: Set<Int> = []
     
     var selectedwmuID = "1"
@@ -57,8 +59,21 @@ class OntarioHuntingSeasonsVC: UIViewController {
         tblViewList.delegate = self
         
         viewDropDownList.isHidden = true
-        
         arrAnimal = arrAllDataList.animals
+        
+        // ✅ Build filtered WMU list
+        let seasonWMUIds = Set(arrAllDataList.hunting_season_wmus.map { $0.wmu_id ?? 0 })
+        filteredWMUs = arrAllDataList.wmu.filter { wmu in
+            if let id = wmu.id {
+                return seasonWMUIds.contains(id)
+            }
+            return false
+        }
+        
+        // ✅ Insert "All WMUs" at first position if exists
+        if let first = arrAllDataList.wmu.first(where: { $0.name == "1" }) {
+            filteredWMUs.insert(first, at: 0)
+        }
         
         // Default = show "All WMUs"
         lblDropdownTitle.text = "All WMUs"
@@ -145,7 +160,7 @@ extension OntarioHuntingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == tblViewDropDown {
-            return arrAllDataList.wmu.count
+            return filteredWMUs.count
         } else if tableView == tblViewList {
             if expandedSections.contains(section) {
                 let animalId = arrAllDataList.animals[section].id ?? 0
@@ -162,10 +177,11 @@ extension OntarioHuntingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
         if tableView == tblViewDropDown {
             let cell = tableView.dequeueReusableCell(withIdentifier: "DropDownTblViewCell", for: indexPath) as! DropDownTblViewCell
             
-            if arrAllDataList.wmu[indexPath.item].name == "1" {
+            let wmu = filteredWMUs[indexPath.row]
+            if wmu.name == "1" {
                 cell.lblDropDownName.text = "All WMUs"
             } else {
-                cell.lblDropDownName.text = "WMU " + (arrAllDataList.wmu[indexPath.item].name ?? "")
+                cell.lblDropDownName.text = "WMU " + (wmu.name ?? "")
             }
             
             return cell
@@ -178,7 +194,6 @@ extension OntarioHuntingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
             let dicData = filteredSeasons[indexPath.row]
             
             cell.configure(with: dicData)
-            
             cell.lblwmu.text = dicData.short_wmu_list ?? ""
             
             cell.viewRifle.isHidden = dicData.rifles_allowed == 1 ? false : true
@@ -187,15 +202,12 @@ extension OntarioHuntingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
             cell.viewBow.isHidden = dicData.bows_allowed == 1 ? false : true
             
             let season_resident = (dicData.season_resident ?? "") + " " + "(Resident)"
-            let season_non_resident = (dicData.season_resident ?? "") + " " + "(Non-resident)"
-            
+            let season_non_resident = (dicData.season_non_resident ?? "") + " " + "(Non-resident)"
             let season = season_resident != "" ? season_resident + "\n" + season_non_resident : season_non_resident
             
             cell.lblSeason.text = season
             cell.lblConditionS.text = dicData.conditions_text
-            
             cell.viewCondtionMain.isHidden = dicData.conditions_text != "" ? false : true
-            
             cell.viewMainSeason.isHidden = dicData.season_resident != "" && dicData.season_non_resident != "" ? false : true
             
             // Reset before filling
