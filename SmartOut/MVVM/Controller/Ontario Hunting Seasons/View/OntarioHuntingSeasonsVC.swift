@@ -329,7 +329,6 @@ extension OntarioHuntingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if tableView == tblViewList {
             let headerView = Bundle.main.loadNibNamed("FishindHeaderView", owner: self, options: nil)?.first as! FishindHeaderView
-            headerView.backgroundColor = .green
             headerView.tag = section
             
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleHeaderTap(_:)))
