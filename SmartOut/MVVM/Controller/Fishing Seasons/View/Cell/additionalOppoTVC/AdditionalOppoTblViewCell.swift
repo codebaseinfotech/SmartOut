@@ -27,6 +27,8 @@ class AdditionalOppoTblViewCell: UITableViewCell {
     @IBOutlet weak var viewLimitMain: UIView!
     @IBOutlet weak var viewDescription: UIView!
     
+    @IBOutlet weak var viewBottomLine: UIView!
+    
     var toggleAction: (() -> Void)?
     
     override func awakeFromNib() {

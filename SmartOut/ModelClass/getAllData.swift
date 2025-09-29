@@ -203,7 +203,7 @@ struct ExceptionModel: Codable {
     let id: Int?
     let fmz_id: Int?
     let exception_type_id: Int?
-    let fish_id: Int?
+    let fish_id: Double?
     let is_additional_opportunity: Double?
     let season: String?
     let limits: String?

@@ -56,6 +56,7 @@ class FishingSeasonsVC: UIViewController {
     var exceptionsNew: [ExceptionModel] = []
     
     var expandedSections: Set<Int> = []
+    var expandedSectionsAdditionalOppo: Set<Int> = []
     var expandedCells: [IndexPath: Bool] = [:]
 
     var expandedIndexPath: IndexPath?
@@ -75,6 +76,7 @@ class FishingSeasonsVC: UIViewController {
         tblViewAdditionalOppo.delegate = self
         
         tblViewExceptions.sectionHeaderTopPadding = 8
+        tblViewAdditionalOppo.sectionHeaderTopPadding = 8
         tblViewExceptions.register(UINib(nibName: "ExceptionsDetailsTblViewCell", bundle: nil), forCellReuseIdentifier: "ExceptionsDetailsTblViewCell")
         tblViewExceptions.dataSource = self
         tblViewExceptions.delegate = self
@@ -99,7 +101,7 @@ class FishingSeasonsVC: UIViewController {
 
         // 3. Filter fish array where id is in exceptionFishIds
         let fishList = arrAllDataList.fish.filter { fish in
-            exceptionFishIds.contains(fish.id ?? 0)
+            exceptionFishIds.contains(Double(fish.id ?? Int(0.0)))
         }
         arrFish = fishList
         
@@ -245,6 +247,8 @@ extension FishingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         if tableView == tblViewExceptions {
             return fishing_exception_types.count
+        } else if tableView == tblViewAdditionalOppo {
+            return arrFish.count
         }
         return 1
     }
@@ -255,7 +259,12 @@ extension FishingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
         } else if tableView == tblViewZoneWide {
             return arrAllFmzData.count
         } else if tableView == tblViewAdditionalOppo {
-            return arrFish.count
+            if !expandedSectionsAdditionalOppo.contains(section) { return 0 }
+            
+            let dicData = arrFish[section]
+            let additional = exceptions.filter { $0.fish_id == Double(dicData.id ?? Int(0.0)) }
+            return additional.count > 0 ? additional.count : arrFish.count
+
         } else if tableView == tblViewExceptions {
             
             if !expandedSections.contains(section) { return 0 }
@@ -299,13 +308,11 @@ extension FishingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
             return cell
         } else if tableView == tblViewAdditionalOppo {
             let cell = self.tblViewAdditionalOppo.dequeueReusableCell(withIdentifier: "AdditionalOppoTblViewCell") as! AdditionalOppoTblViewCell
+                        
+            let dicData = arrFish[indexPath.section]
+            let additional = exceptions.filter { $0.fish_id == Double(dicData.id ?? Int(0.0)) }
+            let dicDataEX =  additional[indexPath.row]
             
-            let dicData = arrFish[indexPath.row]
-            let dicDataEX = exceptions[indexPath.row]
-            
-            cell.lblTitle.text = dicData.name ?? ""
-            cell.imgIcon.image = UIImage(named: dicData.image_path ?? "")
-
             cell.lblSeason.text = dicDataEX.season ?? ""
             cell.lblLimits.text = dicDataEX.limits ?? ""
             cell.lblDis.text = dicDataEX.description ?? ""
@@ -315,17 +322,10 @@ extension FishingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
             cell.viewDescription.isHidden = dicDataEX.description != "" ? false : true
             
             
-            let isExpanded = expandedIndexPaths.contains(indexPath)
-            cell.configure(isExpanded: isExpanded)
-            
-            cell.toggleAction = { [weak self] in
-                guard let self = self else { return }
-                if isExpanded {
-                    self.expandedIndexPaths.remove(indexPath)
-                } else {
-                    self.expandedIndexPaths.insert(indexPath)
-                }
-                self.tblViewAdditionalOppo.reloadRows(at: [indexPath], with: .automatic)
+            if indexPath.item == tableView.numberOfRows(inSection: indexPath.section) - 1 {
+                cell.viewBottomLine.isHidden = true
+            } else {
+                cell.viewBottomLine.isHidden = false
             }
             
             return cell
@@ -417,7 +417,7 @@ extension FishingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
 
             // 3. Filter fish array where id is in exceptionFishIds
             let fishList = arrAllDataList.fish.filter { fish in
-                exceptionFishIds.contains(fish.id ?? 0)
+                exceptionFishIds.contains(Double(fish.id ?? Int(0.0)))
             }
             arrFish = fishList
             
@@ -466,6 +466,8 @@ extension FishingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if tableView == tblViewExceptions {
             return UITableView.automaticDimension
+        } else if tableView == tblViewAdditionalOppo {
+            return UITableView.automaticDimension
         }
         return 0.0
     }
@@ -500,6 +502,30 @@ extension FishingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
             }
             
             return headerView
+        } else if tableView == tblViewAdditionalOppo {
+            let headerView = Bundle.main.loadNibNamed("FishindHeaderView", owner: self, options: nil)?.first as! FishindHeaderView
+            headerView.backgroundColor = .green
+            
+            headerView.tag = section
+            
+            // Add tap gesture
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleHeaderTapAdd(_:)))
+            headerView.addGestureRecognizer(tapGesture)
+            
+            // Configure header title
+            let headerData = arrFish[section]
+            headerView.lblName.text = headerData.name ?? "Exception Type"
+            headerView.imgPic.image = UIImage(named: headerData.image_path ?? "")
+                        
+            
+            // Arrow rotation based on expansion
+            if expandedSectionsAdditionalOppo.contains(section) {
+                headerView.imgDrop.transform = CGAffineTransform(rotationAngle: .pi)
+            } else {
+                headerView.imgDrop.transform = .identity
+            }
+            
+            return headerView
         }
         return UIView()
     }
@@ -515,5 +541,18 @@ extension FishingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
         }
         
         tblViewExceptions.reloadSections(IndexSet(integer: section), with: .automatic)
+    }
+    
+    @objc func handleHeaderTapAdd(_ gesture: UITapGestureRecognizer) {
+        guard let headerView = gesture.view else { return }
+        let section = headerView.tag
+        
+        if expandedSectionsAdditionalOppo.contains(section) {
+            expandedSectionsAdditionalOppo.remove(section)
+        } else {
+            expandedSectionsAdditionalOppo.insert(section)
+        }
+        
+        tblViewAdditionalOppo.reloadSections(IndexSet(integer: section), with: .automatic)
     }
 }
