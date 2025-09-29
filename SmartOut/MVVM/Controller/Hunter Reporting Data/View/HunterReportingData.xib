@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -67,7 +68,7 @@
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="bPg-UF-Tnt">
-                    <rect key="frame" x="0.0" y="109" width="393" height="709"/>
+                    <rect key="frame" x="0.0" y="99" width="393" height="719"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
             </subviews>
@@ -80,7 +81,7 @@
                 <constraint firstItem="bPg-UF-Tnt" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="JoS-CO-FKG"/>
                 <constraint firstItem="jC6-XW-hlz" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Tos-PT-3Sr"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="jC6-XW-hlz" secondAttribute="trailing" id="n0j-nT-MiB"/>
-                <constraint firstItem="bPg-UF-Tnt" firstAttribute="top" secondItem="jC6-XW-hlz" secondAttribute="bottom" constant="10" id="oR3-6H-Uqx"/>
+                <constraint firstItem="bPg-UF-Tnt" firstAttribute="top" secondItem="jC6-XW-hlz" secondAttribute="bottom" id="oR3-6H-Uqx"/>
             </constraints>
             <point key="canvasLocation" x="-28" y="-32"/>
         </view>

@@ -186,6 +186,7 @@ extension HunterReportingData: UITableViewDelegate, UITableViewDataSource, reloa
         
         if let static_data = dicData["static_data"] as? [[String: Any]] {
             cell.arrAllRpe = static_data
+            cell.tblView.reloadData()
         }
         
         return cell

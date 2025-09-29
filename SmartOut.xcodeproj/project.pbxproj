@@ -34,6 +34,10 @@
 		8861F4AB2E782EB20063193E /* EmailPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8861F4A92E782EB20063193E /* EmailPopup.xib */; };
 		8867DD2F2E7A755B00435CC3 /* AdditionalOppoTblViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8867DD2D2E7A755B00435CC3 /* AdditionalOppoTblViewCell.swift */; };
 		8867DD302E7A755B00435CC3 /* AdditionalOppoTblViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8867DD2E2E7A755B00435CC3 /* AdditionalOppoTblViewCell.xib */; };
+		8878BE402E85428E00075619 /* ListInnerHeaderCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8878BE3E2E85428E00075619 /* ListInnerHeaderCVCell.swift */; };
+		8878BE412E85428E00075619 /* ListInnerHeaderCVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8878BE3F2E85428E00075619 /* ListInnerHeaderCVCell.xib */; };
+		8878BE452E8542F700075619 /* ListDetailsCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8878BE432E8542F700075619 /* ListDetailsCVCell.swift */; };
+		8878BE462E8542F700075619 /* ListDetailsCVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8878BE442E8542F700075619 /* ListDetailsCVCell.xib */; };
 		887AF3C52E7BC2F600309ECA /* DataTableCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 887AF3C42E7BC2F600309ECA /* DataTableCollectionViewCell.xib */; };
 		887AF3C62E7BC2F600309ECA /* DataTableCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887AF3C32E7BC2F600309ECA /* DataTableCollectionViewCell.swift */; };
 		88834EC92E7915F900E686FC /* ListTblVIewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88834EC72E7915F900E686FC /* ListTblVIewCell.swift */; };
@@ -127,6 +131,10 @@
 		8861F4A92E782EB20063193E /* EmailPopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmailPopup.xib; sourceTree = "<group>"; };
 		8867DD2D2E7A755B00435CC3 /* AdditionalOppoTblViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalOppoTblViewCell.swift; sourceTree = "<group>"; };
 		8867DD2E2E7A755B00435CC3 /* AdditionalOppoTblViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdditionalOppoTblViewCell.xib; sourceTree = "<group>"; };
+		8878BE3E2E85428E00075619 /* ListInnerHeaderCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListInnerHeaderCVCell.swift; sourceTree = "<group>"; };
+		8878BE3F2E85428E00075619 /* ListInnerHeaderCVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListInnerHeaderCVCell.xib; sourceTree = "<group>"; };
+		8878BE432E8542F700075619 /* ListDetailsCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDetailsCVCell.swift; sourceTree = "<group>"; };
+		8878BE442E8542F700075619 /* ListDetailsCVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListDetailsCVCell.xib; sourceTree = "<group>"; };
 		887AF3C32E7BC2F600309ECA /* DataTableCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTableCollectionViewCell.swift; sourceTree = "<group>"; };
 		887AF3C42E7BC2F600309ECA /* DataTableCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DataTableCollectionViewCell.xib; sourceTree = "<group>"; };
 		88834EC72E7915F900E686FC /* ListTblVIewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTblVIewCell.swift; sourceTree = "<group>"; };
@@ -244,6 +252,8 @@
 		882231A42E78425F00AFC855 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				8878BE422E8542E000075619 /* ListDetailsCVCell */,
+				8878BE3D2E8540B100075619 /* ListInnerHeaderCVCell */,
 				88D1F2892E7974720084DBD5 /* ListDetailsTblViewCell */,
 				88834EC62E7915BE00E686FC /* TblViewListCell */,
 				882231A52E78426E00AFC855 /* Dropdown Cell */,
@@ -405,6 +415,24 @@
 				8867DD2E2E7A755B00435CC3 /* AdditionalOppoTblViewCell.xib */,
 			);
 			path = additionalOppoTVC;
+			sourceTree = "<group>";
+		};
+		8878BE3D2E8540B100075619 /* ListInnerHeaderCVCell */ = {
+			isa = PBXGroup;
+			children = (
+				8878BE3E2E85428E00075619 /* ListInnerHeaderCVCell.swift */,
+				8878BE3F2E85428E00075619 /* ListInnerHeaderCVCell.xib */,
+			);
+			path = ListInnerHeaderCVCell;
+			sourceTree = "<group>";
+		};
+		8878BE422E8542E000075619 /* ListDetailsCVCell */ = {
+			isa = PBXGroup;
+			children = (
+				8878BE432E8542F700075619 /* ListDetailsCVCell.swift */,
+				8878BE442E8542F700075619 /* ListDetailsCVCell.xib */,
+			);
+			path = ListDetailsCVCell;
 			sourceTree = "<group>";
 		};
 		887AF3C22E7BC2C500309ECA /* CollectionViewCell */ = {
@@ -676,8 +704,10 @@
 				A7A2BD555C69BBBED8BDE67E /* README.md in Resources */,
 				8867DD302E7A755B00435CC3 /* AdditionalOppoTblViewCell.xib in Resources */,
 				889D8EFD2E77F385009B9CE8 /* HunterReportingTblViewCell.xib in Resources */,
+				8878BE462E8542F700075619 /* ListDetailsCVCell.xib in Resources */,
 				8861F4AB2E782EB20063193E /* EmailPopup.xib in Resources */,
 				88834ECA2E7915F900E686FC /* ListTblVIewCell.xib in Resources */,
+				8878BE412E85428E00075619 /* ListInnerHeaderCVCell.xib in Resources */,
 				882231A92E78429100AFC855 /* DropDownTblViewCell.xib in Resources */,
 				88DBBDFC2E7A895800491331 /* ExceptionsTblViewCell.xib in Resources */,
 				888503122E73CF1200C99B57 /* WWCalendarTimeSelector.storyboard in Resources */,
@@ -735,6 +765,7 @@
 				8885030A2E73CF1200C99B57 /* String+Timepiece.swift in Sources */,
 				8885030B2E73CF1200C99B57 /* WWCalendarTimeSelector.swift in Sources */,
 				8885030C2E73CF1200C99B57 /* AppUtilites.swift in Sources */,
+				8878BE402E85428E00075619 /* ListInnerHeaderCVCell.swift in Sources */,
 				8885030D2E73CF1200C99B57 /* Extentions.swift in Sources */,
 				889D8EFC2E77F385009B9CE8 /* HunterReportingTblViewCell.swift in Sources */,
 				884AB22C2E77C949006C0BB5 /* HomeVC.swift in Sources */,
@@ -747,6 +778,7 @@
 				888502F02E73CEFE00C99B57 /* UIView+Extension.swift in Sources */,
 				8867DD2F2E7A755B00435CC3 /* AdditionalOppoTblViewCell.swift in Sources */,
 				882231A82E78429100AFC855 /* DropDownTblViewCell.swift in Sources */,
+				8878BE452E8542F700075619 /* ListDetailsCVCell.swift in Sources */,
 				888502F12E73CEFE00C99B57 /* UIImageView+Extension.swift in Sources */,
 				88D1F28C2E7975140084DBD5 /* ListDetailsTblViewCell.swift in Sources */,
 				8861F4A42E78276A0063193E /* AboutVC.swift in Sources */,

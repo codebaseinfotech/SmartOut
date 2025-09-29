@@ -19,6 +19,7 @@ class OntarioHuntingSeasonsVC: UIViewController {
     
     @IBOutlet weak var tblViewList: UITableView!
     
+    @IBOutlet weak var listCollectionView: UICollectionView!
     
     var arrSeasonId = NSMutableArray()
     
@@ -57,6 +58,9 @@ class OntarioHuntingSeasonsVC: UIViewController {
         tblViewList.register(UINib(nibName: "ListDetailsTblViewCell", bundle: nil), forCellReuseIdentifier: "ListDetailsTblViewCell")
         tblViewList.dataSource = self
         tblViewList.delegate = self
+        
+//        listCollectionView.delegate = self
+//        listCollectionView.dataSource = self
         
         viewDropDownList.isHidden = true
         arrAnimal = arrAllDataList.animals
@@ -359,3 +363,16 @@ extension OntarioHuntingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
         tblViewList.reloadSections(IndexSet(integer: section), with: .automatic)
     }
 }
+
+//extension OntarioHuntingSeasonsVC: UICollectionViewDataSource, UICollectionViewDelegate {
+//    
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        <#code#>
+//    }
+//    
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        <#code#>
+//    }
+//    
+//    
+//}

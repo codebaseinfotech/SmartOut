@@ -146,11 +146,49 @@ extension HunterReportingTblViewCell: UITableViewDelegate, UITableViewDataSource
             cell.viewLineB.isHidden = false
         }
         
+        let numberOfRows = tableView.numberOfRows(inSection: indexPath.section)
+
+        if indexPath.row == 0 {
+            // First row
+            DispatchQueue.main.async {
+                cell.viewFirstData.addGradient(withColors: [
+                    UIColor.white.cgColor,
+                    UIColor(hexString: "#FDE4D6").cgColor
+                ])
+                cell.viewThirdData.addGradient(withColors: [
+                    UIColor.white.cgColor,
+                    UIColor(hexString: "#FDE4D6").cgColor
+                ])
+            }
+            
+        } else if indexPath.row == numberOfRows - 1 {
+            
+            DispatchQueue.main.async {
+                cell.viewFirstData.addGradient(withColors: [
+                    UIColor(hexString: "#FDE4D6").cgColor,
+                    UIColor.white.cgColor
+                ])
+                cell.viewThirdData.addGradient(withColors: [
+                    UIColor(hexString: "#FDE4D6").cgColor,
+                    UIColor.white.cgColor
+                ])
+            }
+            
+        } else {
+            // Middle rows
+            cell.viewFirstData.backgroundColor = UIColor(hexString: "#FDE4D6")
+            cell.viewThirdData.backgroundColor = UIColor(hexString: "#FDE4D6")
+            
+            // Optional: clear gradients for other rows if not needed
+            cell.viewFirstData.layer.sublayers?.removeAll(where: { $0 is CAGradientLayer })
+            cell.viewThirdData.layer.sublayers?.removeAll(where: { $0 is CAGradientLayer })
+        }
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return indexPath.row == 0 ? 25 : UITableView.automaticDimension
+        return indexPath.row == 0 ? 27 : UITableView.automaticDimension
     }
     
     

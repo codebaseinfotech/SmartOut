@@ -14,6 +14,7 @@
             <connections>
                 <outlet property="imgDropdown" destination="fDK-7F-oTF" id="3eo-24-HRz"/>
                 <outlet property="lblDropdownTitle" destination="E1Y-uf-mOY" id="Q06-7o-nbP"/>
+                <outlet property="listCollectionView" destination="s9k-ps-zRO" id="XMT-g2-vAZ"/>
                 <outlet property="tblViewDropDown" destination="Wu7-Ho-H9O" id="OIl-e9-m7s"/>
                 <outlet property="tblViewList" destination="4TC-Qr-IZi" id="KuO-19-3S1"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -76,6 +77,16 @@
                     <rect key="frame" x="0.0" y="159" width="393" height="693"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
+                <collectionView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="s9k-ps-zRO">
+                    <rect key="frame" x="0.0" y="159" width="393" height="693"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="mVP-zP-BBe">
+                        <size key="itemSize" width="128" height="128"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ut2-xd-5Uo">
                     <rect key="frame" x="0.0" y="99" width="393" height="300"/>
                     <subviews>
@@ -158,6 +169,10 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Ut2-xd-5Uo" secondAttribute="trailing" id="6mF-HS-KcV"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="kTO-W6-ZAJ" secondAttribute="trailing" id="7rL-Q8-mRs"/>
                 <constraint firstItem="4TC-Qr-IZi" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="FGg-47-X9x"/>
+                <constraint firstItem="s9k-ps-zRO" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="QB6-A5-Jfv"/>
+                <constraint firstItem="s9k-ps-zRO" firstAttribute="top" secondItem="kTO-W6-ZAJ" secondAttribute="bottom" constant="60" id="QSH-8m-sfJ"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="s9k-ps-zRO" secondAttribute="trailing" id="avO-C1-eLG"/>
+                <constraint firstAttribute="bottom" secondItem="s9k-ps-zRO" secondAttribute="bottom" id="kq3-9e-JKQ"/>
                 <constraint firstItem="kTO-W6-ZAJ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="n7M-ar-U4P"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="4TC-Qr-IZi" secondAttribute="trailing" id="qQN-lP-vsL"/>
                 <constraint firstItem="kTO-W6-ZAJ" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="zcR-6E-W3g"/>

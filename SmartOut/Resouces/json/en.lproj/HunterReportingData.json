@@ -58,19 +58,19 @@
           "value": [
             {
               "year": "2021",
-              "metric_in_percent": "1650"
+              "metric_in_percent": "1,650"
             },
             {
               "year": "2022",
-              "metric_in_percent": "1759"
+              "metric_in_percent": "1,759"
             },
             {
               "year": "2023",
-              "metric_in_percent": "2190"
+              "metric_in_percent": "2,190"
             },
             {
               "year": "2024",
-              "metric_in_percent": "2538"
+              "metric_in_percent": "2,538"
             }
           ]
         },
@@ -79,19 +79,19 @@
           "value": [
             {
               "year": "2021",
-              "metric_in_percent": "2139"
+              "metric_in_percent": "2,139"
             },
             {
               "year": "2022",
-              "metric_in_percent": "2602"
+              "metric_in_percent": "2,602"
             },
             {
               "year": "2023",
-              "metric_in_percent": "2657"
+              "metric_in_percent": "2,657"
             },
             {
               "year": "2024",
-              "metric_in_percent": "3672"
+              "metric_in_percent": "3,672"
             }
           ]
         }
@@ -141,19 +141,19 @@
           "value": [
             {
               "year": "2021",
-              "metric_in_percent": "3745"
+              "metric_in_percent": "3,745"
             },
             {
               "year": "2022",
-              "metric_in_percent": "3353"
+              "metric_in_percent": "3,353"
             },
             {
               "year": "2023",
-              "metric_in_percent": "3383"
+              "metric_in_percent": "3,383"
             },
             {
               "year": "2024",
-              "metric_in_percent": "3134"
+              "metric_in_percent": "3,134"
             }
           ]
         }
@@ -217,19 +217,19 @@
           "value": [
             {
               "year": "2021",
-              "metric_in_percent": "52352"
+              "metric_in_percent": "52,352"
             },
             {
               "year": "2022",
-              "metric_in_percent": "55950"
+              "metric_in_percent": "55,950"
             },
             {
               "year": "2023",
-              "metric_in_percent": "52342"
+              "metric_in_percent": "52,342"
             },
             {
               "year": "2024",
-              "metric_in_percent": "54389"
+              "metric_in_percent": "54,389"
             }
           ]
         }

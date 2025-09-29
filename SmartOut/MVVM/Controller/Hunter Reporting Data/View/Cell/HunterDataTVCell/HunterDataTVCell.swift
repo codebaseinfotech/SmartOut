@@ -16,6 +16,13 @@ class HunterDataTVCell: UITableViewCell {
     @IBOutlet weak var lblFourValue: UILabel!
     
     @IBOutlet weak var viewLineB: UIView!
+    @IBOutlet weak var viewFirstData: UIView!
+    @IBOutlet weak var viewThirdData: UIView!
+    
+    @IBOutlet weak var imgBgFirstGradient: UIImageView!
+    @IBOutlet weak var imgBgThirdGradient: UIImageView!
+    
+    private var gradientLayer: CAGradientLayer?
     
     override func awakeFromNib() {
         super.awakeFromNib()
