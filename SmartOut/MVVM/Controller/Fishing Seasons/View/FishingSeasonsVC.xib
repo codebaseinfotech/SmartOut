@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FishingSeasonsVC" customModule="SmartOut" customModuleProvider="target">
             <connections>
+                <outlet property="collectionViewList" destination="iT9-Xj-Iz1" id="6wK-3P-HWD"/>
                 <outlet property="imgDropDown" destination="mgg-eO-9kd" id="gSq-vt-huy"/>
                 <outlet property="lblAdditionalOppo" destination="NSW-oL-4X2" id="klj-P6-370"/>
                 <outlet property="lblExceptions" destination="YKS-UD-aF4" id="43T-dn-qXD"/>
@@ -285,18 +286,32 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="e8V-qS-WBn">
+                        <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="e8V-qS-WBn">
                             <rect key="frame" x="0.0" y="0.0" width="393" height="633"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </tableView>
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="iT9-Xj-Iz1">
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="633"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="hDG-HV-EZS">
+                                <size key="itemSize" width="128" height="128"/>
+                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            </collectionViewFlowLayout>
+                        </collectionView>
                     </subviews>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="e8V-qS-WBn" secondAttribute="bottom" id="BZb-QG-L2D"/>
                         <constraint firstItem="e8V-qS-WBn" firstAttribute="top" secondItem="nvt-km-5ZP" secondAttribute="top" id="EPM-Tr-1lt"/>
                         <constraint firstAttribute="trailing" secondItem="IFe-1w-1e9" secondAttribute="trailing" constant="25" id="Hfz-lS-wcW"/>
+                        <constraint firstItem="iT9-Xj-Iz1" firstAttribute="leading" secondItem="nvt-km-5ZP" secondAttribute="leading" id="I9a-ut-xYE"/>
                         <constraint firstAttribute="trailing" secondItem="e8V-qS-WBn" secondAttribute="trailing" id="Omj-1U-wzt"/>
+                        <constraint firstAttribute="bottom" secondItem="iT9-Xj-Iz1" secondAttribute="bottom" id="QSK-Yy-wHn"/>
+                        <constraint firstItem="iT9-Xj-Iz1" firstAttribute="top" secondItem="nvt-km-5ZP" secondAttribute="top" id="dh8-8F-Fbd"/>
                         <constraint firstItem="IFe-1w-1e9" firstAttribute="leading" secondItem="nvt-km-5ZP" secondAttribute="leading" constant="25" id="gFS-Pp-dz5"/>
                         <constraint firstItem="IFe-1w-1e9" firstAttribute="centerY" secondItem="nvt-km-5ZP" secondAttribute="centerY" id="n2x-aJ-XUF"/>
+                        <constraint firstAttribute="trailing" secondItem="iT9-Xj-Iz1" secondAttribute="trailing" id="rVu-jX-FJL"/>
                         <constraint firstItem="e8V-qS-WBn" firstAttribute="leading" secondItem="nvt-km-5ZP" secondAttribute="leading" id="zwB-re-8iu"/>
                     </constraints>
                 </view>

@@ -41,6 +41,23 @@ class FishingSeasonsVC: UIViewController {
     @IBOutlet weak var viewBottomPopup: UIView!
     @IBOutlet weak var popupHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var collectionViewList: UICollectionView! {
+        didSet {
+            collectionViewList.collectionViewLayout = createCompositionalLayout()
+            
+            collectionViewList.delegate = self
+            collectionViewList.dataSource = self
+            
+            collectionViewList.register(UINib(nibName: "ListDetailsCVCell", bundle: nil), forCellWithReuseIdentifier: "ListDetailsCVCell")
+            
+            collectionViewList.register(UINib(nibName: "ListInnerHeaderCVCell", bundle: nil), forCellWithReuseIdentifier: "ListInnerHeaderCVCell")
+            
+            collectionViewList.register(UINib(nibName: "HuterHeaderCVView", bundle: nil),
+                                        forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                        withReuseIdentifier: "HuterHeaderCVView")
+        }
+    }
+    
     var isDropDownVisible = false
     var expandedIndexPaths: Set<IndexPath> = []
     var isPopupVisible = false
@@ -58,6 +75,7 @@ class FishingSeasonsVC: UIViewController {
     var expandedSections: Set<Int> = []
     var expandedSectionsAdditionalOppo: Set<Int> = []
     var expandedCells: [IndexPath: Bool] = [:]
+    var expandedSeasonTypes: Set<IndexPath> = []
 
     var expandedIndexPath: IndexPath?
     override func viewDidLoad() {
@@ -237,6 +255,40 @@ class FishingSeasonsVC: UIViewController {
             viewZoneWideMain.isHidden = true
             viewAdditionalOppoMain.isHidden = true
             viewExceptionsMain.isHidden = false
+        }
+    }
+    
+    // MARK: - Compositional Layout
+    func createCompositionalLayout() -> UICollectionViewCompositionalLayout {
+        return UICollectionViewCompositionalLayout { sectionIndex, environment -> NSCollectionLayoutSection? in
+            
+            // Item
+            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                  heightDimension: .estimated(50))
+            let item = NSCollectionLayoutItem(layoutSize: itemSize)
+            item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
+            
+            // Group
+            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                   heightDimension: .estimated(50))
+            let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+            
+            // Section
+            let section = NSCollectionLayoutSection(group: group)
+            
+            // Header – dynamic height using estimated
+            let headerSize = NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(1.0),
+                heightDimension: .estimated(40) // Estimated height; will expand based on content
+            )
+            let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
+                layoutSize: headerSize,
+                elementKind: UICollectionView.elementKindSectionHeader,
+                alignment: .top
+            )
+            section.boundarySupplementaryItems = [sectionHeader]
+            
+            return section
         }
     }
     
@@ -555,4 +607,160 @@ extension FishingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
         
         tblViewAdditionalOppo.reloadSections(IndexSet(integer: section), with: .automatic)
     }
+}
+
+extension FishingSeasonsVC: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return fishing_exception_types.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if !expandedSections.contains(section) { return 0 }
+        
+        let dicData = fishing_exception_types[section]
+        let additional = exceptionsNew.filter { $0.exception_type_id == dicData.id && $0.fish_id == nil }
+        return additional.count > 0 ? additional.count : arrFish.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let arrAnimal = AppDelegate.appDelegate.dicAllData.animals
+        let animalId = arrAnimal[indexPath.section].id ?? 0
+        let arrHunter = AppDelegate.appDelegate.dicAllData.hunting_seasons.filter { $0.animal_id == animalId }
+        let groupedSeasons = Dictionary(grouping: arrHunter, by: { $0.season_type ?? "" })
+        let sectionTitles = groupedSeasons.keys.sorted()
+        
+        
+        let dicData = fishing_exception_types[indexPath.section]
+        let additional = exceptionsNew.filter { $0.exception_type_id == dicData.id && $0.fish_id == nil }
+        
+        if additional.count > 0 {
+            
+        }
+        
+        // Build row list with type
+        var rows: [(isType: Bool, type: String?, season: HuntingSeason?)] = []
+        for (i, type) in sectionTitles.enumerated() {
+            rows.append((true, type, nil))
+            let idx = IndexPath(item: i, section: indexPath.section)
+            if expandedSeasonTypes.contains(idx) {
+                for s in groupedSeasons[type] ?? [] {
+                    rows.append((false, nil, s))
+                }
+            }
+        }
+        
+        let row = rows[indexPath.row]
+        if row.isType {
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: "ListInnerHeaderCVCell",
+                for: indexPath
+            ) as! ListInnerHeaderCVCell
+            cell.lblTitle.text = row.type
+            
+            return cell
+        } else if let season = row.season {
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: "ListDetailsCVCell",
+                for: indexPath
+            ) as! ListDetailsCVCell
+            
+            
+            let season_resident = (season.season_resident ?? "") + " " + "(Resident)"
+            let season_non_resident = (season.season_non_resident ?? "") + " " + "(Non-resident)"
+            let season2 = season_resident != "" ? season_resident + "\n" + season_non_resident : season_non_resident
+            cell.lblSeason.text = season2
+            
+            cell.lblWMUs.text = season.short_wmu_list ?? ""
+            cell.lblConditions.text = season.conditions_text ?? ""
+            
+            cell.viewMainRifle.isHidden = season.rifles_allowed != 1
+            cell.viewMainShotgun.isHidden = season.shotguns_allowed != 1
+            cell.viewMainMuzzleloader.isHidden = season.muzzleloaders_allowed != 1
+            cell.viewMainBow.isHidden = season.bows_allowed != 1
+            
+            cell.lblConditions.text = season.conditions_text
+            cell.viewMainConditions.isHidden = (season.conditions_text ?? "").isEmpty
+            cell.viewMainSeason.isHidden = (season.season_resident ?? "").isEmpty && (season.season_non_resident ?? "").isEmpty
+            
+            return cell
+        }
+        
+        return UICollectionViewCell()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        viewForSupplementaryElementOfKind kind: String,
+                        at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
+                                                                     withReuseIdentifier: "HuterHeaderCVView",
+                                                                     for: indexPath) as! HuterHeaderCVView
+        header.tag = indexPath.section
+        
+        header.lblName.text = AppDelegate.appDelegate.dicAllData.animals[indexPath.section].name ?? ""
+        
+        if let imageName = AppDelegate.appDelegate.dicAllData.animals[indexPath.section].image_path {
+            header.imgIcon.image = UIImage(named: imageName)
+        } else {
+            header.imgIcon.image = nil
+        }
+        
+        if expandedSections.contains(indexPath.section) {
+            header.imgDropdown.transform = CGAffineTransform(rotationAngle: .pi)
+        } else {
+            header.imgDropdown.transform = .identity
+        }
+        
+        header.tag = indexPath.section
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(headerTapped(_:)))
+        header.addGestureRecognizer(tapGesture)
+        header.isUserInteractionEnabled = true
+        
+        return header
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let arrAnimal = AppDelegate.appDelegate.dicAllData.animals
+        let animalId = arrAnimal[indexPath.section].id ?? 0
+        let arrHunter = AppDelegate.appDelegate.dicAllData.hunting_seasons.filter { $0.animal_id == animalId }
+        let groupedSeasons = Dictionary(grouping: arrHunter, by: { $0.season_type ?? "" })
+        let sectionTitles = groupedSeasons.keys.sorted()
+        
+        var counter = 0
+        for (i, type) in sectionTitles.enumerated() {
+            if indexPath.row == counter {
+                let idx = IndexPath(item: i, section: indexPath.section)
+                if expandedSeasonTypes.contains(idx) {
+                    expandedSeasonTypes.remove(idx)
+                } else {
+                    expandedSeasonTypes.insert(idx)
+                }
+                collectionView.reloadSections(IndexSet(integer: indexPath.section))
+                return
+            }
+            counter += 1
+            if expandedSeasonTypes.contains(IndexPath(item: i, section: indexPath.section)) {
+                counter += groupedSeasons[type]?.count ?? 0
+            }
+        }
+    }
+    
+    @objc func headerTapped(_ sender: UITapGestureRecognizer) {
+        guard let headerViewTapped = sender.view else { return }
+        let section = headerViewTapped.tag
+        // Toggle isExpanded
+        // headerView[section].isExpanded.toggle()
+        
+        if expandedSections.contains(section) {
+            expandedSections.remove(section)
+        } else {
+            expandedSections.insert(section)
+        }
+        
+        // Reload section with animation
+        collectionViewList.reloadSections(IndexSet(integer: section))
+    }
+    
+    
 }
