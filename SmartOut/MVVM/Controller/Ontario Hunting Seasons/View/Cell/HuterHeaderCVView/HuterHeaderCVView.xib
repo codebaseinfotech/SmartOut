@@ -88,6 +88,8 @@
                 <constraint firstItem="fWT-8i-4YX" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" id="uoY-AG-RJI"/>
             </constraints>
             <connections>
+                <outlet property="imgDropdown" destination="f79-gc-pEx" id="t73-WL-7Vs"/>
+                <outlet property="imgIcon" destination="Ssf-0m-qdF" id="ohp-an-J28"/>
                 <outlet property="lblName" destination="hld-v0-lGM" id="3Qe-ys-IZc"/>
             </connections>
             <point key="canvasLocation" x="131" y="-32"/>
