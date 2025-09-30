@@ -59,7 +59,7 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
             let vc = HunterReportingData()
             self.navigationController?.pushViewController(vc, animated: false)
         } else if indexPath.row == 1 {
-            let vc = OntarioHuntingSeasonsVC()
+            let vc = NewHunterVC()
             self.navigationController?.pushViewController(vc, animated: false)
         } else if indexPath.row == 2 {
             let vc = FishingSeasonsVC()

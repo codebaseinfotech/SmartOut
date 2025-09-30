@@ -12,6 +12,10 @@
 		398BD5D52E824F6E004709D4 /* HunterDataTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 398BD5D32E824F6E004709D4 /* HunterDataTVCell.xib */; };
 		398F9E7A2E7D804000142F7E /* FishindHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398F9E792E7D804000142F7E /* FishindHeaderView.swift */; };
 		398F9E7C2E7D804600142F7E /* FishindHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 398F9E7B2E7D804600142F7E /* FishindHeaderView.xib */; };
+		39D8EEC42E8BBD5800D79A6E /* HuterHeaderCVView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39D8EEC32E8BBD5800D79A6E /* HuterHeaderCVView.xib */; };
+		39D8EEC52E8BBD5800D79A6E /* HuterHeaderCVView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D8EEC22E8BBD5800D79A6E /* HuterHeaderCVView.swift */; };
+		39D8EEC92E8BC43100D79A6E /* NewHunterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D8EEC72E8BC43100D79A6E /* NewHunterVC.swift */; };
+		39D8EECA2E8BC43100D79A6E /* NewHunterVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39D8EEC82E8BC43100D79A6E /* NewHunterVC.xib */; };
 		8804C10A2E78095400ABDA6B /* PieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8804C1082E78095400ABDA6B /* PieChart.swift */; };
 		8804C10D2E780B7300ABDA6B /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = 8804C10C2E780B7300ABDA6B /* DGCharts */; };
 		882231A22E783BEF00AFC855 /* OntarioHuntingSeasonsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882231A02E783BEF00AFC855 /* OntarioHuntingSeasonsVC.swift */; };
@@ -109,6 +113,10 @@
 		398BD5D32E824F6E004709D4 /* HunterDataTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HunterDataTVCell.xib; sourceTree = "<group>"; };
 		398F9E792E7D804000142F7E /* FishindHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FishindHeaderView.swift; sourceTree = "<group>"; };
 		398F9E7B2E7D804600142F7E /* FishindHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FishindHeaderView.xib; sourceTree = "<group>"; };
+		39D8EEC22E8BBD5800D79A6E /* HuterHeaderCVView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuterHeaderCVView.swift; sourceTree = "<group>"; };
+		39D8EEC32E8BBD5800D79A6E /* HuterHeaderCVView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HuterHeaderCVView.xib; sourceTree = "<group>"; };
+		39D8EEC72E8BC43100D79A6E /* NewHunterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewHunterVC.swift; sourceTree = "<group>"; };
+		39D8EEC82E8BC43100D79A6E /* NewHunterVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewHunterVC.xib; sourceTree = "<group>"; };
 		5688EBEE065F5C1122BDE67E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = SmartOut.xcodeproj/README.md; sourceTree = SOURCE_ROOT; };
 		8804C1082E78095400ABDA6B /* PieChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChart.swift; sourceTree = "<group>"; };
 		882231A02E783BEF00AFC855 /* OntarioHuntingSeasonsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OntarioHuntingSeasonsVC.swift; sourceTree = "<group>"; };
@@ -223,6 +231,24 @@
 			path = FishindHeaderView;
 			sourceTree = "<group>";
 		};
+		39D8EEC12E8BBD3E00D79A6E /* HuterHeaderCVView */ = {
+			isa = PBXGroup;
+			children = (
+				39D8EEC22E8BBD5800D79A6E /* HuterHeaderCVView.swift */,
+				39D8EEC32E8BBD5800D79A6E /* HuterHeaderCVView.xib */,
+			);
+			path = HuterHeaderCVView;
+			sourceTree = "<group>";
+		};
+		39D8EEC62E8BC42000D79A6E /* NewHunterVC */ = {
+			isa = PBXGroup;
+			children = (
+				39D8EEC72E8BC43100D79A6E /* NewHunterVC.swift */,
+				39D8EEC82E8BC43100D79A6E /* NewHunterVC.xib */,
+			);
+			path = NewHunterVC;
+			sourceTree = "<group>";
+		};
 		8804C1092E78095400ABDA6B /* PieChart */ = {
 			isa = PBXGroup;
 			children = (
@@ -242,6 +268,7 @@
 		8822319F2E78387A00AFC855 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				39D8EEC62E8BC42000D79A6E /* NewHunterVC */,
 				882231A42E78425F00AFC855 /* Cell */,
 				882231A02E783BEF00AFC855 /* OntarioHuntingSeasonsVC.swift */,
 				882231A12E783BEF00AFC855 /* OntarioHuntingSeasonsVC.xib */,
@@ -252,6 +279,7 @@
 		882231A42E78425F00AFC855 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				39D8EEC12E8BBD3E00D79A6E /* HuterHeaderCVView */,
 				8878BE422E8542E000075619 /* ListDetailsCVCell */,
 				8878BE3D2E8540B100075619 /* ListInnerHeaderCVCell */,
 				88D1F2892E7974720084DBD5 /* ListDetailsTblViewCell */,
@@ -708,6 +736,7 @@
 				8861F4AB2E782EB20063193E /* EmailPopup.xib in Resources */,
 				88834ECA2E7915F900E686FC /* ListTblVIewCell.xib in Resources */,
 				8878BE412E85428E00075619 /* ListInnerHeaderCVCell.xib in Resources */,
+				39D8EEC42E8BBD5800D79A6E /* HuterHeaderCVView.xib in Resources */,
 				882231A92E78429100AFC855 /* DropDownTblViewCell.xib in Resources */,
 				88DBBDFC2E7A895800491331 /* ExceptionsTblViewCell.xib in Resources */,
 				888503122E73CF1200C99B57 /* WWCalendarTimeSelector.storyboard in Resources */,
@@ -725,6 +754,7 @@
 				889D33DF2E79917E007B1124 /* ZoneWideTblViewCell.xib in Resources */,
 				884AB2252E77C4CB006C0BB5 /* smartout.sqlite in Resources */,
 				888502E32E73CE5100C99B57 /* LaunchScreen.storyboard in Resources */,
+				39D8EECA2E8BC43100D79A6E /* NewHunterVC.xib in Resources */,
 				88DBBE012E7A915F00491331 /* ExceptionsDetailsTblViewCell.xib in Resources */,
 				888502E42E73CE5100C99B57 /* Main.storyboard in Resources */,
 				884AB22D2E77C949006C0BB5 /* HomeVC.xib in Resources */,
@@ -778,11 +808,13 @@
 				888502F02E73CEFE00C99B57 /* UIView+Extension.swift in Sources */,
 				8867DD2F2E7A755B00435CC3 /* AdditionalOppoTblViewCell.swift in Sources */,
 				882231A82E78429100AFC855 /* DropDownTblViewCell.swift in Sources */,
+				39D8EEC92E8BC43100D79A6E /* NewHunterVC.swift in Sources */,
 				8878BE452E8542F700075619 /* ListDetailsCVCell.swift in Sources */,
 				888502F12E73CEFE00C99B57 /* UIImageView+Extension.swift in Sources */,
 				88D1F28C2E7975140084DBD5 /* ListDetailsTblViewCell.swift in Sources */,
 				8861F4A42E78276A0063193E /* AboutVC.swift in Sources */,
 				888502DE2E73CE5100C99B57 /* AppDelegate.swift in Sources */,
+				39D8EEC52E8BBD5800D79A6E /* HuterHeaderCVView.swift in Sources */,
 				888502E02E73CE5100C99B57 /* ViewController.swift in Sources */,
 				884AB2382E77D93E006C0BB5 /* SideMenuVC.swift in Sources */,
 				88DBBDFD2E7A895800491331 /* ExceptionsTblViewCell.swift in Sources */,

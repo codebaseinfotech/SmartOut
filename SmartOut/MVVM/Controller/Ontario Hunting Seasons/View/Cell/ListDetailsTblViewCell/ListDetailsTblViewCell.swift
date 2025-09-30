@@ -22,6 +22,13 @@ class ListDetailsTblViewCell: UITableViewCell {
     @IBOutlet weak var viewCondtionMain: UIView!
     @IBOutlet weak var viewMainSeason: UIView!
     
+    @IBOutlet weak var viewTop: UIView!
+    
+    @IBOutlet weak var imgPic: UIImageView!
+    @IBOutlet weak var lblTitle: UILabel!
+    @IBOutlet weak var imgDrop: UIImageView!
+    
+    
 //    var isExpanded = false
 //    var toggleAction: (() -> Void)?
     

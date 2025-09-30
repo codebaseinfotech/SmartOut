@@ -44,6 +44,8 @@ class OntarioHuntingSeasonsVC: UIViewController {
     
     var selectedwmuID = "1"
     var expandedIndexDocument: IndexPath?
+    var expandedSeasonTypes: Set<IndexPath> = []
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,6 +63,19 @@ class OntarioHuntingSeasonsVC: UIViewController {
         
 //        listCollectionView.delegate = self
 //        listCollectionView.dataSource = self
+        
+        listCollectionView.collectionViewLayout = createCompositionalLayout()
+        
+        listCollectionView.delegate = self
+        listCollectionView.dataSource = self
+        
+        // Register cell and header
+//        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "SeasonCell")
+        listCollectionView.register(ListDetailsCVCell.self, forCellWithReuseIdentifier: "ListDetailsCVCell")
+        listCollectionView.register(ListInnerHeaderCVCell.self, forCellWithReuseIdentifier: "ListInnerHeaderCVCell")
+        listCollectionView.register(HuterHeaderCVView.self,
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                withReuseIdentifier: "HuterHeaderCVView")
         
         viewDropDownList.isHidden = true
         arrAnimal = arrAllDataList.animals
@@ -113,6 +128,36 @@ class OntarioHuntingSeasonsVC: UIViewController {
         
         tblViewList.reloadData()
         // Do any additional setup after loading the view.
+    }
+    
+    // MARK: - Compositional Layout
+    func createCompositionalLayout() -> UICollectionViewCompositionalLayout {
+        return UICollectionViewCompositionalLayout { sectionIndex, environment -> NSCollectionLayoutSection? in
+            
+            // Item
+            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                  heightDimension: .estimated(50))
+            let item = NSCollectionLayoutItem(layoutSize: itemSize)
+            item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10)
+            
+            // Group
+            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                   heightDimension: .estimated(50))
+            let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+            
+            // Section
+            let section = NSCollectionLayoutSection(group: group)
+            
+            // Header
+            let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                    heightDimension: .absolute(40))
+            let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize,
+                                                                            elementKind: UICollectionView.elementKindSectionHeader,
+                                                                            alignment: .top)
+            section.boundarySupplementaryItems = [sectionHeader]
+            
+            return section
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -254,6 +299,9 @@ extension OntarioHuntingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
             
         } else if tableView == tblViewList {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ListDetailsTblViewCell", for: indexPath) as! ListDetailsTblViewCell
+            
+            cell.viewTop.isHidden = true
+            
             let animalId = arrAnimal[indexPath.section].id ?? 0
             let filteredSeasons = arrHuntingSeasons.filter { $0.animal_id == animalId }
             let dicData = filteredSeasons[indexPath.row]
@@ -364,15 +412,138 @@ extension OntarioHuntingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-//extension OntarioHuntingSeasonsVC: UICollectionViewDataSource, UICollectionViewDelegate {
-//    
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        <#code#>
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        <#code#>
-//    }
-//    
-//    
-//}
+extension OntarioHuntingSeasonsVC: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+//        return headerView.count
+        return AppDelegate.appDelegate.dicAllData.animals.count
+    }
+
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        let arrAnimal = AppDelegate.appDelegate.dicAllData.animals
+        let animalId = arrAnimal[section].id ?? 0
+        let arrHunter = AppDelegate.appDelegate.dicAllData.hunting_seasons.filter { $0.animal_id == animalId }
+        let groupedSeasons = Dictionary(grouping: arrHunter, by: { $0.season_type ?? "" })
+        let sectionTitles = groupedSeasons.keys.sorted()
+        guard expandedSections.contains(section) else { return 0 }
+        var total = 0
+        for (i, type) in sectionTitles.enumerated() {
+            total += 1
+            let idx = IndexPath(item: i, section: section)
+            if expandedSeasonTypes.contains(idx) {
+                total += groupedSeasons[type]?.count ?? 0
+            }
+        }
+        return total
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let arrAnimal = AppDelegate.appDelegate.dicAllData.animals
+        let animalId = arrAnimal[indexPath.section].id ?? 0
+        let arrHunter = AppDelegate.appDelegate.dicAllData.hunting_seasons.filter { $0.animal_id == animalId }
+        let groupedSeasons = Dictionary(grouping: arrHunter, by: { $0.season_type ?? "" })
+        let sectionTitles = groupedSeasons.keys.sorted()
+
+        // Build row list with type
+        var rows: [(isType: Bool, text: String)] = []
+        for (i, type) in sectionTitles.enumerated() {
+            rows.append((true, type))
+            let idx = IndexPath(item: i, section: indexPath.section)
+            if expandedSeasonTypes.contains(idx) {
+                for s in groupedSeasons[type] ?? [] {
+                    rows.append((false, s.season_resident ?? ""))
+                }
+            }
+        }
+
+        let row = rows[indexPath.row]
+        if row.isType {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ListInnerHeaderCVCell", for: indexPath) as! ListInnerHeaderCVCell
+            cell.lblTitle.text = row.text
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ListDetailsCVCell", for: indexPath) as! ListDetailsCVCell
+            cell.lblSeason.text = row.text
+            return cell
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                            viewForSupplementaryElementOfKind kind: String,
+                        at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
+                                                                     withReuseIdentifier: "HuterHeaderCVView",
+                                                                     for: indexPath) as! HuterHeaderCVView
+        header.backgroundColor = .systemBlue
+        header.tag = indexPath.section
+        
+//        header.lblName.text = AppDelegate.appDelegate.dicAllData.animals[indexPath.section].name ?? ""
+        
+//        if header.subviews.isEmpty {
+//            let label = UILabel()
+//            label.tag = 101
+//            label.frame = header.bounds
+//            label.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//            label.font = .boldSystemFont(ofSize: 18)
+//            label.textColor = .white
+//            header.addSubview(label)
+//            
+//            // Add tap gesture recognizer to header
+//            header.tag = indexPath.section
+//            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(headerTapped(_:)))
+//            header.addGestureRecognizer(tapGesture)
+//            header.isUserInteractionEnabled = true
+//        }
+//        if let label = header.viewWithTag(101) as? UILabel {
+//            label.text = AppDelegate.appDelegate.dicAllData.animals[indexPath.section].name ?? ""
+//        }
+        
+        
+        return header
+    }
+    
+    @objc func headerTapped(_ sender: UITapGestureRecognizer) {
+        guard let headerViewTapped = sender.view else { return }
+        let section = headerViewTapped.tag
+        // Toggle isExpanded
+        // headerView[section].isExpanded.toggle()
+        
+        if expandedSections.contains(section) {
+            expandedSections.remove(section)
+        } else {
+            expandedSections.insert(section)
+        }
+        
+        // Reload section with animation
+        listCollectionView.reloadSections(IndexSet(integer: section))
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let arrAnimal = AppDelegate.appDelegate.dicAllData.animals
+        let animalId = arrAnimal[indexPath.section].id ?? 0
+        let arrHunter = AppDelegate.appDelegate.dicAllData.hunting_seasons.filter { $0.animal_id == animalId }
+        let groupedSeasons = Dictionary(grouping: arrHunter, by: { $0.season_type ?? "" })
+        let sectionTitles = groupedSeasons.keys.sorted()
+
+        var counter = 0
+        for (i, type) in sectionTitles.enumerated() {
+            if indexPath.row == counter {
+                let idx = IndexPath(item: i, section: indexPath.section)
+                if expandedSeasonTypes.contains(idx) {
+                    expandedSeasonTypes.remove(idx)
+                } else {
+                    expandedSeasonTypes.insert(idx)
+                }
+                collectionView.reloadSections(IndexSet(integer: indexPath.section))
+                return
+            }
+            counter += 1
+            if expandedSeasonTypes.contains(IndexPath(item: i, section: indexPath.section)) {
+                counter += groupedSeasons[type]?.count ?? 0
+            }
+        }
+    }
+    
+}
