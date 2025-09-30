@@ -47,6 +47,7 @@ class NewHunterVC: UIViewController {
     var arrAllDataList = AppDelegate.appDelegate.dicAllData
     var filteredWMUs: [WMU] = []
     var expandedSections: Set<Int> = []
+    var expandedSectionsTV: Set<Int> = []
     var expandedSeasonTypes: Set<IndexPath> = []
     var selectedwmuID = "1"
     
@@ -77,6 +78,12 @@ class NewHunterVC: UIViewController {
             return false
         }
         
+        // ✅ Insert "All WMUs" at first position if exists
+        if let first = arrAllDataList.wmu.first(where: { $0.name == "1" }) {
+            filteredWMUs.insert(first, at: 0)
+        }
+        
+        
         lblDropDown.text = "All WMUs"
         selectedwmuID = ""
         
@@ -100,7 +107,7 @@ class NewHunterVC: UIViewController {
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                   heightDimension: .estimated(50))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
-            item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 0, bottom: 5, trailing: 0)
+            item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
             
             // Group
             let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
@@ -227,7 +234,7 @@ extension NewHunterVC: UITableViewDelegate, UITableViewDataSource {
         if tableView == tblViewListMain {
             return filteredWMUs.count
         } else if tableView == tblViewList {
-            if expandedSections.contains(section) {
+            if expandedSectionsTV.contains(section) {
                 let animalId = arrAnimal[section].id ?? 0
                 return arrHuntingSeasons.filter { $0.animal_id == animalId }.count
             } else {
@@ -313,7 +320,7 @@ extension NewHunterVC: UITableViewDelegate, UITableViewDataSource {
             headerView.lblName.text = headerData.name ?? "Exception Type"
             headerView.imgPic.image = UIImage(named: headerData.image_path ?? "")
             
-            if expandedSections.contains(section) {
+            if expandedSectionsTV.contains(section) {
                 headerView.imgDrop.transform = CGAffineTransform(rotationAngle: .pi)
             } else {
                 headerView.imgDrop.transform = .identity
@@ -326,10 +333,10 @@ extension NewHunterVC: UITableViewDelegate, UITableViewDataSource {
     @objc func handleHeaderTap(_ gesture: UITapGestureRecognizer) {
         guard let headerView = gesture.view else { return }
         let section = headerView.tag
-        if expandedSections.contains(section) {
-            expandedSections.remove(section)
+        if expandedSectionsTV.contains(section) {
+            expandedSectionsTV.remove(section)
         } else {
-            expandedSections.insert(section)
+            expandedSectionsTV.insert(section)
         }
         tblViewList.reloadSections(IndexSet(integer: section), with: .automatic)
     }
@@ -341,10 +348,17 @@ extension NewHunterVC: UITableViewDelegate, UITableViewDataSource {
                 lblDropDown.text = "All WMUs"
                 selectedwmuID = ""
                 loadAllSeasons()
+                
+                tblViewList.isHidden = true
+                collectionViewList.isHidden = false
+                
             } else {
                 lblDropDown.text = "WMU " + (selectedWMU.name ?? "")
                 selectedwmuID = selectedWMU.name ?? ""
                 loadSeasons(forWMU: selectedWMU.id ?? 0)
+                
+                tblViewList.isHidden = false
+                collectionViewList.isHidden = true
             }
             
             tblViewList.reloadData()
@@ -457,7 +471,6 @@ extension NewHunterVC: UICollectionViewDelegate, UICollectionViewDataSource {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
                                                                      withReuseIdentifier: "HuterHeaderCVView",
                                                                      for: indexPath) as! HuterHeaderCVView
-        header.backgroundColor = .systemBlue
         header.tag = indexPath.section
         
         header.lblName.text = AppDelegate.appDelegate.dicAllData.animals[indexPath.section].name ?? ""
