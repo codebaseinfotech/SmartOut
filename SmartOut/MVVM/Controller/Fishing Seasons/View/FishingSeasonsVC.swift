@@ -78,6 +78,15 @@ class FishingSeasonsVC: UIViewController {
     var expandedSeasonTypes: Set<IndexPath> = []
 
     var expandedIndexPath: IndexPath?
+    
+    var expandedExceptionTypes: Set<IndexPath> = []
+    var arrAllFishing: [Fish] = []
+    var fishIds: [Double] = []
+    var expandedFish: Set<IndexPath> = []
+    
+    var fmz_id = 0
+    var exceptionIds: [Int] = []
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -106,7 +115,7 @@ class FishingSeasonsVC: UIViewController {
         lblListName.text = "FMZ" + " " + (arrAllDataList.fmz.first?.name ?? "")
         
         let seasonIdToCheck = arrAllDataList.fmz.first?.id ?? 0
-        
+        fmz_id = seasonIdToCheck
         let fishingSeasonsData = arrAllDataList.fishing_seasons.filter { $0.fmz_id == seasonIdToCheck }
         print("Fishing Seasons:", fishingSeasonsData.count)
         arrAllFmzData = fishingSeasonsData
@@ -125,16 +134,23 @@ class FishingSeasonsVC: UIViewController {
         
         let additionalNew = arrAllDataList.exceptions.filter { $0.fmz_id == seasonIdToCheck }
         exceptionsNew = additionalNew
-
-        // 1. Extract all exception_type_id values from exceptions
-        let exceptionTypes = additionalNew.compactMap { $0.exception_type_id }
         
-        let fisingingArr = arrAllDataList.fishing_exception_types.filter { fish in
-            exceptionTypes.contains(fish.id ?? 0)
+        let exceptionTypes = additionalNew.compactMap { $0.exception_type_id }
+       
+        let arrExten = arrAllDataList.exceptions.filter({ $0.fmz_id == fmz_id })
+        
+        
+        for obj in arrExten {
+            if !exceptionIds.contains(obj.exception_type_id ?? 0) {
+                exceptionIds.append(obj.exception_type_id ?? 0)
+            }
         }
-        fishing_exception_types = fisingingArr
+        
+        let filtered = arrAllDataList.fishing_exception_types.filter { exceptionIds.contains($0.id ?? 0) }
+        fishing_exception_types = filtered
 
         print("Unique Exception Types:", fishing_exception_types)
+        
         
         lblNoDataExceptions.isHidden = fishing_exception_types.count > 0 ? true : false
         lblNoDataAddOppo.isHidden = arrFish.count > 0 ? true : false
@@ -456,6 +472,7 @@ extension FishingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
             lblListName.text = "FMZ" + " " + (arrAllDataList.fmz[indexPath.row].name ?? "")
             
             let seasonIdToCheck = arrAllDataList.fmz[indexPath.row].id ?? 0
+            fmz_id = seasonIdToCheck
             
             let fishingSeasonsData = arrAllDataList.fishing_seasons.filter { $0.fmz_id == seasonIdToCheck }
             print("Fishing Seasons:", fishingSeasonsData.count)
@@ -477,11 +494,17 @@ extension FishingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
             exceptionsNew = additionalNew
             
             let exceptionTypes = additionalNew.compactMap { $0.exception_type_id }
-
-            let fisingingArr = arrAllDataList.fishing_exception_types.filter { fish in
-                exceptionTypes.contains(fish.id ?? 0)
+           
+            let arrExten = arrAllDataList.exceptions.filter({ $0.fmz_id == fmz_id })
+            
+            for obj in arrExten {
+                if !exceptionIds.contains(obj.exception_type_id ?? 0) {
+                    exceptionIds.append(obj.exception_type_id ?? 0)
+                }
             }
-            fishing_exception_types = fisingingArr
+            
+            let filtered = arrAllDataList.fishing_exception_types.filter { exceptionIds.contains($0.id ?? 0) }
+            fishing_exception_types = filtered
 
             print("Unique Exception Types:", fishing_exception_types)
             
@@ -496,6 +519,7 @@ extension FishingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
                 tblViewZoneWide.reloadData()
                 tblViewAdditionalOppo.reloadData()
                 tblViewExceptions.reloadData()
+                collectionViewList.reloadData()
             }
             
             isDropDownVisible = false
@@ -616,77 +640,91 @@ extension FishingSeasonsVC: UICollectionViewDelegate, UICollectionViewDataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if !expandedSections.contains(section) { return 0 }
+        let fishing = fishing_exception_types[section].id ?? 0
+        let filtered = AppDelegate.appDelegate.dicAllData.exceptions.filter { $0.exception_type_id == fishing && $0.fish_id == nil && $0.fmz_id == fmz_id }
         
-        let dicData = fishing_exception_types[section]
-        let additional = exceptionsNew.filter { $0.exception_type_id == dicData.id && $0.fish_id == nil }
-        return additional.count > 0 ? additional.count : arrFish.count
+        let filterFish = arrAllDataList.exceptions.filter({ $0.exception_type_id == fishing && $0.fmz_id == fmz_id })
+        
+        for obj in filterFish {
+            if !fishIds.contains(obj.fish_id ?? 0) {
+                fishIds.append(obj.fish_id ?? 0)
+            }
+        }
+        
+        let getFishData = arrAllDataList.fish.filter { fishIds.contains(Double($0.id ?? 0)) }
+        arrAllFishing = getFishData
+        
+        guard expandedSections.contains(section) else { return 0 }
+        
+        var total = 0
+        for (i, _) in filtered.enumerated() {
+            total += 1
+            let idx = IndexPath(item: i, section: section)
+            if expandedExceptionTypes.contains(idx) {
+                total += 1
+            }
+        }
+        
+        if total == 0 {
+            var fishCount = 0
+            for (i, _) in arrAllFishing.enumerated() {
+                fishCount += 1
+                let idx = IndexPath(item: i, section: section)
+                if expandedFish.contains(idx) {
+                    let fish = arrAllFishing[i]
+                    let fishExceptions = AppDelegate.appDelegate.dicAllData.exceptions.filter {
+                        $0.exception_type_id == fishing && $0.fish_id == Double(fish.id ?? 0) && $0.fmz_id == fmz_id
+                    }
+                    fishCount += fishExceptions.count
+                }
+            }
+            return fishCount
+        }
+        
+        return total
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let arrAnimal = AppDelegate.appDelegate.dicAllData.animals
-        let animalId = arrAnimal[indexPath.section].id ?? 0
-        let arrHunter = AppDelegate.appDelegate.dicAllData.hunting_seasons.filter { $0.animal_id == animalId }
-        let groupedSeasons = Dictionary(grouping: arrHunter, by: { $0.season_type ?? "" })
-        let sectionTitles = groupedSeasons.keys.sorted()
-        
-        
-        let dicData = fishing_exception_types[indexPath.section]
-        let additional = exceptionsNew.filter { $0.exception_type_id == dicData.id && $0.fish_id == nil }
-        
-        if additional.count > 0 {
-            
+        let fishing = fishing_exception_types[indexPath.section].id ?? 0
+        let filtered = AppDelegate.appDelegate.dicAllData.exceptions.filter {
+            $0.exception_type_id == fishing && $0.fish_id == nil && $0.fmz_id == fmz_id
         }
         
-        // Build row list with type
-        var rows: [(isType: Bool, type: String?, season: HuntingSeason?)] = []
-        for (i, type) in sectionTitles.enumerated() {
-            rows.append((true, type, nil))
-            let idx = IndexPath(item: i, section: indexPath.section)
-            if expandedSeasonTypes.contains(idx) {
-                for s in groupedSeasons[type] ?? [] {
-                    rows.append((false, nil, s))
+        var rows: [(isDetail: Bool, title: String)] = []
+        
+        if filtered.count > 0 {
+            for (i, e) in filtered.enumerated() {
+                rows.append((false, e.title ?? "No Title"))
+                let idx = IndexPath(item: i, section: indexPath.section)
+                if expandedExceptionTypes.contains(idx) {
+                    rows.append((true, e.description ?? "No description"))
+                }
+            }
+        } else {
+            for (i, fish) in arrAllFishing.enumerated() {
+                rows.append((false, fish.name ?? "Unknown Fish"))
+                let idx = IndexPath(item: i, section: indexPath.section)
+                if expandedFish.contains(idx) {
+                    let fishExceptions = AppDelegate.appDelegate.dicAllData.exceptions.filter {
+                        $0.exception_type_id == fishing && $0.fish_id == Double(fish.id ?? 0) && $0.fmz_id == fmz_id
+                    }
+                    for e in fishExceptions {
+                        rows.append((true, e.description ?? "No description"))
+                    }
                 }
             }
         }
         
         let row = rows[indexPath.row]
-        if row.isType {
-            let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: "ListInnerHeaderCVCell",
-                for: indexPath
-            ) as! ListInnerHeaderCVCell
-            cell.lblTitle.text = row.type
-            
+        if row.isDetail {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ListDetailsCVCell", for: indexPath) as! ListDetailsCVCell
+            //cell.label.text = row.title
             return cell
-        } else if let season = row.season {
-            let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: "ListDetailsCVCell",
-                for: indexPath
-            ) as! ListDetailsCVCell
-            
-            
-            let season_resident = (season.season_resident ?? "") + " " + "(Resident)"
-            let season_non_resident = (season.season_non_resident ?? "") + " " + "(Non-resident)"
-            let season2 = season_resident != "" ? season_resident + "\n" + season_non_resident : season_non_resident
-            cell.lblSeason.text = season2
-            
-            cell.lblWMUs.text = season.short_wmu_list ?? ""
-            cell.lblConditions.text = season.conditions_text ?? ""
-            
-            cell.viewMainRifle.isHidden = season.rifles_allowed != 1
-            cell.viewMainShotgun.isHidden = season.shotguns_allowed != 1
-            cell.viewMainMuzzleloader.isHidden = season.muzzleloaders_allowed != 1
-            cell.viewMainBow.isHidden = season.bows_allowed != 1
-            
-            cell.lblConditions.text = season.conditions_text
-            cell.viewMainConditions.isHidden = (season.conditions_text ?? "").isEmpty
-            cell.viewMainSeason.isHidden = (season.season_resident ?? "").isEmpty && (season.season_non_resident ?? "").isEmpty
-            
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ListInnerHeaderCVCell", for: indexPath) as! ListInnerHeaderCVCell
+            //cell.label.text = row.title
             return cell
         }
-        
-        return UICollectionViewCell()
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -698,13 +736,13 @@ extension FishingSeasonsVC: UICollectionViewDelegate, UICollectionViewDataSource
                                                                      for: indexPath) as! HuterHeaderCVView
         header.tag = indexPath.section
         
-        header.lblName.text = AppDelegate.appDelegate.dicAllData.animals[indexPath.section].name ?? ""
+        header.lblName.text = fishing_exception_types[indexPath.section].text ?? ""
         
-        if let imageName = AppDelegate.appDelegate.dicAllData.animals[indexPath.section].image_path {
-            header.imgIcon.image = UIImage(named: imageName)
-        } else {
-            header.imgIcon.image = nil
-        }
+//        if let imageName = AppDelegate.appDelegate.dicAllData.animals[indexPath.section].image_path {
+//            header.imgIcon.image = UIImage(named: imageName)
+//        } else {
+//            header.imgIcon.image = nil
+//        }
         
         if expandedSections.contains(indexPath.section) {
             header.imgDropdown.transform = CGAffineTransform(rotationAngle: .pi)
@@ -721,27 +759,56 @@ extension FishingSeasonsVC: UICollectionViewDelegate, UICollectionViewDataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let arrAnimal = AppDelegate.appDelegate.dicAllData.animals
-        let animalId = arrAnimal[indexPath.section].id ?? 0
-        let arrHunter = AppDelegate.appDelegate.dicAllData.hunting_seasons.filter { $0.animal_id == animalId }
-        let groupedSeasons = Dictionary(grouping: arrHunter, by: { $0.season_type ?? "" })
-        let sectionTitles = groupedSeasons.keys.sorted()
+        let fishing = fishing_exception_types[indexPath.section].id ?? 0
+        let filtered = AppDelegate.appDelegate.dicAllData.exceptions.filter {
+            $0.exception_type_id == fishing && $0.fish_id == nil && $0.fmz_id == fmz_id
+        }
         
-        var counter = 0
-        for (i, type) in sectionTitles.enumerated() {
-            if indexPath.row == counter {
+        if filtered.count > 0 {
+            var rows: [(isDetail: Bool, index: Int)] = []
+            for (i, _) in filtered.enumerated() {
+                rows.append((false, i))
                 let idx = IndexPath(item: i, section: indexPath.section)
-                if expandedSeasonTypes.contains(idx) {
-                    expandedSeasonTypes.remove(idx)
+                if expandedExceptionTypes.contains(idx) {
+                    rows.append((true, i))
+                }
+            }
+            
+            let row = rows[indexPath.row]
+            if !row.isDetail {
+                let idx = IndexPath(item: row.index, section: indexPath.section)
+                if expandedExceptionTypes.contains(idx) {
+                    expandedExceptionTypes.remove(idx)
                 } else {
-                    expandedSeasonTypes.insert(idx)
+                    expandedExceptionTypes.insert(idx)
                 }
                 collectionView.reloadSections(IndexSet(integer: indexPath.section))
-                return
             }
-            counter += 1
-            if expandedSeasonTypes.contains(IndexPath(item: i, section: indexPath.section)) {
-                counter += groupedSeasons[type]?.count ?? 0
+        } else {
+            var rows: [(isDetail: Bool, index: Int)] = []
+            for (i, _) in arrAllFishing.enumerated() {
+                rows.append((false, i))
+                let idx = IndexPath(item: i, section: indexPath.section)
+                if expandedFish.contains(idx) {
+                    let fish = arrAllFishing[i]
+                    let fishExceptions = AppDelegate.appDelegate.dicAllData.exceptions.filter {
+                        $0.exception_type_id == fishing && $0.fish_id == Double(fish.id ?? 0) && $0.fmz_id == fmz_id
+                    }
+                    for _ in fishExceptions {
+                        rows.append((true, i))
+                    }
+                }
+            }
+            
+            let row = rows[indexPath.row]
+            if !row.isDetail {
+                let idx = IndexPath(item: row.index, section: indexPath.section)
+                if expandedFish.contains(idx) {
+                    expandedFish.remove(idx)
+                } else {
+                    expandedFish.insert(idx)
+                }
+                collectionView.reloadSections(IndexSet(integer: indexPath.section))
             }
         }
     }
