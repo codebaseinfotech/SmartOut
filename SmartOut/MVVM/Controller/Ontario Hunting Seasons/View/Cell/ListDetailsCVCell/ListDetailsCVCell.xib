@@ -625,9 +625,11 @@
                 <constraint firstAttribute="trailing" secondItem="h7q-j4-T2Z" secondAttribute="trailing" id="xhd-0N-OaX"/>
             </constraints>
             <connections>
+                <outlet property="WMUsTitleWidthConst" destination="I1z-Tw-w4D" id="Kvl-iC-xEL"/>
                 <outlet property="lblConditions" destination="NSC-lG-eK6" id="5Cn-Vk-PuI"/>
                 <outlet property="lblSeason" destination="MjJ-oL-oYK" id="fPP-b4-g8b"/>
                 <outlet property="lblWMUs" destination="uXR-wR-pdy" id="9ND-UN-DNI"/>
+                <outlet property="lblWmusTitle" destination="CsT-gv-GMq" id="OmN-W5-Q0c"/>
                 <outlet property="viewMainBow" destination="Awc-Oa-yQU" id="SLC-NR-z9D"/>
                 <outlet property="viewMainConditions" destination="2D6-U7-To2" id="6hh-lH-bxl"/>
                 <outlet property="viewMainMuzzleloader" destination="gy8-sg-Wd8" id="a4k-Yy-Ex0"/>
@@ -635,6 +637,8 @@
                 <outlet property="viewMainSeason" destination="rsg-XE-9tf" id="Y2I-8h-ZyM"/>
                 <outlet property="viewMainShotgun" destination="miE-CZ-nPx" id="iFu-wd-6l1"/>
                 <outlet property="viewMainWMUs" destination="wRm-NB-fE3" id="2lM-xZ-6fa"/>
+                <outlet property="viewMainWeapon" destination="h6O-zI-8Y6" id="YhU-zM-UyY"/>
+                <outlet property="viewWMUsLocation" destination="0JN-4b-Z9V" id="jFN-cG-c59"/>
             </connections>
             <point key="canvasLocation" x="131" y="-32"/>
         </collectionViewCell>

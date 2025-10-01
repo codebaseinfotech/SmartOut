@@ -88,6 +88,8 @@
 		88DBBDFD2E7A895800491331 /* ExceptionsTblViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DBBDFA2E7A895800491331 /* ExceptionsTblViewCell.swift */; };
 		88DBBE012E7A915F00491331 /* ExceptionsDetailsTblViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88DBBE002E7A915F00491331 /* ExceptionsDetailsTblViewCell.xib */; };
 		88DBBE022E7A915F00491331 /* ExceptionsDetailsTblViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DBBDFF2E7A915F00491331 /* ExceptionsDetailsTblViewCell.swift */; };
+		88DCB3912E8D09B900DFE3BF /* ExceptionsDetailsCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCB38F2E8D09B900DFE3BF /* ExceptionsDetailsCVCell.swift */; };
+		88DCB3922E8D09B900DFE3BF /* ExceptionsDetailsCVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88DCB3902E8D09B900DFE3BF /* ExceptionsDetailsCVCell.xib */; };
 		A7A2BD555C69BBBED8BDE67E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 5688EBEE065F5C1122BDE67E /* README.md */; };
 /* End PBXBuildFile section */
 
@@ -190,6 +192,8 @@
 		88DBBDFB2E7A895800491331 /* ExceptionsTblViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExceptionsTblViewCell.xib; sourceTree = "<group>"; };
 		88DBBDFF2E7A915F00491331 /* ExceptionsDetailsTblViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExceptionsDetailsTblViewCell.swift; sourceTree = "<group>"; };
 		88DBBE002E7A915F00491331 /* ExceptionsDetailsTblViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExceptionsDetailsTblViewCell.xib; sourceTree = "<group>"; };
+		88DCB38F2E8D09B900DFE3BF /* ExceptionsDetailsCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExceptionsDetailsCVCell.swift; sourceTree = "<group>"; };
+		88DCB3902E8D09B900DFE3BF /* ExceptionsDetailsCVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExceptionsDetailsCVCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -617,6 +621,7 @@
 		889D33DB2E7990E2007B1124 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				88DCB38E2E8D099100DFE3BF /* ExceptionsDetailsCVCell */,
 				88DBBDFE2E7A910800491331 /* ExceptionsDetailsTVC */,
 				88DBBDF92E7A891800491331 /* ExceptionsTVC */,
 				8867DD2C2E7A737E00435CC3 /* additionalOppoTVC */,
@@ -659,6 +664,15 @@
 				88DBBE002E7A915F00491331 /* ExceptionsDetailsTblViewCell.xib */,
 			);
 			path = ExceptionsDetailsTVC;
+			sourceTree = "<group>";
+		};
+		88DCB38E2E8D099100DFE3BF /* ExceptionsDetailsCVCell */ = {
+			isa = PBXGroup;
+			children = (
+				88DCB38F2E8D09B900DFE3BF /* ExceptionsDetailsCVCell.swift */,
+				88DCB3902E8D09B900DFE3BF /* ExceptionsDetailsCVCell.xib */,
+			);
+			path = ExceptionsDetailsCVCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -746,6 +760,7 @@
 				398BD5D52E824F6E004709D4 /* HunterDataTVCell.xib in Resources */,
 				887AF3C52E7BC2F600309ECA /* DataTableCollectionViewCell.xib in Resources */,
 				884AB2322E77CDA1006C0BB5 /* HomeListTblViewCell.xib in Resources */,
+				88DCB3922E8D09B900DFE3BF /* ExceptionsDetailsCVCell.xib in Resources */,
 				889CAA902E77E42B0001BC57 /* SideMenuListTblViewCell.xib in Resources */,
 				884AB2372E77D93E006C0BB5 /* SideMenuVC.xib in Resources */,
 				8861F4A52E78276A0063193E /* AboutVC.xib in Resources */,
@@ -808,6 +823,7 @@
 				888502F02E73CEFE00C99B57 /* UIView+Extension.swift in Sources */,
 				8867DD2F2E7A755B00435CC3 /* AdditionalOppoTblViewCell.swift in Sources */,
 				882231A82E78429100AFC855 /* DropDownTblViewCell.swift in Sources */,
+				88DCB3912E8D09B900DFE3BF /* ExceptionsDetailsCVCell.swift in Sources */,
 				39D8EEC92E8BC43100D79A6E /* NewHunterVC.swift in Sources */,
 				8878BE452E8542F700075619 /* ListDetailsCVCell.swift in Sources */,
 				888502F12E73CEFE00C99B57 /* UIImageView+Extension.swift in Sources */,

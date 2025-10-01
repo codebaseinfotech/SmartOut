@@ -20,7 +20,13 @@ class ListDetailsCVCell: UICollectionViewCell {
     @IBOutlet weak var lblWMUs: UILabel!
     @IBOutlet weak var lblSeason: UILabel!
     @IBOutlet weak var lblConditions: UILabel!
+    @IBOutlet weak var lblWmusTitle: UILabel!
     
+    @IBOutlet weak var viewMainWeapon: UIView!
+    
+    @IBOutlet weak var viewWMUsLocation: UIView!
+    
+    @IBOutlet weak var WMUsTitleWidthConst: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()
