@@ -15,6 +15,8 @@ class ListInnerHeaderCVCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        imgDrop.transform = .identity
         // Initialization code
     }
 

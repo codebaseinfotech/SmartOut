@@ -736,18 +736,6 @@ extension FishingSeasonsVC: UICollectionViewDelegate, UICollectionViewDataSource
 //                    cell.viewMainLimits.isHidden = obj.limits != "" ? false : true
                     cell.viewMainAdditionalOppo.isHidden = (obj.is_additional_opportunity ?? 0) != 1
                     
-//                    if obj.season == "" {
-//                        cell.imgSeasonLocation.isHidden = true
-//                    } else {
-//                        cell.imgSeasonLocation.isHidden = false
-//                    }
-                    
-                    
-//                    if indexPath.item == collectionView.numberOfItems(inSection: indexPath.section) - 1 {
-//                        cell.viewBottomLine.isHidden = true
-//                    } else {
-//                        cell.viewBottomLine.isHidden = false
-//                    }
                     
                     break
                 }
