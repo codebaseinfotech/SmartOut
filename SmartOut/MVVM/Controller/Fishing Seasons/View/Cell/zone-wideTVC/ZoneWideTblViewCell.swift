@@ -15,6 +15,7 @@ class ZoneWideTblViewCell: UITableViewCell {
     
     @IBOutlet weak var viewMainSeason: UIView!
     @IBOutlet weak var viewLimitsMain: UIView!
+    @IBOutlet weak var viewBottomLine: UIView!
     
     
     override func awakeFromNib() {

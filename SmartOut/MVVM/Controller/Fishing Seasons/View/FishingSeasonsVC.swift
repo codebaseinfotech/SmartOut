@@ -100,6 +100,7 @@ class FishingSeasonsVC: UIViewController {
         tblVIewList.dataSource = self
         tblVIewList.delegate = self
         
+        tblViewZoneWide.sectionHeaderTopPadding = 0
         tblViewZoneWide.register(UINib(nibName: "ZoneWideTblViewCell", bundle: nil), forCellReuseIdentifier: "ZoneWideTblViewCell")
         tblViewZoneWide.dataSource = self
         tblViewZoneWide.delegate = self
@@ -115,6 +116,8 @@ class FishingSeasonsVC: UIViewController {
         tblViewExceptions.delegate = self
         tblViewExceptions.estimatedRowHeight = UITableView.automaticDimension
         tblViewExceptions.rowHeight = UITableView.automaticDimension
+        
+        tblViewZoneWide.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 70, right: 0)
         
         viewMainList.isHidden = true
         
@@ -398,16 +401,26 @@ extension FishingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
             
             cell.lblSeason.text = dicData.season ?? ""
             
-            let limits = dicData.limits_non_resident != "" ? (dicData.limits_resident ?? "") + (dicData.limits_non_resident ?? "") : dicData.limits_resident
+//            let limits = dicData.limits_non_resident != "" ? "\(dicData.limits_resident ?? "") (Resident)" + (dicData.limits_non_resident ?? "") : dicData.limits_resident
             
-            cell.viewLimitsMain.isHidden = limits != "" ? false : true
-            cell.lblLimit.text = limits
+            let season_resident = (dicData.limits_resident ?? "") + " " + "(Resident)"
+            let season_non_resident = (dicData.limits_non_resident ?? "")
+            let season = season_resident != "" ? season_resident + "\n" + season_non_resident : season_non_resident
+            
+            cell.viewLimitsMain.isHidden = season != "" ? false : true
+            cell.lblLimit.text = season
             
             let fish_id = dicData.fish_id ?? 0
             
             if let fish = arrAllDataList.fish.first(where: { $0.id == fish_id }) {
                 print("✅ Fish with id \(fish_id) exists, name = \(fish.name ?? "No name")")
                 cell.lblFish.text = fish.name
+            }
+            
+            if indexPath.item == tableView.numberOfRows(inSection: indexPath.section) - 1 {
+                cell.viewBottomLine.isHidden = true
+            } else {
+                cell.viewBottomLine.isHidden = false
             }
             
             return cell

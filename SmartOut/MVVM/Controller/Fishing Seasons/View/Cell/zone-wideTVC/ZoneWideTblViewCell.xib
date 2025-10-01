@@ -20,13 +20,6 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y43-7d-xBe">
                         <rect key="frame" x="10" y="5" width="300" height="140"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jg1-6d-h8g">
-                                <rect key="frame" x="15" y="139" width="270" height="1"/>
-                                <color key="backgroundColor" red="0.92549019607843142" green="0.39215686274509803" blue="0.031372549019607843" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="bbO-Uw-tp3"/>
-                                </constraints>
-                            </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Tzf-En-RCX">
                                 <rect key="frame" x="0.0" y="0.0" width="300" height="134"/>
                                 <subviews>
@@ -188,6 +181,13 @@
                                     </view>
                                 </subviews>
                             </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jg1-6d-h8g">
+                                <rect key="frame" x="15" y="139" width="270" height="1"/>
+                                <color key="backgroundColor" red="0.92549019607843142" green="0.39215686274509803" blue="0.031372549019607843" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="bbO-Uw-tp3"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <constraints>
                             <constraint firstItem="Jg1-6d-h8g" firstAttribute="leading" secondItem="y43-7d-xBe" secondAttribute="leading" constant="15" id="9lC-SS-1x8"/>
@@ -213,6 +213,7 @@
                 <outlet property="lblFish" destination="q8v-f7-K8z" id="Lyu-4b-Hap"/>
                 <outlet property="lblLimit" destination="Mox-1n-uy9" id="05h-V6-d71"/>
                 <outlet property="lblSeason" destination="hpL-Z1-rn1" id="B8b-wj-VgX"/>
+                <outlet property="viewBottomLine" destination="Jg1-6d-h8g" id="Hkh-Kr-pBg"/>
                 <outlet property="viewLimitsMain" destination="WhH-yR-HPe" id="Zuz-QJ-y8b"/>
                 <outlet property="viewMainSeason" destination="sjA-j2-gbP" id="agt-BR-3gY"/>
             </connections>
