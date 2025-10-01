@@ -58,6 +58,11 @@ class FishingSeasonsVC: UIViewController {
         }
     }
     
+    @IBOutlet weak var viewInnerBottomPopup: UIView!
+    @IBOutlet weak var lblPopUpTitle: UILabel!
+    @IBOutlet weak var txtViewPopUP: UITextView!
+    
+    
     var isDropDownVisible = false
     var expandedIndexPaths: Set<IndexPath> = []
     var isPopupVisible = false
@@ -71,6 +76,7 @@ class FishingSeasonsVC: UIViewController {
     
     var fishing_exception_types: [FishingExceptionType] = []
     var exceptionsNew: [ExceptionModel] = []
+    var fishing_general_info: [FishingGeneralInfo] = []
     
     var expandedSections: Set<Int> = []
     var expandedSectionsAdditionalOppo: Set<Int> = []
@@ -169,6 +175,30 @@ class FishingSeasonsVC: UIViewController {
         let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeDown))
         swipeDown.direction = .down
         viewBottomPopup.addGestureRecognizer(swipeDown)
+        
+        // New swipe up
+        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeUp))
+        swipeUp.direction = .up
+        viewBottomPopup.addGestureRecognizer(swipeUp)
+        
+        viewInnerBottomPopup.layer.applySketchShadow(
+            color: .black,
+            alpha: 0.3,
+            x: 0,
+            y: -3,
+            blur: 10,
+            spread: 1
+        )
+        
+        if let firstFMZ = arrAllDataList.fmz.first {
+            self.lblPopUpTitle.text = "General Information for FMZ \(firstFMZ.name ?? "")"
+        }
+                
+        if let generalInfo = arrAllDataList.fishing_general_info.first {
+            self.txtViewPopUP.text = generalInfo.info_resident ?? ""
+        } else {
+            self.txtViewPopUP.text = "No general information available."
+        }
         // Do any additional setup after loading the view.
     }
     
@@ -183,14 +213,20 @@ class FishingSeasonsVC: UIViewController {
     @objc func handleSwipeDown() {
         hideBottomPopup()
     }
+
+    @objc func handleSwipeUp() {
+        showBottomPopup()
+    }
     
     // Show Popup
     func showBottomPopup() {
         viewBottomPopup.isHidden = false
         self.view.layoutIfNeeded()
         
+        let targetHeight = viewZoneWideMain.bounds.height
+        
         UIView.animate(withDuration: 0.3) {
-            self.popupHeightConstraint.constant = 400 // your desired height
+            self.popupHeightConstraint.constant = targetHeight
             self.view.layoutIfNeeded()
         }
         
@@ -199,11 +235,9 @@ class FishingSeasonsVC: UIViewController {
     
     // Hide Popup
     func hideBottomPopup() {
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: 0.3) {
             self.popupHeightConstraint.constant = 110
             self.view.layoutIfNeeded()
-        }) { _ in
-            self.viewBottomPopup.isHidden = true
         }
         
         isPopupVisible = false
@@ -476,6 +510,10 @@ extension FishingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
         if tableView == tblVIewList {
             lblListName.text = "FMZ " + (arrAllDataList.fmz[indexPath.row].name ?? "")
             
+            lblPopUpTitle.text = "General Information for FMZ \(arrAllDataList.fmz[indexPath.row].name ?? "")"
+            
+            txtViewPopUP.text = arrAllDataList.fishing_general_info[indexPath.row].info_resident ?? ""
+            
             let seasonIdToCheck = arrAllDataList.fmz[indexPath.row].id ?? 0
             fmz_id = seasonIdToCheck
             
@@ -740,6 +778,14 @@ extension FishingSeasonsVC: UICollectionViewDelegate, UICollectionViewDataSource
                     break
                 }
             }
+            
+            var lastDetailRowIndex = -1
+            for (i, r) in rows.enumerated() {
+                if r.isDetail { lastDetailRowIndex = i }
+            }
+            
+            cell.viewBottomLine.isHidden = indexPath.row == lastDetailRowIndex
+            
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ListInnerHeaderCVCell", for: indexPath) as! ListInnerHeaderCVCell

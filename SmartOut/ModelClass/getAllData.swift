@@ -159,8 +159,9 @@ struct FMZGeometry: Codable {
 // MARK: - Fishing General Info
 struct FishingGeneralInfo: Codable {
     let id: Int?
-    let name: String?
-    let description: String?
+    let fmz_id: Int?
+    let info_resident: String?
+    let info_non_resident: String?
 }
 
 // MARK: - Hunting Season WMU

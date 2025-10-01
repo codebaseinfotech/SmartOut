@@ -52,6 +52,12 @@ class HunterReportingTblViewCell: UITableViewCell {
     
     @IBOutlet weak var tblView: UITableView!
     @IBOutlet weak var heightTV: NSLayoutConstraint!
+    
+    @IBOutlet weak var viewFirstTop: UIView!
+    @IBOutlet weak var viewThirdTop: UIView!
+    @IBOutlet weak var viewFirstBottom: UIView!
+    @IBOutlet weak var viewThirdBottom: UIView!
+    
    
     var delegateReload: reloadCell?
     
@@ -64,6 +70,25 @@ class HunterReportingTblViewCell: UITableViewCell {
         tblView.register(UINib(nibName: "HunterDataTVCell", bundle: nil), forCellReuseIdentifier: "HunterDataTVCell")
         tblView.dataSource = self
         tblView.delegate = self
+        
+//        DispatchQueue.main.async {
+//            self.viewFirstTop.addGradient(withColors: [
+//                UIColor.white.cgColor,
+//                UIColor(hexString: "#FDE4D6").cgColor
+//            ])
+//            self.viewThirdTop.addGradient(withColors: [
+//                UIColor.white.cgColor,
+//                UIColor(hexString: "#FDE4D6").cgColor
+//            ])
+//            self.viewFirstBottom.addGradient(withColors: [
+//                UIColor(hexString: "#FDE4D6").cgColor,
+//                UIColor.white.cgColor
+//            ])
+//            self.viewThirdBottom.addGradient(withColors: [
+//                UIColor(hexString: "#FDE4D6").cgColor,
+//                UIColor.white.cgColor
+//            ])
+//        }
         
         // Initialization code
     }

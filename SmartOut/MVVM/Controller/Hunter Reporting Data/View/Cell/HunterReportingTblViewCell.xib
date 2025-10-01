@@ -896,9 +896,13 @@
                 <outlet property="viewCalfMain" destination="DiT-Lt-CyU" id="BtZ-ba-1Bn"/>
                 <outlet property="viewClaf" destination="6n0-oz-a4t" id="ERt-9p-jCE"/>
                 <outlet property="viewFallChart" destination="j3t-cf-4ke" id="9Wn-f3-jKe"/>
+                <outlet property="viewFirstBottom" destination="aLA-6h-mgz" id="Mzc-Iw-iUa"/>
+                <outlet property="viewFirstTop" destination="e2D-bw-mui" id="vYV-e5-FZH"/>
                 <outlet property="viewMainCharS" destination="epZ-LJ-5cN" id="gge-Hc-4oS"/>
                 <outlet property="viewMainChart" destination="fWi-G4-dd3" id="JNz-3Z-41d"/>
                 <outlet property="viewSpringChart" destination="n4C-WF-hI5" id="WWO-bh-HiB"/>
+                <outlet property="viewThirdBottom" destination="DiT-Lt-CyU" id="3lT-eG-ePV"/>
+                <outlet property="viewThirdTop" destination="6n0-oz-a4t" id="LID-n6-ntO"/>
             </connections>
             <point key="canvasLocation" x="-29.007633587786259" y="27.816901408450704"/>
         </tableViewCell>
