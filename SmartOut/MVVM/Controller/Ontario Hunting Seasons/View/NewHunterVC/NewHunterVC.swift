@@ -433,6 +433,12 @@ extension NewHunterVC: UICollectionViewDelegate, UICollectionViewDataSource {
             ) as! ListInnerHeaderCVCell
             cell.lblTitle.text = row.type
             
+            if expandedSeasonTypes.contains(indexPath) {
+                cell.imgDrop.transform = CGAffineTransform(rotationAngle: .pi) // rotated down
+            } else {
+                cell.imgDrop.transform = .identity // default up
+            }
+            
             return cell
         } else if let season = row.season {
             let cell = collectionView.dequeueReusableCell(
@@ -458,26 +464,9 @@ extension NewHunterVC: UICollectionViewDelegate, UICollectionViewDataSource {
             cell.viewMainConditions.isHidden = (season.conditions_text ?? "").isEmpty
             cell.viewMainSeason.isHidden = (season.season_resident ?? "").isEmpty && (season.season_non_resident ?? "").isEmpty
             
-            var rowsInSection: [(isType: Bool, type: String?, season: HuntingSeason?)] = []
-            let arrAnimal = AppDelegate.appDelegate.dicAllData.animals
-            let animalId = arrAnimal[indexPath.section].id ?? 0
-            let arrHunter = AppDelegate.appDelegate.dicAllData.hunting_seasons.filter { $0.animal_id == animalId }
-            let groupedSeasons = Dictionary(grouping: arrHunter, by: { $0.season_type ?? "" })
-            let sectionTitles = groupedSeasons.keys.sorted()
-            
-            for (i, type) in sectionTitles.enumerated() {
-                rowsInSection.append((true, type, nil)) // header
-                let idx = IndexPath(item: i, section: indexPath.section)
-                if expandedSeasonTypes.contains(idx) {
-                    for s in groupedSeasons[type] ?? [] {
-                        rowsInSection.append((false, nil, s))
-                    }
-                }
-            }
-            
-            // Find last detail cell in section
-            if let lastDetailIndex = rowsInSection.lastIndex(where: { !$0.isType }) {
-                cell.viewBottomLine.isHidden = indexPath.row == lastDetailIndex
+            let rowsInSection = rows.filter { !$0.isType }   // only details for this section
+            if let lastSeason = rowsInSection.last?.season {
+                cell.viewBottomLine.isHidden = (season.id == lastSeason.id)
             }
             
             return cell
