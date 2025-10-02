@@ -21,7 +21,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vzr-Zc-kIw">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="400"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="kB0-Sc-evm">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="kB0-Sc-evm">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="400"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PBY-VG-43J">
@@ -82,7 +82,7 @@
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="jY8-l7-PuW">
-                                        <rect key="frame" x="0.0" y="56" width="320" height="344"/>
+                                        <rect key="frame" x="0.0" y="61" width="320" height="339"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G1A-iL-a4I">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="55.666666666666664"/>
@@ -283,7 +283,7 @@
                                                                 <rect key="frame" x="258" y="0.0" width="52" height="54"/>
                                                                 <subviews>
                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location_pin_icon_orange" translatesAutoresizingMaskIntoConstraints="NO" id="IMc-8q-6EE">
-                                                                        <rect key="frame" x="16" y="5" width="20" height="20"/>
+                                                                        <rect key="frame" x="16" y="4.9999999999999858" width="20" height="20"/>
                                                                         <color key="tintColor" name="primary_color"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="20" id="3mk-Ig-0q5"/>
@@ -310,13 +310,13 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ps7-Oc-amv">
-                                                <rect key="frame" x="0.0" y="129.66666666666669" width="320" height="182.66666666666669"/>
+                                                <rect key="frame" x="0.0" y="129.66666666666669" width="320" height="177.66666666666669"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="sOR-G6-8pp">
-                                                        <rect key="frame" x="5" y="0.0" width="310" height="182.66666666666666"/>
+                                                        <rect key="frame" x="5" y="0.0" width="310" height="177.66666666666666"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SW4-qv-i4a">
-                                                                <rect key="frame" x="0.0" y="0.0" width="75" height="182.66666666666666"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="75" height="177.66666666666666"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Season:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="htV-XS-se5">
                                                                         <rect key="frame" x="0.0" y="0.99999999999999911" width="75" height="15.666666666666664"/>
@@ -334,7 +334,7 @@
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Eh-lE-6VT">
-                                                                <rect key="frame" x="80" y="0.0" width="230" height="182.66666666666666"/>
+                                                                <rect key="frame" x="80" y="0.0" width="230" height="177.66666666666666"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rifle" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DDs-dj-VkU">
                                                                         <rect key="frame" x="0.0" y="0.99999999999999911" width="230" height="15.666666666666664"/>
@@ -363,7 +363,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xdi-a5-DER">
-                                                <rect key="frame" x="0.0" y="322.33333333333331" width="320" height="21.666666666666686"/>
+                                                <rect key="frame" x="0.0" y="317.33333333333331" width="320" height="21.666666666666686"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="U26-ZR-dDd">
                                                         <rect key="frame" x="5" y="0.0" width="310" height="21.666666666666668"/>
@@ -416,7 +416,7 @@
                                                 </constraints>
                                             </view>
                                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sXK-24-fQ1">
-                                                <rect key="frame" x="0.0" y="344" width="320" height="111"/>
+                                                <rect key="frame" x="0.0" y="339" width="320" height="111"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="kWJ-gj-Lvz">
                                                         <rect key="frame" x="0.0" y="0.0" width="320" height="111"/>
