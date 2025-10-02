@@ -2,7 +2,7 @@
 //  ExceptionsDetailsTblViewCell.swift
 //  SmartOut
 //
-//  Created by iMac on 17/09/25.
+//  Created by Ankit Gabani on 17/09/25.
 //
 
 import UIKit

@@ -2,7 +2,7 @@
 //  ListDetailsTblViewCell.swift
 //  SmartOut
 //
-//  Created by iMac on 16/09/25.
+//  Created by Ankit Gabani on 16/09/25.
 //
 
 import UIKit

@@ -2,7 +2,7 @@
 //  VideoPicker.swift
 //  Loyactive
 //
-//  Created by iMac on 11/08/23.
+//  Created by Ankit Gabani on 11/08/23.
 //
 
 import UIKit

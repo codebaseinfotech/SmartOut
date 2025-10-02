@@ -2,7 +2,7 @@
 //  AboutVC.swift
 //  SmartOut
 //
-//  Created by iMac on 15/09/25.
+//  Created by Ankit Gabani on 15/09/25.
 //
 
 import UIKit
