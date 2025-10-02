@@ -834,6 +834,13 @@ extension FishingSeasonsVC: UICollectionViewDelegate, UICollectionViewDataSource
                 cell.imgIcon.image = nil
             }
             
+            let idx = IndexPath(item: indexPath.row, section: indexPath.section)
+            if expandedExceptionTypes.contains(idx) || expandedFish.contains(idx) {
+                cell.imgDrop.transform = CGAffineTransform(rotationAngle: .pi) // rotated down
+            } else {
+                cell.imgDrop.transform = .identity // default up
+            }
+            
             var lastDetailRowIndex = 0
             for (i, r) in rows.enumerated() {
                 if r.isDetail { lastDetailRowIndex = i }
