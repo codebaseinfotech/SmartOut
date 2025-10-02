@@ -89,13 +89,16 @@
                                         <rect key="frame" x="0.0" y="65" width="300" height="17"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Limits:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b32-X9-V5K">
-                                                <rect key="frame" x="0.0" y="0.0" width="42.666666666666664" height="17"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="43" height="17"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="43" id="YdM-Ua-8Pp"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qee-VA-IXg">
-                                                <rect key="frame" x="45.666666666666664" y="0.0" width="30.666666666666664" height="17"/>
+                                                <rect key="frame" x="46" y="0.0" width="30.666666666666671" height="17"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -141,10 +144,10 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D0W-72-iPt">
-                                <rect key="frame" x="10" y="143" width="300" height="1"/>
+                                <rect key="frame" x="10" y="143.66666666666666" width="300" height="0.33333333333334281"/>
                                 <color key="backgroundColor" name="primary_color"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="S1P-zU-HTh"/>
+                                    <constraint firstAttribute="height" constant="0.5" id="S1P-zU-HTh"/>
                                 </constraints>
                             </view>
                         </subviews>

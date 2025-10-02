@@ -110,7 +110,7 @@ class FishingSeasonsVC: UIViewController {
         tblViewAdditionalOppo.delegate = self
         
         tblViewExceptions.sectionHeaderTopPadding = 8
-        tblViewAdditionalOppo.sectionHeaderTopPadding = 8
+        tblViewAdditionalOppo.sectionHeaderTopPadding = 5
         tblViewExceptions.register(UINib(nibName: "ExceptionsDetailsTblViewCell", bundle: nil), forCellReuseIdentifier: "ExceptionsDetailsTblViewCell")
         tblViewExceptions.dataSource = self
         tblViewExceptions.delegate = self
@@ -162,8 +162,10 @@ class FishingSeasonsVC: UIViewController {
         
         
         lblNoDataExceptions.isHidden = fishing_exception_types.count > 0 ? true : false
+        lblNoDataExceptions.text = "no exceptions for FMZ " + (arrAllDataList.fmz.first?.name ?? "")
+        
         lblNoDataAddOppo.isHidden = arrFish.count > 0 ? true : false
-        lblNoDataAddOppo.text = "no exceptions for " + "FMZ " + (arrAllDataList.fmz.first?.name ?? "")
+        lblNoDataAddOppo.text = "no additional opportunities for FMZ " + (arrAllDataList.fmz.first?.name ?? "")
 
         tblViewZoneWide.reloadData()
         tblViewAdditionalOppo.reloadData()
@@ -297,18 +299,21 @@ class FishingSeasonsVC: UIViewController {
             viewZoneWideMain.isHidden = false
             viewAdditionalOppoMain.isHidden = true
             viewExceptionsMain.isHidden = true
+            viewBottomPopup.isHidden = false
         case .additional:
             lblAdditionalOppo.textColor = .black
             viewAdditionalBottomLine.backgroundColor = .primary
             viewZoneWideMain.isHidden = true
             viewAdditionalOppoMain.isHidden = false
             viewExceptionsMain.isHidden = true
+            viewBottomPopup.isHidden = true
         case .exceptions:
             lblExceptions.textColor = .black
             viewExceptionsBottomLine.backgroundColor = .primary
             viewZoneWideMain.isHidden = true
             viewAdditionalOppoMain.isHidden = true
             viewExceptionsMain.isHidden = false
+            viewBottomPopup.isHidden = true
         }
     }
     
@@ -526,6 +531,9 @@ extension FishingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
             lblPopUpTitle.text = "General Information for FMZ \(arrAllDataList.fmz[indexPath.row].name ?? "")"
             
             txtViewPopUP.text = arrAllDataList.fishing_general_info[indexPath.row].info_resident ?? ""
+            
+            lblNoDataAddOppo.text = "no additional opportunities for FMZ " + (arrAllDataList.fmz[indexPath.row].name ?? "")
+            lblNoDataExceptions.text = "no exceptions for FMZ " + (arrAllDataList.fmz[indexPath.row].name ?? "")
             
             let seasonIdToCheck = arrAllDataList.fmz[indexPath.row].id ?? 0
             fmz_id = seasonIdToCheck
@@ -746,26 +754,39 @@ extension FishingSeasonsVC: UICollectionViewDelegate, UICollectionViewDataSource
             $0.exception_type_id == fishing && $0.fish_id == nil && $0.fmz_id == fmz_id
         }
         
-        var rows: [(isDetail: Bool, title: String)] = []
+        var rows: [(isDetail: Bool, title: String, imageName: String?)] = []
         
         if filtered.count > 0 {
             for (i, e) in filtered.enumerated() {
-                rows.append((false, e.title ?? "No Title"))
+                // exceptions don't have an image in your models (as far as I can see),
+                // so pass nil for imageName
+                rows.append((false, e.title ?? "No Title", nil))
                 let idx = IndexPath(item: i, section: indexPath.section)
                 if expandedExceptionTypes.contains(idx) {
-                    rows.append((true, e.description ?? "No description"))
+                    rows.append((true, e.description ?? "No description", nil))
                 }
             }
         } else {
+            // make sure fishIds doesn't grow forever (optional but recommended)
+            fishIds.removeAll()
+            for obj in arrAllDataList.exceptions.filter({ $0.exception_type_id == fishing && $0.fmz_id == fmz_id }) {
+                if !fishIds.contains(obj.fish_id ?? 0) {
+                    fishIds.append(obj.fish_id ?? 0)
+                }
+            }
+            let getFishData = arrAllDataList.fish.filter { fishIds.contains(Double($0.id ?? 0)) }
+            arrAllFishing = getFishData
+
             for (i, fish) in arrAllFishing.enumerated() {
-                rows.append((false, fish.name ?? "Unknown Fish"))
+                // use fish.image_path (if it exists) for the header row
+                rows.append((false, fish.name ?? "Unknown Fish", fish.image_path))
                 let idx = IndexPath(item: i, section: indexPath.section)
                 if expandedFish.contains(idx) {
                     let fishExceptions = AppDelegate.appDelegate.dicAllData.exceptions.filter {
                         $0.exception_type_id == fishing && $0.fish_id == Double(fish.id ?? 0) && $0.fmz_id == fmz_id
                     }
                     for e in fishExceptions {
-                        rows.append((true, e.description ?? "No description"))
+                        rows.append((true, e.description ?? "No description", nil))
                     }
                 }
             }
@@ -803,7 +824,22 @@ extension FishingSeasonsVC: UICollectionViewDelegate, UICollectionViewDataSource
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ListInnerHeaderCVCell", for: indexPath) as! ListInnerHeaderCVCell
             cell.lblTitle.text = row.title
-            cell.imgIcon.isHidden = true
+            if let imageName = row.imageName, !imageName.isEmpty {
+                cell.imgIcon.isHidden = false
+                cell.imgIcon.image = UIImage(named: imageName)
+                cell.imgIcon.tintColor = .primary
+            } else {
+                cell.imgIcon.isHidden = true
+                cell.imgIcon.image = nil
+            }
+            
+            var lastDetailRowIndex = 0
+            for (i, r) in rows.enumerated() {
+                if r.isDetail { lastDetailRowIndex = i }
+            }
+            
+            cell.viewTopLine.isHidden = indexPath.row == lastDetailRowIndex
+            
             return cell
         }
     }
