@@ -34,13 +34,13 @@ class PieChart {
         let dataSet = PieChartDataSet(entries: entries, label: "")
         dataSet.colors = colors
         dataSet.valueTextColor = .white
-        dataSet.valueFont = .systemFont(ofSize: 14, weight: .bold)
+        dataSet.valueFont = .systemFont(ofSize: 13, weight: .bold)
         dataSet.drawValuesEnabled = true
         
         // Format values as percentages with % sign
         let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal // ✅ Change from .percent to .decimal
-        formatter.positiveSuffix = " %"
+        formatter.numberStyle = .percent // ✅ Change from .percent to .decimal
+        formatter.positiveSuffix = "%"
         formatter.maximumFractionDigits = 1
 
         let data = PieChartData(dataSet: dataSet)

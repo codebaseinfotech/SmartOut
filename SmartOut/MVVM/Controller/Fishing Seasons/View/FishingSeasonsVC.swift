@@ -166,6 +166,7 @@ class FishingSeasonsVC: UIViewController {
         
         lblNoDataAddOppo.isHidden = arrFish.count > 0 ? true : false
         lblNoDataAddOppo.text = "no additional opportunities for FMZ " + (arrAllDataList.fmz.first?.name ?? "")
+//        viewAdditionalOppoMain.bringSubviewToFront(lblNoDataAddOppo)
 
         tblViewZoneWide.reloadData()
         tblViewAdditionalOppo.reloadData()
