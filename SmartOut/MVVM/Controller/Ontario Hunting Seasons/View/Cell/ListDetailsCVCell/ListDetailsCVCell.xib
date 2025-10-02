@@ -630,6 +630,7 @@
                 <outlet property="lblSeason" destination="MjJ-oL-oYK" id="fPP-b4-g8b"/>
                 <outlet property="lblWMUs" destination="uXR-wR-pdy" id="9ND-UN-DNI"/>
                 <outlet property="lblWmusTitle" destination="CsT-gv-GMq" id="OmN-W5-Q0c"/>
+                <outlet property="viewBottomLine" destination="qzq-5s-f9D" id="2hv-OQ-J0U"/>
                 <outlet property="viewMainBow" destination="Awc-Oa-yQU" id="SLC-NR-z9D"/>
                 <outlet property="viewMainConditions" destination="2D6-U7-To2" id="6hh-lH-bxl"/>
                 <outlet property="viewMainMuzzleloader" destination="gy8-sg-Wd8" id="a4k-Yy-Ex0"/>

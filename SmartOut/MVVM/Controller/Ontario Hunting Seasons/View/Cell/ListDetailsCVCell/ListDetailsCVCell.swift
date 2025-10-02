@@ -28,6 +28,8 @@ class ListDetailsCVCell: UICollectionViewCell {
     
     @IBOutlet weak var WMUsTitleWidthConst: NSLayoutConstraint!
     
+    @IBOutlet weak var viewBottomLine: UIView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
