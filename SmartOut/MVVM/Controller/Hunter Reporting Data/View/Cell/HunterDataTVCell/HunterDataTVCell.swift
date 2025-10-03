@@ -25,6 +25,15 @@ class HunterDataTVCell: UITableViewCell {
     private var gradientLayer: CAGradientLayer?
     @IBOutlet weak var widthSpring: NSLayoutConstraint!
     
+    @IBOutlet weak var viewLine1: UIView!
+    @IBOutlet weak var viewLine2: UIView!
+    @IBOutlet weak var viewLine3: UIView!
+    @IBOutlet weak var viewLine4: UIView!
+    
+    @IBOutlet weak var viewFirst: UIView!
+    @IBOutlet weak var viewSecondData: UIView!
+    @IBOutlet weak var viewFourthData: UIView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

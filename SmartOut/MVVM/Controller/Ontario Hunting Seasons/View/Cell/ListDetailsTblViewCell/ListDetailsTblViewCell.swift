@@ -37,6 +37,8 @@ class ListDetailsTblViewCell: UITableViewCell {
     @IBOutlet weak var viewMooseMain: UIView!
     @IBOutlet weak var viewDear: UIView!
     
+    @IBOutlet weak var lblMooseTitle: UILabel!
+    
 //    var isExpanded = false
 //    var toggleAction: (() -> Void)?
     
@@ -114,6 +116,22 @@ extension ListDetailsTblViewCell: UITableViewDelegate, UITableViewDataSource {
         cell.lblSValue.font = .systemFont(ofSize: 12)
         cell.lblTValue.font = .systemFont(ofSize: 12)
         cell.lblFourValue.font = .systemFont(ofSize: 12)
+        
+        cell.lblTitle.textAlignment = .left
+        
+        DispatchQueue.main.async {
+            cell.viewLine1.isHidden = false
+            cell.viewLine2.isHidden = false
+            cell.viewLine3.isHidden = false
+            cell.viewLine4.isHidden = false
+        }
+        
+//        DispatchQueue.main.async {
+//            cell.viewFirst.addBorder(to: .right, color: .primary, thickness: 1)
+//            cell.viewFirstData.addBorder(to: .right, color: .primary, thickness: 1)
+//            cell.viewSecondData.addBorder(to: .right, color: .primary, thickness: 1)
+//            cell.viewThirdData.addBorder(to: .right, color: .primary, thickness: 1)
+//        }
         
         cell.widthSpring.constant = 70
         
