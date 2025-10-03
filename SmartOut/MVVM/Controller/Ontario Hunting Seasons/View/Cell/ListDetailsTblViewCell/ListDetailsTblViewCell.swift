@@ -32,6 +32,7 @@ class ListDetailsTblViewCell: UITableViewCell {
     
     @IBOutlet weak var tblViewResults: UITableView!
     
+    @IBOutlet weak var tblViewResultsHeightConst: NSLayoutConstraint!
     
 //    var isExpanded = false
 //    var toggleAction: (() -> Void)?
@@ -49,6 +50,11 @@ class ListDetailsTblViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func updateTableViewHeight() {
+        tblViewResults.layoutIfNeeded()
+        tblViewResultsHeightConst.constant = tblViewResults.contentSize.height
     }
     
     func configure(with season: HuntingSeason) {
@@ -71,6 +77,10 @@ class ListDetailsTblViewCell: UITableViewCell {
         viewCondtionMain.isHidden = (season.conditions_text ?? "").isEmpty
         viewMainSeason.isHidden = (season.season_resident ?? "").isEmpty &&
         (season.season_non_resident ?? "").isEmpty
+        
+        
+        tblViewResults.reloadData()
+        updateTableViewHeight()
     }
     
 }
@@ -88,7 +98,7 @@ extension ListDetailsTblViewCell: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 30
+        return UITableView.automaticDimension
     }
     
 }
