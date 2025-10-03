@@ -23,6 +23,7 @@ class HunterDataTVCell: UITableViewCell {
     @IBOutlet weak var imgBgThirdGradient: UIImageView!
     
     private var gradientLayer: CAGradientLayer?
+    @IBOutlet weak var widthSpring: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()

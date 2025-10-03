@@ -50,6 +50,7 @@ class NewHunterVC: UIViewController {
     var expandedSectionsTV: Set<Int> = []
     var expandedSeasonTypes: Set<IndexPath> = []
     var selectedwmuID = "1"
+    var selectedMoosewmuID = 0
     
     var arrHuntingSeasons: [HuntingSeason] = []
     var arrAnimal: [Animal] = []
@@ -308,6 +309,27 @@ extension NewHunterVC: UITableViewDelegate, UITableViewDataSource {
             let filteredSeasons = arrHuntingSeasons.filter { $0.animal_id == animalId }
             let dicData = filteredSeasons[indexPath.row]
             
+            var filteredMoose = arrAllDataList.moose_draw.filter { $0.wmu_id == selectedMoosewmuID }
+            
+            cell.viewMooseMain.isHidden = animalId == 9 ? false : true
+
+            if filteredMoose.count > 0 {
+                let staticArr = MooseDraw(id: 0, wmu_id: 0, draw_type_id: 0, primary_quota: 0, second_chance_tags: 0, primary_min_points: "", second_min_points: "")
+                
+                // Insert staticArr at the beginning
+                filteredMoose.insert(staticArr, at: 0)
+              
+                cell.arrListMoose = filteredMoose
+                
+                DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
+                    cell.tblViewResults.reloadData()
+                    cell.updateTableViewHeight()
+
+                    self.tblViewList.reloadRows(at: [indexPath], with: .none)
+                })
+                
+            }
+            
             cell.configure(with: dicData)
             let filtered = arrAllDataList.hunting_season_wmus.filter { $0.season_id == dicData.id }
             
@@ -408,6 +430,7 @@ extension NewHunterVC: UITableViewDelegate, UITableViewDataSource {
             } else {
                 lblDropDown.text = "WMU " + (selectedWMU.name ?? "")
                 selectedwmuID = selectedWMU.name ?? ""
+                selectedMoosewmuID = selectedWMU.id ?? 0
                 loadSeasons(forWMU: selectedWMU.id ?? 0)
                 
                 tblViewList.isHidden = false

@@ -34,16 +34,28 @@ class ListDetailsTblViewCell: UITableViewCell {
     
     @IBOutlet weak var tblViewResultsHeightConst: NSLayoutConstraint!
     
+    @IBOutlet weak var viewMooseMain: UIView!
+    @IBOutlet weak var viewDear: UIView!
+    
 //    var isExpanded = false
 //    var toggleAction: (() -> Void)?
     
+    var arrListMoose: [MooseDraw] = []
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        tblViewResults.backgroundColor = .clear
+        tblViewResults.estimatedRowHeight = 44 // Set a default estimated height
+        tblViewResults.rowHeight = UITableView.automaticDimension // Enable dynamic row height
         tblViewResults.register(UINib(nibName: "HunterDataTVCell", bundle: nil), forCellReuseIdentifier: "HunterDataTVCell")
         tblViewResults.dataSource = self
         tblViewResults.delegate = self
         // Initialization code
+    }
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        updateTableViewHeight()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -88,11 +100,44 @@ class ListDetailsTblViewCell: UITableViewCell {
 extension ListDetailsTblViewCell: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return arrListMoose.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tblViewResults.dequeueReusableCell(withIdentifier: "HunterDataTVCell") as! HunterDataTVCell
+        cell.backgroundColor = .clear
+        
+        let dicData = arrListMoose[indexPath.row]
+        
+        cell.lblTitle.font = .systemFont(ofSize: 12)
+        cell.lblFValue.font = .systemFont(ofSize: 12)
+        cell.lblSValue.font = .systemFont(ofSize: 12)
+        cell.lblTValue.font = .systemFont(ofSize: 12)
+        cell.lblFourValue.font = .systemFont(ofSize: 12)
+        
+        cell.widthSpring.constant = 70
+        
+        if dicData.id == 0 {
+                        
+            cell.lblTitle.text = "Draw"
+            cell.lblFValue.text = "Primery Quota"
+            cell.lblSValue.text = "Primary Min. Points Required"
+            cell.lblTValue.text = "2nd Chance Quota"
+            cell.lblFourValue.text = "2nd Chance Min. Points Required"
+            
+        } else {
+            if let match = AppDelegate.appDelegate.dicAllData.moose_draw_types.first(where: { $0.id == dicData.draw_type_id }) {
+                cell.lblTitle.text = match.name ?? ""
+            } else {
+                cell.lblTitle.text = "-"
+            }
+            
+            cell.lblFValue.text = "\(dicData.primary_quota ?? 0)"
+            cell.lblSValue.text = dicData.primary_min_points ?? ""
+            cell.lblTValue.text = "\(dicData.second_chance_tags ?? 0)"
+            cell.lblFourValue.text = dicData.second_min_points ?? ""
+        }
+        
         
         return cell
     }

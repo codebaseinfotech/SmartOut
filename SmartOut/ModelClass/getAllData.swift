@@ -101,8 +101,12 @@ struct HuntingSeason: Codable {
 // MARK: - Moose Draw
 struct MooseDraw: Codable {
     let id: Int?
-    let typeId: Int?
-    let description: String?
+    let wmu_id: Int?
+    let draw_type_id: Int?
+    let primary_quota: Int?
+    let second_chance_tags: Int?
+    let primary_min_points: String?
+    let second_min_points: String?
 }
 
 // MARK: - Municipality
@@ -189,7 +193,6 @@ struct DeerAntlerless: Codable {
 struct MooseDrawType: Codable {
     let id: Int?
     let name: String?
-    let description: String?
 }
 
 // MARK: - Municipality Geometry
