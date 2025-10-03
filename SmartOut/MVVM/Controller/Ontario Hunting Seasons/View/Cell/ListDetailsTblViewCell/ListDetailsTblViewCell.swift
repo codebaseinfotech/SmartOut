@@ -28,12 +28,20 @@ class ListDetailsTblViewCell: UITableViewCell {
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var imgDrop: UIImageView!
     
+    @IBOutlet weak var viewBottomLine: UIView!
+    
+    @IBOutlet weak var tblViewResults: UITableView!
+    
     
 //    var isExpanded = false
 //    var toggleAction: (() -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        tblViewResults.register(UINib(nibName: "HunterDataTVCell", bundle: nil), forCellReuseIdentifier: "HunterDataTVCell")
+        tblViewResults.dataSource = self
+        tblViewResults.delegate = self
         // Initialization code
     }
 
@@ -63,6 +71,24 @@ class ListDetailsTblViewCell: UITableViewCell {
         viewCondtionMain.isHidden = (season.conditions_text ?? "").isEmpty
         viewMainSeason.isHidden = (season.season_resident ?? "").isEmpty &&
         (season.season_non_resident ?? "").isEmpty
+    }
+    
+}
+
+extension ListDetailsTblViewCell: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 4
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = self.tblViewResults.dequeueReusableCell(withIdentifier: "HunterDataTVCell") as! HunterDataTVCell
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 30
     }
     
 }

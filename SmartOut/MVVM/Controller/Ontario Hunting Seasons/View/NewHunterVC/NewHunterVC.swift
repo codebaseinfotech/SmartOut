@@ -60,6 +60,15 @@ class NewHunterVC: UIViewController {
     var expandedIndexSet: Set<Int> = []
     var expandedIndexDocument: IndexPath?
     
+    var sortedAnimals: [Animal] {
+        return AppDelegate.appDelegate.dicAllData.animals.sorted {
+            if ($0.list_priority ?? 0) == ($1.list_priority ?? 0) {
+                return ($0.name ?? "").localizedCaseInsensitiveCompare($1.name ?? "") == .orderedAscending
+            }
+            return ($0.list_priority ?? 0) > ($1.list_priority ?? 0)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -171,6 +180,12 @@ class NewHunterVC: UIViewController {
         arrAnimal = arrAllDataList.animals.filter { animal in
             arrHuntingSeasons.contains { $0.animal_id == animal.id }
         }
+        arrAnimal.sort {
+            if ($0.list_priority ?? 0) == ($1.list_priority ?? 0) {
+                return ($0.name ?? "").localizedCaseInsensitiveCompare($1.name ?? "") == .orderedAscending
+            }
+            return ($0.list_priority ?? 0) > ($1.list_priority ?? 0)
+        }
     }
     
     private func loadSeasons(forWMU wmuId: Int) {
@@ -201,6 +216,12 @@ class NewHunterVC: UIViewController {
         arrAnimal = arrAllDataList.animals.filter { animal in
             arrHuntingSeasons.contains { $0.animal_id == animal.id }
         }
+        arrAnimal.sort {
+            if ($0.list_priority ?? 0) == ($1.list_priority ?? 0) {
+                return ($0.name ?? "").localizedCaseInsensitiveCompare($1.name ?? "") == .orderedAscending
+            }
+            return ($0.list_priority ?? 0) > ($1.list_priority ?? 0)
+        }
     }
     
     @objc func didTapTopView(_ sender: UITapGestureRecognizer) {
@@ -215,6 +236,27 @@ class NewHunterVC: UIViewController {
         tblViewList.beginUpdates()
         tblViewList.reloadRows(at: [IndexPath(row: row, section: 0)], with: .automatic)
         tblViewList.endUpdates()
+    }
+    
+    func buildRows(for section: Int) -> [(isType: Bool, type: String?, season: HuntingSeason?)] {
+        let animalId = sortedAnimals[section].id ?? 0
+        let arrHunter = AppDelegate.appDelegate.dicAllData.hunting_seasons.filter { $0.animal_id == animalId }
+        let groupedSeasons = Dictionary(grouping: arrHunter, by: { $0.season_type ?? "" })
+        let sectionTitles = groupedSeasons.keys.sorted()
+        
+        var rows: [(isType: Bool, type: String?, season: HuntingSeason?)] = []
+        
+        for (i, type) in sectionTitles.enumerated() {
+            rows.append((true, type, nil)) // header row
+            
+            let idx = IndexPath(item: i, section: section)
+            if expandedSeasonTypes.contains(idx) {
+                for s in groupedSeasons[type] ?? [] {
+                    rows.append((false, nil, s)) // detail rows
+                }
+            }
+        }
+        return rows
     }
     
     
@@ -267,7 +309,12 @@ extension NewHunterVC: UITableViewDelegate, UITableViewDataSource {
             let dicData = filteredSeasons[indexPath.row]
             
             cell.configure(with: dicData)
-            cell.lblwmu.text = dicData.short_wmu_list ?? ""
+            let filtered = arrAllDataList.hunting_season_wmus.filter { $0.season_id == dicData.id }
+            
+            let wmuIds = filtered.compactMap { $0.wmu_id }
+            let matchedWmus = arrAllDataList.wmu.filter { wmuIds.contains($0.id ?? 0) }
+            let wmuNames = matchedWmus.compactMap { $0.name }.joined(separator: ", ")
+            cell.lblwmu.text = dicData.short_wmu_list != "" ? dicData.short_wmu_list : wmuNames
             
             cell.viewRifle.isHidden = dicData.rifles_allowed != 1
             cell.viewShortgun.isHidden = dicData.shotguns_allowed != 1
@@ -282,6 +329,12 @@ extension NewHunterVC: UITableViewDelegate, UITableViewDataSource {
             cell.lblConditionS.text = dicData.conditions_text
             cell.viewCondtionMain.isHidden = (dicData.conditions_text ?? "").isEmpty
             cell.viewMainSeason.isHidden = (dicData.season_resident ?? "").isEmpty && (dicData.season_non_resident ?? "").isEmpty
+            
+            if indexPath.row == filteredSeasons.count - 1 {
+                cell.viewBottomLine.isHidden = true
+            } else {
+                cell.viewBottomLine.isHidden = false
+            }
             
             return cell
         }
@@ -385,83 +438,47 @@ extension NewHunterVC: UITableViewDelegate, UITableViewDataSource {
 extension NewHunterVC: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return AppDelegate.appDelegate.dicAllData.animals.count
+        return sortedAnimals.count
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let arrAnimal = AppDelegate.appDelegate.dicAllData.animals
-        let animalId = arrAnimal[section].id ?? 0
-        let arrHunter = AppDelegate.appDelegate.dicAllData.hunting_seasons.filter { $0.animal_id == animalId }
-        let groupedSeasons = Dictionary(grouping: arrHunter, by: { $0.season_type ?? "" })
-        let sectionTitles = groupedSeasons.keys.sorted()
         guard expandedSections.contains(section) else { return 0 }
-        var total = 0
-        for (i, type) in sectionTitles.enumerated() {
-            total += 1
-            let idx = IndexPath(item: i, section: section)
-            if expandedSeasonTypes.contains(idx) {
-                total += groupedSeasons[type]?.count ?? 0
-            }
-        }
-        return total
+        return buildRows(for: section).count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let arrAnimal = AppDelegate.appDelegate.dicAllData.animals
-        let animalId = arrAnimal[indexPath.section].id ?? 0
-        let arrHunter = AppDelegate.appDelegate.dicAllData.hunting_seasons.filter { $0.animal_id == animalId }
-        let groupedSeasons = Dictionary(grouping: arrHunter, by: { $0.season_type ?? "" })
-        let sectionTitles = groupedSeasons.keys.sorted()
+        let rows = buildRows(for: indexPath.section)
+        let row = rows[indexPath.row]   // ✅ always safe now
         
-        // Build row list with type
-        var rows: [(isType: Bool, type: String?, season: HuntingSeason?)] = []
-        for (i, type) in sectionTitles.enumerated() {
-            rows.append((true, type, nil))
-            let idx = IndexPath(item: i, section: indexPath.section)
-            if expandedSeasonTypes.contains(idx) {
-                for s in groupedSeasons[type] ?? [] {
-                    rows.append((false, nil, s))
-                }
-            }
-        }
-        
-        let row = rows[indexPath.row]
         if row.isType {
             let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: "ListInnerHeaderCVCell",
                 for: indexPath
             ) as! ListInnerHeaderCVCell
+            
             cell.lblTitle.text = row.type
             
             if expandedSeasonTypes.contains(indexPath) {
-                cell.imgDrop.transform = CGAffineTransform(rotationAngle: .pi) // rotated down
+                cell.imgDrop.transform = CGAffineTransform(rotationAngle: .pi)
             } else {
-                cell.imgDrop.transform = .identity // default up
+                cell.imgDrop.transform = .identity
             }
             
             cell.imgIcon.isHidden = true
-            
             return cell
+            
         } else if let season = row.season {
             let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: "ListDetailsCVCell",
                 for: indexPath
             ) as! ListDetailsCVCell
             
-            
-//            let season_resident = (season.season_resident ?? "") + " " + "(Resident)"
-//            let season_non_resident = (season.season_non_resident ?? "") + " " + "(Non-resident)"
-//            let season2 = season_resident != "" ? season_resident + "\n" + season_non_resident : season_non_resident
-//            cell.lblSeason.text = season2
-            
             let residentText = season.season_resident?.isEmpty == false ? (season.season_resident! + " (Resident)") : nil
             let nonResidentText = season.season_non_resident?.isEmpty == false ? (season.season_non_resident! + " (Non-resident)") : nil
             let season2 = [residentText, nonResidentText].compactMap { $0 }.joined(separator: "\n")
-
             cell.lblSeason.text = season2
             
             let filtered = arrAllDataList.hunting_season_wmus.filter { $0.season_id == season.id }
-            
             let wmuIds = filtered.compactMap { $0.wmu_id }
             let matchedWmus = arrAllDataList.wmu.filter { wmuIds.contains($0.id ?? 0) }
             let wmuNames = matchedWmus.compactMap { $0.name }.joined(separator: ", ")
@@ -474,12 +491,12 @@ extension NewHunterVC: UICollectionViewDelegate, UICollectionViewDataSource {
             cell.viewMainMuzzleloader.isHidden = season.muzzleloaders_allowed != 1
             cell.viewMainBow.isHidden = season.bows_allowed != 1
             
-            cell.lblConditions.text = season.conditions_text
             cell.viewMainConditions.isHidden = (season.conditions_text ?? "").isEmpty
             cell.viewMainWMUs.isHidden = season.short_wmu_list != "" || !wmuNames.isEmpty ? false : true
             cell.viewMainSeason.isHidden = (season.season_resident ?? "").isEmpty && (season.season_non_resident ?? "").isEmpty
             
-            let rowsInSection = rows.filter { !$0.isType }   // only details for this section
+            // hide bottom line only on last season
+            let rowsInSection = rows.filter { !$0.isType }
             if let lastSeason = rowsInSection.last?.season {
                 cell.viewBottomLine.isHidden = (season.id == lastSeason.id)
             }
@@ -490,6 +507,7 @@ extension NewHunterVC: UICollectionViewDelegate, UICollectionViewDataSource {
         return UICollectionViewCell()
     }
     
+    // MARK: - Header
     func collectionView(_ collectionView: UICollectionView,
                         viewForSupplementaryElementOfKind kind: String,
                         at indexPath: IndexPath) -> UICollectionReusableView {
@@ -499,12 +517,9 @@ extension NewHunterVC: UICollectionViewDelegate, UICollectionViewDataSource {
                                                                      for: indexPath) as! HuterHeaderCVView
         header.tag = indexPath.section
         
-        header.lblName.text = AppDelegate.appDelegate.dicAllData.animals[indexPath.section].name ?? ""
-        
-        if let imageName = AppDelegate.appDelegate.dicAllData.animals[indexPath.section].image_path {
+        header.lblName.text = sortedAnimals[indexPath.section].name ?? ""
+        if let imageName = sortedAnimals[indexPath.section].image_path {
             header.imgIcon.image = UIImage(named: imageName)
-        } else {
-            header.imgIcon.image = nil
         }
         
         if expandedSections.contains(indexPath.section) {
@@ -513,7 +528,6 @@ extension NewHunterVC: UICollectionViewDelegate, UICollectionViewDataSource {
             header.imgDropdown.transform = .identity
         }
         
-        header.tag = indexPath.section
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(headerTapped(_:)))
         header.addGestureRecognizer(tapGesture)
         header.isUserInteractionEnabled = true
@@ -521,41 +535,35 @@ extension NewHunterVC: UICollectionViewDelegate, UICollectionViewDataSource {
         return header
     }
     
+    // MARK: - Selection
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let arrAnimal = AppDelegate.appDelegate.dicAllData.animals
-        let animalId = arrAnimal[indexPath.section].id ?? 0
-        let arrHunter = AppDelegate.appDelegate.dicAllData.hunting_seasons.filter { $0.animal_id == animalId }
-        let groupedSeasons = Dictionary(grouping: arrHunter, by: { $0.season_type ?? "" })
-        let sectionTitles = groupedSeasons.keys.sorted()
+        let rows = buildRows(for: indexPath.section)
+        let row = rows[indexPath.row]
         
-        var counter = 0
-        for (i, type) in sectionTitles.enumerated() {
-            if indexPath.row == counter {
-                let idx = IndexPath(item: i, section: indexPath.section)
-                if expandedSeasonTypes.contains(idx) {
-                    expandedSeasonTypes.remove(idx)
-                } else {
-                    expandedSeasonTypes.insert(idx)
-                }
-                collectionView.reloadSections(IndexSet(integer: indexPath.section))
-                
-                DispatchQueue.main.async {
-                    collectionView.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
-                }
-                return
+        if row.isType {
+            // toggle expand/collapse
+            let section = indexPath.section
+            let typeIndex = section // since we used IndexPath(item: i, section: section)
+            let idx = IndexPath(item: typeIndex, section: section)
+            
+            if expandedSeasonTypes.contains(idx) {
+                expandedSeasonTypes.remove(idx)
+            } else {
+                expandedSeasonTypes.insert(idx)
             }
-            counter += 1
-            if expandedSeasonTypes.contains(IndexPath(item: i, section: indexPath.section)) {
-                counter += groupedSeasons[type]?.count ?? 0
+            
+            collectionView.reloadSections(IndexSet(integer: section))
+            
+            DispatchQueue.main.async {
+                collectionView.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
             }
         }
     }
     
+    // MARK: - Header Tap
     @objc func headerTapped(_ sender: UITapGestureRecognizer) {
         guard let headerViewTapped = sender.view else { return }
         let section = headerViewTapped.tag
-        // Toggle isExpanded
-        // headerView[section].isExpanded.toggle()
         
         if expandedSections.contains(section) {
             expandedSections.remove(section)
@@ -563,16 +571,13 @@ extension NewHunterVC: UICollectionViewDelegate, UICollectionViewDataSource {
             expandedSections.insert(section)
         }
         
-        // Reload section with animation
         collectionViewList.reloadSections(IndexSet(integer: section))
         
         DispatchQueue.main.async {
-            let indexPath = IndexPath(item: 0, section: section) // 👈 First item in section
+            let indexPath = IndexPath(item: 0, section: section)
             if self.collectionViewList.numberOfItems(inSection: section) > 0 {
                 self.collectionViewList.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
             }
         }
     }
-    
-    
 }
