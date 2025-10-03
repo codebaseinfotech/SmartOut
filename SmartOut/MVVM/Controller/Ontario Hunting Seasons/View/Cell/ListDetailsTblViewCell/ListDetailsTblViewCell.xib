@@ -337,7 +337,7 @@
                                                                 <rect key="frame" x="80" y="0.0" width="230" height="149.33333333333334"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rifle" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DDs-dj-VkU">
-                                                                        <rect key="frame" x="0.0" y="0.99999999999999911" width="230" height="15.666666666666664"/>
+                                                                        <rect key="frame" x="0.0" y="0.99999999999999911" width="210" height="15.666666666666664"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
@@ -348,7 +348,7 @@
                                                                     <constraint firstItem="DDs-dj-VkU" firstAttribute="top" secondItem="6Eh-lE-6VT" secondAttribute="top" constant="1" id="7ZU-sc-ph6"/>
                                                                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="DDs-dj-VkU" secondAttribute="bottom" constant="1" id="C30-oe-A9c"/>
                                                                     <constraint firstItem="DDs-dj-VkU" firstAttribute="leading" secondItem="6Eh-lE-6VT" secondAttribute="leading" id="LEe-tY-hlq"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="DDs-dj-VkU" secondAttribute="trailing" id="xdO-z0-7ZB"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="DDs-dj-VkU" secondAttribute="trailing" constant="20" id="xdO-z0-7ZB"/>
                                                                 </constraints>
                                                             </view>
                                                         </subviews>
@@ -390,7 +390,7 @@
                                                                 <rect key="frame" x="80" y="0.0" width="230" height="50"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rifle" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tdI-cu-AMb">
-                                                                        <rect key="frame" x="0.0" y="0.99999999999999911" width="230" height="15.666666666666664"/>
+                                                                        <rect key="frame" x="0.0" y="0.99999999999999911" width="220" height="15.666666666666664"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
@@ -400,7 +400,7 @@
                                                                 <constraints>
                                                                     <constraint firstItem="tdI-cu-AMb" firstAttribute="top" secondItem="ety-lk-aOo" secondAttribute="top" constant="1" id="IFx-1n-KaE"/>
                                                                     <constraint firstItem="tdI-cu-AMb" firstAttribute="leading" secondItem="ety-lk-aOo" secondAttribute="leading" id="h83-LJ-7LU"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="tdI-cu-AMb" secondAttribute="trailing" id="qKv-R6-zku"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="tdI-cu-AMb" secondAttribute="trailing" constant="10" id="qKv-R6-zku"/>
                                                                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="tdI-cu-AMb" secondAttribute="bottom" constant="5" id="sf9-XP-3su"/>
                                                                 </constraints>
                                                             </view>

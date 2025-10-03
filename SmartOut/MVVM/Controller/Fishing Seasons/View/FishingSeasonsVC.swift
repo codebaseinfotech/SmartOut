@@ -909,6 +909,10 @@ extension FishingSeasonsVC: UICollectionViewDelegate, UICollectionViewDataSource
                     expandedExceptionTypes.insert(idx)
                 }
                 collectionView.reloadSections(IndexSet(integer: indexPath.section))
+                
+                DispatchQueue.main.async {
+                    collectionView.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
+                }
             }
         } else {
             var rows: [(isDetail: Bool, index: Int)] = []
@@ -935,6 +939,10 @@ extension FishingSeasonsVC: UICollectionViewDelegate, UICollectionViewDataSource
                     expandedFish.insert(idx)
                 }
                 collectionView.reloadSections(IndexSet(integer: indexPath.section))
+                
+                DispatchQueue.main.async {
+                    collectionView.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
+                }
             }
         }
     }
@@ -953,6 +961,13 @@ extension FishingSeasonsVC: UICollectionViewDelegate, UICollectionViewDataSource
         
         // Reload section with animation
         collectionViewList.reloadSections(IndexSet(integer: section))
+        
+        DispatchQueue.main.async {
+            let indexPath = IndexPath(item: 0, section: section) // 👈 First item in section
+            if self.collectionViewList.numberOfItems(inSection: section) > 0 {
+                self.collectionViewList.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
+            }
+        }
     }
     
     

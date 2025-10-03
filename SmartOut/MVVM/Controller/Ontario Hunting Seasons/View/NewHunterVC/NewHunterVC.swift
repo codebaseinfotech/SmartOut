@@ -460,7 +460,13 @@ extension NewHunterVC: UICollectionViewDelegate, UICollectionViewDataSource {
 
             cell.lblSeason.text = season2
             
-            cell.lblWMUs.text = season.short_wmu_list ?? ""
+            let filtered = arrAllDataList.hunting_season_wmus.filter { $0.season_id == season.id }
+            
+            let wmuIds = filtered.compactMap { $0.wmu_id }
+            let matchedWmus = arrAllDataList.wmu.filter { wmuIds.contains($0.id ?? 0) }
+            let wmuNames = matchedWmus.compactMap { $0.name }.joined(separator: ", ")
+            
+            cell.lblWMUs.text = season.short_wmu_list != "" ? season.short_wmu_list : wmuNames
             cell.lblConditions.text = season.conditions_text ?? ""
             
             cell.viewMainRifle.isHidden = season.rifles_allowed != 1
@@ -470,7 +476,7 @@ extension NewHunterVC: UICollectionViewDelegate, UICollectionViewDataSource {
             
             cell.lblConditions.text = season.conditions_text
             cell.viewMainConditions.isHidden = (season.conditions_text ?? "").isEmpty
-            cell.viewMainWMUs.isHidden = (season.short_wmu_list ?? "").isEmpty
+            cell.viewMainWMUs.isHidden = season.short_wmu_list != "" || !wmuNames.isEmpty ? false : true
             cell.viewMainSeason.isHidden = (season.season_resident ?? "").isEmpty && (season.season_non_resident ?? "").isEmpty
             
             let rowsInSection = rows.filter { !$0.isType }   // only details for this section
@@ -532,6 +538,10 @@ extension NewHunterVC: UICollectionViewDelegate, UICollectionViewDataSource {
                     expandedSeasonTypes.insert(idx)
                 }
                 collectionView.reloadSections(IndexSet(integer: indexPath.section))
+                
+                DispatchQueue.main.async {
+                    collectionView.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
+                }
                 return
             }
             counter += 1
@@ -555,6 +565,13 @@ extension NewHunterVC: UICollectionViewDelegate, UICollectionViewDataSource {
         
         // Reload section with animation
         collectionViewList.reloadSections(IndexSet(integer: section))
+        
+        DispatchQueue.main.async {
+            let indexPath = IndexPath(item: 0, section: section) // 👈 First item in section
+            if self.collectionViewList.numberOfItems(inSection: section) > 0 {
+                self.collectionViewList.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
+            }
+        }
     }
     
     
