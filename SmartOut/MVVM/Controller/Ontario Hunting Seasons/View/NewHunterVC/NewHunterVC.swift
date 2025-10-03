@@ -439,6 +439,8 @@ extension NewHunterVC: UICollectionViewDelegate, UICollectionViewDataSource {
                 cell.imgDrop.transform = .identity // default up
             }
             
+            cell.imgIcon.isHidden = true
+            
             return cell
         } else if let season = row.season {
             let cell = collectionView.dequeueReusableCell(
@@ -447,9 +449,15 @@ extension NewHunterVC: UICollectionViewDelegate, UICollectionViewDataSource {
             ) as! ListDetailsCVCell
             
             
-            let season_resident = (season.season_resident ?? "") + " " + "(Resident)"
-            let season_non_resident = (season.season_non_resident ?? "") + " " + "(Non-resident)"
-            let season2 = season_resident != "" ? season_resident + "\n" + season_non_resident : season_non_resident
+//            let season_resident = (season.season_resident ?? "") + " " + "(Resident)"
+//            let season_non_resident = (season.season_non_resident ?? "") + " " + "(Non-resident)"
+//            let season2 = season_resident != "" ? season_resident + "\n" + season_non_resident : season_non_resident
+//            cell.lblSeason.text = season2
+            
+            let residentText = season.season_resident?.isEmpty == false ? (season.season_resident! + " (Resident)") : nil
+            let nonResidentText = season.season_non_resident?.isEmpty == false ? (season.season_non_resident! + " (Non-resident)") : nil
+            let season2 = [residentText, nonResidentText].compactMap { $0 }.joined(separator: "\n")
+
             cell.lblSeason.text = season2
             
             cell.lblWMUs.text = season.short_wmu_list ?? ""
@@ -462,6 +470,7 @@ extension NewHunterVC: UICollectionViewDelegate, UICollectionViewDataSource {
             
             cell.lblConditions.text = season.conditions_text
             cell.viewMainConditions.isHidden = (season.conditions_text ?? "").isEmpty
+            cell.viewMainWMUs.isHidden = (season.short_wmu_list ?? "").isEmpty
             cell.viewMainSeason.isHidden = (season.season_resident ?? "").isEmpty && (season.season_non_resident ?? "").isEmpty
             
             let rowsInSection = rows.filter { !$0.isType }   // only details for this section

@@ -310,13 +310,13 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ps7-Oc-amv">
-                                                <rect key="frame" x="0.0" y="129.66666666666669" width="320" height="177.66666666666669"/>
+                                                <rect key="frame" x="0.0" y="129.66666666666663" width="320" height="149.33333333333337"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="sOR-G6-8pp">
-                                                        <rect key="frame" x="5" y="0.0" width="310" height="177.66666666666666"/>
+                                                        <rect key="frame" x="5" y="0.0" width="310" height="149.33333333333334"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SW4-qv-i4a">
-                                                                <rect key="frame" x="0.0" y="0.0" width="75" height="177.66666666666666"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="75" height="149.33333333333334"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Season:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="htV-XS-se5">
                                                                         <rect key="frame" x="0.0" y="0.99999999999999911" width="75" height="15.666666666666664"/>
@@ -334,7 +334,7 @@
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Eh-lE-6VT">
-                                                                <rect key="frame" x="80" y="0.0" width="230" height="177.66666666666666"/>
+                                                                <rect key="frame" x="80" y="0.0" width="230" height="149.33333333333334"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rifle" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DDs-dj-VkU">
                                                                         <rect key="frame" x="0.0" y="0.99999999999999911" width="230" height="15.666666666666664"/>
@@ -363,13 +363,13 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xdi-a5-DER">
-                                                <rect key="frame" x="0.0" y="317.33333333333331" width="320" height="21.666666666666686"/>
+                                                <rect key="frame" x="0.0" y="289" width="320" height="50"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="U26-ZR-dDd">
-                                                        <rect key="frame" x="5" y="0.0" width="310" height="21.666666666666668"/>
+                                                        <rect key="frame" x="5" y="0.0" width="310" height="50"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yzw-Tm-Dw7">
-                                                                <rect key="frame" x="0.0" y="0.0" width="75" height="21.666666666666668"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="75" height="50"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Conditions:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JzI-NR-99X">
                                                                         <rect key="frame" x="0.0" y="0.99999999999999911" width="75" height="15.666666666666664"/>
@@ -387,7 +387,7 @@
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ety-lk-aOo">
-                                                                <rect key="frame" x="80" y="0.0" width="230" height="21.666666666666668"/>
+                                                                <rect key="frame" x="80" y="0.0" width="230" height="50"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rifle" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tdI-cu-AMb">
                                                                         <rect key="frame" x="0.0" y="0.99999999999999911" width="230" height="15.666666666666664"/>

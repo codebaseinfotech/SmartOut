@@ -314,9 +314,15 @@ extension OntarioHuntingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
             cell.viewMuzzleLoader.isHidden = dicData.muzzleloaders_allowed != 1
             cell.viewBow.isHidden = dicData.bows_allowed != 1
             
-            let season_resident = (dicData.season_resident ?? "") + " " + "(Resident)"
-            let season_non_resident = (dicData.season_non_resident ?? "") + " " + "(Non-resident)"
-            let season = season_resident != "" ? season_resident + "\n" + season_non_resident : season_non_resident
+//            let season_resident = (dicData.season_resident ?? "") + " " + "(Resident)"
+//            let season_non_resident = (dicData.season_non_resident ?? "") + " " + "(Non-resident)"
+//            let season = season_resident != "" ? season_resident + "\n" + season_non_resident : season_non_resident
+//            cell.lblSeason.text = season
+            
+            let residentText = dicData.season_resident?.isEmpty == false ? (dicData.season_resident! + " (Resident)") : nil
+            let nonResidentText = dicData.season_non_resident?.isEmpty == false ? (dicData.season_non_resident! + " (Non-resident)") : nil
+            let season = [residentText, nonResidentText].compactMap { $0 }.joined(separator: "\n")
+
             cell.lblSeason.text = season
             
             cell.lblConditionS.text = dicData.conditions_text

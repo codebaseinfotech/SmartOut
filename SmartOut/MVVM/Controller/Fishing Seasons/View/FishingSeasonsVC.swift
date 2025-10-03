@@ -229,7 +229,7 @@ class FishingSeasonsVC: UIViewController {
         viewBottomPopup.isHidden = false
         self.view.layoutIfNeeded()
         
-        let targetHeight = viewZoneWideMain.bounds.height
+        let targetHeight = viewZoneWideMain.bounds.height - 180
         
         UIView.animate(withDuration: 0.3) {
             self.popupHeightConstraint.constant = targetHeight
@@ -409,12 +409,17 @@ extension FishingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
             
 //            let limits = dicData.limits_non_resident != "" ? "\(dicData.limits_resident ?? "") (Resident)" + (dicData.limits_non_resident ?? "") : dicData.limits_resident
             
-            let season_resident = (dicData.limits_resident ?? "") + " " + "(Resident)"
-            let season_non_resident = (dicData.limits_non_resident ?? "")
-            let season = season_resident != "" ? season_resident + "\n" + season_non_resident : season_non_resident
+//            let season_resident = (dicData.limits_resident ?? "") + " " + "(Resident)"
+//            let season_non_resident = (dicData.limits_non_resident ?? "")
+//            let season = season_resident != "" ? season_resident + "\n" + season_non_resident : season_non_resident
+            
+            let residentText = dicData.limits_resident?.isEmpty == false ? (dicData.limits_resident! + " (Resident)") : nil
+            let nonResidentText = dicData.limits_non_resident?.isEmpty == false ? (dicData.limits_non_resident! + " (Non-resident)") : nil
+            let season = [residentText, nonResidentText].compactMap { $0 }.joined(separator: "\n")
+
+            cell.lblLimit.text = season
             
             cell.viewLimitsMain.isHidden = season != "" ? false : true
-            cell.lblLimit.text = season
             
             let fish_id = dicData.fish_id ?? 0
             
