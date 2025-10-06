@@ -162,7 +162,7 @@ extension ListDetailsTblViewCell: UITableViewDelegate, UITableViewDataSource {
                 cell.lblTitle.text = "-"
             }
             
-            if cell.lblTitle.text == "Cow/Calf Gun" {
+            if cell.lblTitle.text == "Cow/Calf Gun" || cell.lblTitle.text == "Cow/Calf Bow" {
                 
                 let fullText = "\(dicData.primary_quota ?? 0)" + "\n sdfgg"
                 let fullText1 = "\(dicData.primary_min_points ?? "")" + "\n sdfgg"

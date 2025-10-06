@@ -565,17 +565,17 @@ extension NewHunterVC: UICollectionViewDelegate, UICollectionViewDataSource {
         
         if row.isType {
             // toggle expand/collapse
-            let section = indexPath.section
-            let typeIndex = section // since we used IndexPath(item: i, section: section)
-            let idx = IndexPath(item: typeIndex, section: section)
+//            let section = indexPath.section
+//            let typeIndex = section // since we used IndexPath(item: i, section: section)
+//            let idx = IndexPath(item: typeIndex, section: section)
             
-            if expandedSeasonTypes.contains(idx) {
-                expandedSeasonTypes.remove(idx)
+            if expandedSeasonTypes.contains(indexPath) {
+                expandedSeasonTypes.remove(indexPath)
             } else {
-                expandedSeasonTypes.insert(idx)
+                expandedSeasonTypes.insert(indexPath)
             }
             
-            collectionView.reloadSections(IndexSet(integer: section))
+            collectionView.reloadSections(IndexSet(integer: indexPath.section))
             
             DispatchQueue.main.async {
                 collectionView.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
