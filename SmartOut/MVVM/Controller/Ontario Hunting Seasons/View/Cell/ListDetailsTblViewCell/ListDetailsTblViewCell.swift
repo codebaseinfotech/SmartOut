@@ -137,7 +137,19 @@ extension ListDetailsTblViewCell: UITableViewDelegate, UITableViewDataSource {
         
         if dicData.id == 0 {
                         
-            cell.lblTitle.text = "Draw"
+            let fullText = "Draw dfhdeth etdhy et"
+            let mainText = "Draw "
+            let coloredText = "dfhdeth etdhy et"
+
+            let attributedString = NSMutableAttributedString(string: fullText)
+
+            // Apply color only to the colored part
+            if let range = fullText.range(of: coloredText) {
+                let nsRange = NSRange(range, in: fullText)
+                attributedString.addAttribute(.foregroundColor, value: UIColor.clear, range: nsRange)
+            }
+
+            cell.lblTitle.attributedText = attributedString
             cell.lblFValue.text = "Primery Quota"
             cell.lblSValue.text = "Primary Min. Points Required"
             cell.lblTValue.text = "2nd Chance Quota"
@@ -150,10 +162,51 @@ extension ListDetailsTblViewCell: UITableViewDelegate, UITableViewDataSource {
                 cell.lblTitle.text = "-"
             }
             
-            cell.lblFValue.text = "\(dicData.primary_quota ?? 0)"
-            cell.lblSValue.text = dicData.primary_min_points ?? ""
-            cell.lblTValue.text = "\(dicData.second_chance_tags ?? 0)"
-            cell.lblFourValue.text = dicData.second_min_points ?? ""
+            if cell.lblTitle.text == "Cow/Calf Gun" {
+                
+                let fullText = "\(dicData.primary_quota ?? 0)" + "\n sdfgg"
+                let fullText1 = "\(dicData.primary_min_points ?? "")" + "\n sdfgg"
+                let fullText2 = "\(dicData.second_chance_tags ?? 0)" + "\n sdfgg"
+                let fullText3 = "\(dicData.second_min_points ?? "")" + "\n sdfgg"
+                
+                let coloredText = "sdfgg"
+
+                let attributedString = NSMutableAttributedString(string: fullText)
+                if let range = fullText.range(of: coloredText) {
+                    let nsRange = NSRange(range, in: fullText)
+                    attributedString.addAttribute(.foregroundColor, value: UIColor.clear, range: nsRange)
+                }
+                
+                let attributedString1 = NSMutableAttributedString(string: fullText1)
+                if let range = fullText1.range(of: coloredText) {
+                    let nsRange = NSRange(range, in: fullText1)
+                    attributedString1.addAttribute(.foregroundColor, value: UIColor.clear, range: nsRange)
+                }
+                
+                let attributedString2 = NSMutableAttributedString(string: fullText2)
+                if let range = fullText2.range(of: coloredText) {
+                    let nsRange = NSRange(range, in: fullText2)
+                    attributedString2.addAttribute(.foregroundColor, value: UIColor.clear, range: nsRange)
+                }
+                
+                let attributedString3 = NSMutableAttributedString(string: fullText3)
+                if let range = fullText3.range(of: coloredText) {
+                    let nsRange = NSRange(range, in: fullText3)
+                    attributedString3.addAttribute(.foregroundColor, value: UIColor.clear, range: nsRange)
+                }
+                
+                cell.lblFValue.attributedText = attributedString
+                cell.lblSValue.attributedText = attributedString1
+                cell.lblTValue.attributedText = attributedString2
+                cell.lblFourValue.attributedText = attributedString3
+            } else {
+                cell.lblFValue.text = "\(dicData.primary_quota ?? 0)"
+                cell.lblSValue.text = dicData.primary_min_points ?? ""
+                cell.lblTValue.text = "\(dicData.second_chance_tags ?? 0)"
+                cell.lblFourValue.text = dicData.second_min_points ?? ""
+            }
+            
+            
         }
         
         
