@@ -52,7 +52,7 @@
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hunter Reporting Data" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xXP-tf-uee">
-                            <rect key="frame" x="75" y="5" width="241" height="30"/>
+                            <rect key="frame" x="76" y="5" width="241" height="30"/>
                             <fontDescription key="fontDescription" type="system" pointSize="25"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -61,7 +61,7 @@
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstItem="xXP-tf-uee" firstAttribute="centerY" secondItem="jC6-XW-hlz" secondAttribute="centerY" id="I9a-hb-81l"/>
-                        <constraint firstItem="xXP-tf-uee" firstAttribute="leading" secondItem="U0J-Ar-QaS" secondAttribute="trailing" constant="25" id="MP4-iU-7zW"/>
+                        <constraint firstItem="xXP-tf-uee" firstAttribute="centerX" secondItem="jC6-XW-hlz" secondAttribute="centerX" id="QIt-tq-4pI"/>
                         <constraint firstItem="U0J-Ar-QaS" firstAttribute="centerY" secondItem="jC6-XW-hlz" secondAttribute="centerY" id="R9M-QX-ozf"/>
                         <constraint firstItem="U0J-Ar-QaS" firstAttribute="leading" secondItem="jC6-XW-hlz" secondAttribute="leading" constant="20" id="Xvv-IK-mF8"/>
                         <constraint firstAttribute="height" constant="40" id="cNr-Cp-6ur"/>

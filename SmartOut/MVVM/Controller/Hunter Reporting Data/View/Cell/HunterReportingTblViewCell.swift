@@ -15,7 +15,7 @@ protocol reloadCell: AnyObject {
 }
 
 class HunterReportingTblViewCell: UITableViewCell {
-
+    
     @IBOutlet weak var imgAnimal: UIImageView! {
         didSet {
             imgAnimal.tintColor = .primary
@@ -28,7 +28,7 @@ class HunterReportingTblViewCell: UITableViewCell {
     
     @IBOutlet weak var lblFChartName: UILabel!
     @IBOutlet weak var lblSChartName: UILabel!
-        
+    
     @IBOutlet weak var viewMainChart: UIView!
     @IBOutlet weak var viewMainCharS: UIView!
     
@@ -58,41 +58,41 @@ class HunterReportingTblViewCell: UITableViewCell {
     @IBOutlet weak var viewFirstBottom: UIView!
     @IBOutlet weak var viewThirdBottom: UIView!
     
-   
+    
     var delegateReload: reloadCell?
     
     var arrAllRpe: [[String: Any]] = []
     
     override func awakeFromNib() {
         super.awakeFromNib()
-                
+        
         tblView.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
         tblView.register(UINib(nibName: "HunterDataTVCell", bundle: nil), forCellReuseIdentifier: "HunterDataTVCell")
         tblView.dataSource = self
         tblView.delegate = self
         
-//        DispatchQueue.main.async {
-//            self.viewFirstTop.addGradient(withColors: [
-//                UIColor.white.cgColor,
-//                UIColor(hexString: "#FDE4D6").cgColor
-//            ])
-//            self.viewThirdTop.addGradient(withColors: [
-//                UIColor.white.cgColor,
-//                UIColor(hexString: "#FDE4D6").cgColor
-//            ])
-//            self.viewFirstBottom.addGradient(withColors: [
-//                UIColor(hexString: "#FDE4D6").cgColor,
-//                UIColor.white.cgColor
-//            ])
-//            self.viewThirdBottom.addGradient(withColors: [
-//                UIColor(hexString: "#FDE4D6").cgColor,
-//                UIColor.white.cgColor
-//            ])
-//        }
+        //        DispatchQueue.main.async {
+        //            self.viewFirstTop.addGradient(withColors: [
+        //                UIColor.white.cgColor,
+        //                UIColor(hexString: "#FDE4D6").cgColor
+        //            ])
+        //            self.viewThirdTop.addGradient(withColors: [
+        //                UIColor.white.cgColor,
+        //                UIColor(hexString: "#FDE4D6").cgColor
+        //            ])
+        //            self.viewFirstBottom.addGradient(withColors: [
+        //                UIColor(hexString: "#FDE4D6").cgColor,
+        //                UIColor.white.cgColor
+        //            ])
+        //            self.viewThirdBottom.addGradient(withColors: [
+        //                UIColor(hexString: "#FDE4D6").cgColor,
+        //                UIColor.white.cgColor
+        //            ])
+        //        }
         
         // Initialization code
     }
-
+    
     deinit {
         tblView.removeObserver(self, forKeyPath: "contentSize")
     }
@@ -109,7 +109,7 @@ class HunterReportingTblViewCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
     
@@ -126,12 +126,12 @@ extension HunterReportingTblViewCell: UITableViewDelegate, UITableViewDataSource
         
         if indexPath.item == 0 {
             cell.lblTitle.text = ""
-
+            
             cell.lblFValue.text = "2021"
             cell.lblSValue.text = "2022"
             cell.lblTValue.text = "2023"
             cell.lblFourValue.text = "2024"
-                
+            
         } else {
             let dicData = arrAllRpe[indexPath.item-1]
             
@@ -145,24 +145,57 @@ extension HunterReportingTblViewCell: UITableViewDelegate, UITableViewDataSource
                     let percent = val["metric_in_percent"] as? String ?? ""
                     print("   Year:", year, "Value:", percent)
                     
-                    if year == "2021" {
-                        cell.lblFValue.text = percent
-                    }
                     
-                    if year == "2022" {
-                        cell.lblSValue.text = percent
-                    }
                     
-                    if year == "2023" {
-                        cell.lblTValue.text = percent
-                    }
-                    
-                    if year == "2024" {
-                        cell.lblFourValue.text = percent
+                    if metric_name == "Spring Reporting Rate" || metric_name == "Fall Reporting Harvest" {
+                        
+                        let mainText = "\(percent)\n"
+                        let coloredText = "sdfgg"
+                        let fullText = mainText + coloredText
+                        
+                        let attributedString = NSMutableAttributedString(string: fullText)
+                        
+                        // Make "percent" part bold
+//                        let boldRange = NSRange(location: 0, length: percent.count)
+//                        attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 14), range: boldRange)
+                        
+                        // Make "sdfgg" red (or any color you want)
+                        if let range = fullText.range(of: coloredText) {
+                            let nsRange = NSRange(range, in: fullText)
+                            attributedString.addAttribute(.foregroundColor, value: UIColor.clear, range: nsRange)
+                        }
+                        
+                        // Assign attributed text to correct year label
+                        switch year {
+                        case "2021":
+                            cell.lblFValue.attributedText = attributedString
+                        case "2022":
+                            cell.lblSValue.attributedText = attributedString
+                        case "2023":
+                            cell.lblTValue.attributedText = attributedString
+                        case "2024":
+                            cell.lblFourValue.attributedText = attributedString
+                        default:
+                            break
+                        }
+                        
+                    } else {
+                        // MARK: - Normal case (no special color)
+                        switch year {
+                        case "2021":
+                            cell.lblFValue.text = percent
+                        case "2022":
+                            cell.lblSValue.text = percent
+                        case "2023":
+                            cell.lblTValue.text = percent
+                        case "2024":
+                            cell.lblFourValue.text = percent
+                        default:
+                            break
+                        }
                     }
                 }
             }
-            
         }
         
         if indexPath.item == tableView.numberOfRows(inSection: indexPath.section) - 1 {
@@ -172,7 +205,7 @@ extension HunterReportingTblViewCell: UITableViewDelegate, UITableViewDataSource
         }
         
         let numberOfRows = tableView.numberOfRows(inSection: indexPath.section)
-
+        
         if indexPath.row == 0 {
             // First row
             DispatchQueue.main.async {
