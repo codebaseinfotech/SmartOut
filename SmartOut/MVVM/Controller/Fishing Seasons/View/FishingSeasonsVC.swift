@@ -694,6 +694,13 @@ extension FishingSeasonsVC: UITableViewDelegate, UITableViewDataSource {
         }
         
         tblViewAdditionalOppo.reloadSections(IndexSet(integer: section), with: .automatic)
+        
+        DispatchQueue.main.async {
+            let indexPath = IndexPath(item: 0, section: section)
+            if self.tblViewAdditionalOppo.numberOfRows(inSection: section) > 0 {
+                self.tblViewAdditionalOppo.scrollToRow(at: indexPath, at: .middle, animated: true)
+            }
+        }
     }
 }
 

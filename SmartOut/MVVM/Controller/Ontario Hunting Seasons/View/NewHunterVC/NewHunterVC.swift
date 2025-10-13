@@ -242,18 +242,29 @@ class NewHunterVC: UIViewController {
     func buildRows(for section: Int) -> [(isType: Bool, type: String?, season: HuntingSeason?)] {
         let animalId = sortedAnimals[section].id ?? 0
         let arrHunter = AppDelegate.appDelegate.dicAllData.hunting_seasons.filter { $0.animal_id == animalId }
-        let groupedSeasons = Dictionary(grouping: arrHunter, by: { $0.season_type ?? "" })
-        let sectionTitles = groupedSeasons.keys.sorted()
         
+        // 1. Get unique season types manually
+        var uniqueTypes: [String] = []
+        for season in arrHunter {
+            let type = season.season_type ?? ""
+            if !uniqueTypes.contains(type) {
+                uniqueTypes.append(type)
+            }
+        }
+        
+        // 2. Build rows
         var rows: [(isType: Bool, type: String?, season: HuntingSeason?)] = []
         
-        for (i, type) in sectionTitles.enumerated() {
-            rows.append((true, type, nil)) // header row
+        for (i, type) in uniqueTypes.enumerated() {
+            // Add header row
+            rows.append((true, type, nil))
             
             let idx = IndexPath(item: i, section: section)
             if expandedSeasonTypes.contains(idx) {
-                for s in groupedSeasons[type] ?? [] {
-                    rows.append((false, nil, s)) // detail rows
+                // Add detail rows for this type
+                let filteredSeasons = arrHunter.filter { $0.season_type == type }
+                for s in filteredSeasons {
+                    rows.append((false, nil, s))
                 }
             }
         }
